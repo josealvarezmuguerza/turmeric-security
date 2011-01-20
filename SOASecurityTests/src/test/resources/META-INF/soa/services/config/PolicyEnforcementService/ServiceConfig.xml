@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+    Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+    http://www.apache.org/licenses/LICENSE-2.0
+-->
+<service-config group="TurmericSecurityServiceGroup" service-name="{http://www.ebayopensource.org/turmeric/services}PolicyEnforcementService" xmlns="http://www.ebayopensource.org/turmeric/common/config">
+    <service-impl-class-name>org.ebayopensource.turmeric.services.policyenforcementservice.impl.PolicyEnforcementServiceImpl</service-impl-class-name>
+    <service-interface-class-name>org.ebayopensource.turmeric.services.policyenforcementservice.intf.PolicyEnforcementService</service-interface-class-name>
+    <current-version>1.0.1</current-version>
+    
+    <service-instance-config>
+    	
+    	<pipeline-config>
+            <request-handlers>
+                <chain name="servicehandlers">
+                    <handler name="ServerCredentialHandler">
+                         <class-name>
+                         	org.ebayopensource.turmeric.securitycommon.spf.impl.handlers.ServerCredentialHandler
+                         </class-name>
+                         <options>
+                                <option name="credential-userid">
+                                       X-TURMERIC-SECURITY-USERID
+                                </option>
+                                <option name="credential-password">
+                                       X-TURMERIC-SECURITY-PASSWORD
+                                </option>  
+                         </options>
+                    </handler> 
+			        <handler name="AuthenticationHandler">
+                      	<class-name>
+                           	org.ebayopensource.turmeric.services.authenticationservice.impl.handler.AuthenticationHandler
+                       	</class-name>                       	
+                   	</handler>
+                </chain>
+            </request-handlers>
+        </pipeline-config>
+    	    
+        <protocol-processor version="1.1" name="SOAP11">
+            <indicator>
+                <transport-header name="X-TURMERIC-MESSAGE-PROTOCOL">SOAP11</transport-header>
+            </indicator>
+            <class-name>org.ebayopensource.turmeric.runtime.spf.impl.protocolprocessor.soap.ServerSOAPProtocolProcessor</class-name>
+        </protocol-processor>
+        <protocol-processor version="1.2" name="SOAP12">
+            <indicator>
+                <transport-header name="X-TURMERIC-MESSAGE-PROTOCOL">SOAP12</transport-header>
+            </indicator>
+            <class-name>org.ebayopensource.turmeric.runtime.spf.impl.protocolprocessor.soap.ServerSOAPProtocolProcessor</class-name>
+        </protocol-processor>
+        
+    </service-instance-config>
+    
+</service-config>
+

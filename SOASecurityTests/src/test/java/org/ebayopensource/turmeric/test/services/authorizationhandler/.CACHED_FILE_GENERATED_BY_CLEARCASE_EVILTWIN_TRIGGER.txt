@@ -1,0 +1,27 @@
+# ---------------------------------------------------
+# this is a temp file and used for eviltwin trigger.
+# this file speeds up the process for adding file to source control
+# you can remove this file. but if you remove it than you will not take 
+# a advantage of this cached file.
+# ---------------------------------------------------
+--11-30T11:08  sukoneru   checkout directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler" from \main\m_soa_opensource_security\1 (unreserved)
+  "Added file element "OSTemplate_AuthorizationHandlerTests.properties"."
+--11-30T11:08  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\m_soa_opensource_security\1"
+  "ChangeSet No: 220
+   ChangeSet Name: Add new handler tests and corresponding changes to testservices
+   ChangeSet Branch: m_soa_opensource_security"
+--11-30T11:08  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\m_soa_opensource_security\0"
+--11-30T11:08  sukoneru   create branch "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\m_soa_opensource_security"
+--11-30T11:08  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\0"
+--11-30T11:08  sukoneru   create branch "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main"
+--11-30T11:08  sukoneru   create directory element "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@"
+--11-30T11:08  sukoneru   checkout directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler" from \main\m_soa_opensource_security\1 (unreserved)
+--11-30T11:08  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\m_soa_opensource_security\1"
+  "ChangeSet No: 220
+   ChangeSet Name: Add new handler tests and corresponding changes to testservices
+   ChangeSet Branch: m_soa_opensource_security"
+--11-30T11:08  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\m_soa_opensource_security\0"
+--11-30T11:08  sukoneru   create branch "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\m_soa_opensource_security"
+--11-30T11:08  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main\0"
+--11-30T11:08  sukoneru   create branch "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@\main"
+--11-30T11:08  sukoneru   create directory element "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\security\SOASecurityTests\UnitTests\src\com\ebay\test\services\authorizationhandler@@"

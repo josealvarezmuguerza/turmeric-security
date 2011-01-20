@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client-config-list xmlns="http://www.ebay.com/soaframework/common/config">
+  <client-config service-name="{http://www.ebayopensource.org/turmeric/services}PolicyEnforcementService" group="SecurityServiceGroup">
+      <service-interface-class-name>org.ebayopensource.turmeric.services.policyenforcementservice.intf.PolicyEnforcementService</service-interface-class-name>
+      <service-location>http://localhost:8080/ws/spf</service-location>
+    <client-instance-config>
+      <invocation-options>
+        <preferred-transport name="LOCAL" />
+        <request-data-binding>XML</request-data-binding>
+        <response-data-binding>XML</response-data-binding>                     
+      </invocation-options>    
+<!--      <pipeline-config>-->
+<!--      	<request-handlers>-->
+<!--        	<chain name="clienthandlers">-->
+<!--            	<handler name="ClientTokenRetrievalHandler">-->
+<!--                	<class-name>org.ebayopensource.turmeric.securitycommon.sif.impl.handlers.ClientTokenRetrievalHandler</class-name>-->
+<!--                	<options>-->
+<!--                		<option name="token-retrieval-style">-->
+<!--                			static-->
+<!--                		</option>-->
+<!--                		<option name="token-provider-impl-class-name">-->
+<!--                			com.ebay.test.services.policyenforcementhandler.CustomTokenProviderImpl-->
+<!--                		</option>-->
+<!--                	</options>-->
+<!--            	</handler>-->
+<!--            </chain>-->
+<!--        </request-handlers> -->
+<!--      </pipeline-config>      -->
+    </client-instance-config>
+  </client-config>
+</client-config-list>
+

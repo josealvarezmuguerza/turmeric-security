@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); 
+    you may not use this file except in compliance with the License. 
+    You may obtain a copy of the License at 
+   
+       http://www.apache.org/licenses/LICENSE-2.0
+       
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.ebayopensource.turmeric</groupId>
+    <artifactId>turmeric-project</artifactId>
+    <version>0.9.0-Beta-RC3</version>
+    <relativePath>../turmeric-project/pom.xml</relativePath>
+  </parent>
+  <groupId>org.ebayopensource.turmeric.security</groupId>
+  <artifactId>turmeric-security-parent</artifactId>
+  <version>0.9.0.5-Beta-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+  	<turmeric-runtime-version>0.9.0-Beta-RC3</turmeric-runtime-version>
+  	<turmeric-policy-version>0.9.0-Beta-RC4</turmeric-policy-version>
+  	<turmeric-ratelimiter-version>0.9.0-Beta-RC4</turmeric-ratelimiter-version>
+  	<turmeric-monitoring-version>0.9.0-Beta-RC4</turmeric-monitoring-version>
+  </properties>
+  <scm>
+    <connection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/security</connection>
+    <developerConnection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/security</developerConnection>
+  </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <tagBase>http://www.ebayopensource.org/svn/turmeric/soa-platform/tags</tagBase>
+        </configuration>
+      </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+           <show>package</show>
+           <excludePackageNames>*.impl.*</excludePackageNames>
+        </configuration>
+	<executions>
+	  <execution>
+	    <id>security-javadocs</id>
+	    <goals>
+		<goal>jar</goal>
+	    </goals>
+	  </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${basedir}/gen-src</directory>
+            </fileset>
+            <fileset>
+              <directory>${basedir}/gen-meta-src</directory>
+            </fileset>
+            <fileset>
+              <directory>${basedir}/build</directory>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <modules>
+    <module>SecurityCommon</module>
+    <module>SecurityErrorLibrary</module>
+    <module>AuthenticationService</module>
+    <module>AuthenticationServiceConsumer</module>
+    <module>SecurityProviderInterface</module>
+    <module>AuthenticationServiceImpl</module>
+    <module>AuthorizationService</module>
+    <module>AuthorizationServiceConsumer</module>
+    <module>AuthorizationServiceImpl</module>
+    <module>PolicyEnforcementService</module>
+    <module>PolicyEnforcementServiceConsumer</module>
+    <module>PolicyEnforcementServiceImpl</module>
+    <module>turmeric-security-provider</module>
+    <module>security-dist-mysql</module>
+    <module>security-dist-mysql-bin</module>
+  </modules>
+  <profiles>
+    <profile>
+      <id>soasecuritytests</id>
+      <activation>
+        <!-- Default behavior is to always build SOASecurityTests -->
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+         <module>SOASecurityTests</module>
+      </modules>
+    </profile>
+  </profiles>
+</project>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); 
+    you may not use this file except in compliance with the License. 
+    You may obtain a copy of the License at 
+   
+       http://www.apache.org/licenses/LICENSE-2.0
+       
+ -->
+<ErrorBundle xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.ebayopensource.org/turmeric/common/config" xmlns="http://www.ebayopensource.org/turmeric/common/config"
+  libraryVersion="1.0.0"
+  packageName="org.ebayopensource.turmeric.errorlibrary.turmericsecurity"
+  domain="TurmericSecurity"
+  organization="ebayopensource"
+  errorLibraryName="SecurityErrorLibrary"
+>
+<errorlist>
+	<error id="30001" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_failed" />
+			
+	<error id="30002" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_unexpected_authn_error" />
+			
+	<error id="30003" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_internal_error" />		
+			
+	<error id="30004" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_config_init_error" />	
+			
+	<error id="30005" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_policy_not_found" />
+	<error id="30006" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_policy_missing_authn_method" />						
+				
+	<error id="30007" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_no_authenticator_configured" />	
+			
+	<error id="30008" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_invalid_request" />	
+			
+	<error id="30009" category="SYSTEM" subdomain="AUTHN"
+			severity="ERROR" errorGroup="" name="svc_security_authn_missing_req_credentials" />
+			
+	<error id="30101" category="SYSTEM" subdomain="AUTHZ"
+			severity="ERROR" errorGroup="" name="svc_security_authz_failed" />
+			
+	<error id="30102" category="SYSTEM" subdomain="AUTHZ"
+			severity="ERROR" errorGroup="" name="svc_security_unexpected_authz_error" />
+
+	<error id="30103" category="SYSTEM" subdomain="AUTHZ"
+			severity="ERROR" errorGroup="" name="svc_security_sys_authz_missing_authz_request" />
+			
+	<error id="30104" category="SYSTEM" subdomain="AUTHZ"
+			severity="ERROR" errorGroup="" name="svc_security_sys_authz_policy_not_found" />
+			
+	<error id="30105" category="SYSTEM" subdomain="AUTHZ"
+			severity="ERROR" errorGroup="" name="svc_security_app_authz_internal_error" />
+			
+	<error id="30106" category="SYSTEM" subdomain="AUTHZ"
+			severity="ERROR" errorGroup="" name="svc_security_app_authz_unauthorized_user" />		
+			
+    <error id="30201" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_invalid_null_input" />    			
+	
+	<error id="30202" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_missing_resource_input" />    			
+												
+	<error id="30203" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_missing_policy_type_input" />    			
+	
+	<error id="30204" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_invalid_policy_type_input" />    			
+	
+	<error id="30205" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_unsupported_policy_type_input" />    			
+	
+	<error id="30206" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_authn_failed" /> 
+			
+	<error id="30207" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_unexpected_authn_error" />  		   			
+	
+	<error id="30208" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_invalid_subject_domain_input" />    			
+
+	<error id="30209" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_rl_failed" />    			
+
+	<error id="30210" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_unexpected_rl_error" />    	
+			
+	<error id="30211" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_authz_failed" />
+			
+	<error id="30212" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_unexpected_authz_error" />
+			
+	<error id="30213" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_unexpected_policyenforcement_error" />		
+	
+	<error id="30214" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_invalid_url_path" />
+			
+	<error id="30215" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_handler_authn_failed" />
+			
+	<error id="30216" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_handler_authz_failed" /> 	
+			
+	<error id="30217" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_handler_rl_failed" />
+			
+	<error id="30218" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_handler_pes_failed" />
+			
+	<error id="30219" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_handler_RL_limit_exceed" /> 
+			
+	<error id="30220" category="SYSTEM" subdomain="POLICYENFORCEMENT"
+			severity="ERROR" errorGroup="" name="svc_security_policyenforcement_handler_unexpected_error" /> 							 			 				 				
+	
+	<error id="30221" category="SYSTEM" subdomain="CLIENTTOKENRETRIEVAL"
+			severity="ERROR" errorGroup="" name="svc_security_clienttokenretrieval_handler_init_failed" />
+			
+	<error id="30222" category="SYSTEM" subdomain="CLIENTTOKENRETRIEVAL"
+			severity="ERROR" errorGroup="" name="svc_security_clienttokenretrieval_handler_error" /> 			 							 			 				 				
+						
+</errorlist>
+</ErrorBundle>
