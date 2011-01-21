@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.ebayopensource.turmeric</groupId>
     <artifactId>turmeric-project</artifactId>
-    <version>0.9.0-Beta-RC3</version>
+    <version>0.9.0-Beta</version>
     <relativePath>../turmeric-project/pom.xml</relativePath>
   </parent>
   <groupId>org.ebayopensource.turmeric.security</groupId>
@@ -21,10 +21,10 @@
   <version>0.9.0.5-Beta-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-  	<turmeric-runtime-version>0.9.0-Beta-RC3</turmeric-runtime-version>
-  	<turmeric-policy-version>0.9.0-Beta-RC4</turmeric-policy-version>
-  	<turmeric-ratelimiter-version>0.9.0-Beta-RC4</turmeric-ratelimiter-version>
-  	<turmeric-monitoring-version>0.9.0-Beta-RC4</turmeric-monitoring-version>
+  	<turmeric-runtime-version>0.9.0-Beta</turmeric-runtime-version>
+  	<turmeric-policy-version>0.9.0-Beta</turmeric-policy-version>
+  	<turmeric-ratelimiter-version>0.9.0-Beta</turmeric-ratelimiter-version>
+  	<turmeric-monitoring-version>0.9.0-Beta</turmeric-monitoring-version>
   </properties>
   <scm>
     <connection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/security</connection>
