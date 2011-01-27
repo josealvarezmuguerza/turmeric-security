@@ -66,32 +66,14 @@ public class AuthorizationServiceNegativeTest extends CreateValidateAuthz {
 	private static TestDataReader reader = null;
 	private static int max;
 
-	@BeforeClass 
-	public static void setUpOnce(){
-		
-	}
-
-	@AfterClass
-	public static void cleanUp() {
-		
-
-	}
 
 	@Before
 	public void setUp() throws Exception {
-		try {
 			reader = new TestDataReader(className);
 			max = maxPolicies(reader.getProps());
 			createPolicies(reader, max);
 			m_consumer = isRemote() ? new BaseAuthorizationServiceConsumer(
 					"AuthzRemote") : new BaseAuthorizationServiceConsumer();
-		} catch (ServiceException e) {
-			throw new RuntimeException("Could not initialize consumer", e);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	@After
