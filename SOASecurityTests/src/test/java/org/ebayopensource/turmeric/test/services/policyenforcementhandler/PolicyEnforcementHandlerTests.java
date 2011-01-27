@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,11 +15,14 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.pipeline.HandlerInitContextImpl;
 import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;
 import org.ebayopensource.turmeric.runtime.spf.security.ServerSecurityContext;
 import org.ebayopensource.turmeric.runtime.tests.common.jetty.AbstractWithServerTest;
+import org.ebayopensource.turmeric.runtime.tests.common.jetty.SimpleJettyServer;
 import org.ebayopensource.turmeric.services.policyenforcementservice.handler.PolicyEnforcementHandler;
 import org.ebayopensource.turmeric.test.services.extended.util.ExtendedTestUtils;
 import org.ebayopensource.turmeric.test.services.utils.CommonUtils;
@@ -31,12 +35,35 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class PolicyEnforcementHandlerTests extends AbstractWithServerTest {
+public class PolicyEnforcementHandlerTests  {
 	private static TestDataReader reader = null;
 	private static SecurityTokenUtility util = null;
 	private static int maxpolicyId;
 	private static Class className = PolicyEnforcementHandlerTests.class;
+	protected static SimpleJettyServer jetty;
+	protected static URI serverUri;
 
+	@BeforeClass
+	public static void startServer() throws Exception {
+		String externalServerPort = System.getProperty("external.jetty.server.port");
+		if(StringUtils.isNotBlank(externalServerPort)) {
+			int port = NumberUtils.toInt(externalServerPort);
+			serverUri = URI.create("http://localhost:" + port + "/ws/spf");
+			return;
+		}
+		
+		jetty = new SimpleJettyServer();
+		jetty.start();
+		serverUri = jetty.getSPFURI();
+	}
+
+	@AfterClass
+	public static void stopServer() throws Exception {
+		if(jetty != null) {
+			jetty.stop();
+		}
+	}	
+	
 	@BeforeClass
 	public static void setUpOnce() {
 		try {
@@ -121,6 +148,9 @@ public class PolicyEnforcementHandlerTests extends AbstractWithServerTest {
 						"getSubtraction");
 
 		populateSubjectInContext(ctx);
+		ctx.getSecurityContext().setCredential("credential-userid", "admin");
+		ctx.getSecurityContext().setCredential("credential-password", "admin");
+
 
 		Map<String, String> option = new HashMap<String, String>();
 		option.put("policy-types", "AUTHZ");
@@ -151,6 +181,9 @@ public class PolicyEnforcementHandlerTests extends AbstractWithServerTest {
 
 		populateAuthnInfoInContext(ctx);
 
+		ctx.getSecurityContext().setCredential("userid", "admin");
+		ctx.getSecurityContext().setCredential("password", "admin");
+		
 		PolicyEnforcementHandler handler = new PolicyEnforcementHandler();
 
 		Map<String, String> option = new HashMap<String, String>();
@@ -178,7 +211,9 @@ public class PolicyEnforcementHandlerTests extends AbstractWithServerTest {
 						"getSubtraction");
 
 		populateAuthnInfoInContext(ctx);
-
+		ctx.getSecurityContext().setCredential("userid", "admin");
+		ctx.getSecurityContext().setCredential("password", "admin");
+		
 		PolicyEnforcementHandler handler = new PolicyEnforcementHandler();
 
 		Map<String, String> option = new HashMap<String, String>();
