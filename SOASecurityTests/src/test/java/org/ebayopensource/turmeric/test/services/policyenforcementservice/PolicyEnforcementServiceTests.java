@@ -57,18 +57,12 @@ public class PolicyEnforcementServiceTests extends CreateValidatePES {
 
 	@Before
 	public void setUp() throws Exception {
-		try {
 			reader = new TestDataReader(className);
 			max = maxPolicies(reader.getProps());
 			// createPolicies(reader, max);
 			util = TestTokenRetrivalObject.getSecurityTokenRetrival();
 			authnLoader = new AuthenticationDataLoader();
 			authnLoader.initData();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		m_policyEnforcementConsumer = new BasePolicyEnforcementServiceConsumer(
 				"PolicyEnforcementService", "PESTestEnv");
