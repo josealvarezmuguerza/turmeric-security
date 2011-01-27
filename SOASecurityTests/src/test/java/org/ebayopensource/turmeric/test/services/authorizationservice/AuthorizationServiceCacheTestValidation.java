@@ -118,7 +118,7 @@ public class AuthorizationServiceCacheTestValidation extends CreateValidateAuthz
 	@Test
 	public void testValidation_test() throws Exception{
 		System.out.println("\n--- testValidation_test ---");
-		try{
+		
 			String request_id = "testcase1";
 			// poke cache to get a clean slate
 			final boolean poked = m_util.pokeCache();
@@ -166,10 +166,6 @@ public class AuthorizationServiceCacheTestValidation extends CreateValidateAuthz
 			m_resMap.put(encodeStdSvcOp(), 2L);
 			m_resMap.put(encodeSvcOp("CalculatorTestService", "getSubtraction"), 1L);
 			validateAuthzCache(resKeys);
-		}catch(Exception e){
-			e.printStackTrace();
-			fail("Testcase should not fail. "+e.getMessage());
-		}
 	}
 
 	@Test
