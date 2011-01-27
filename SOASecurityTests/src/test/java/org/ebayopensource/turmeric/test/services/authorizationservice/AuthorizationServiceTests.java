@@ -128,25 +128,18 @@ public class AuthorizationServiceTests extends CreateValidateAuthz {
 		System.out.println("\n -- Testcase Number = " + testcaseNumber
 				+ "\n -- Testcase Description= " + testcaseDesc);
 
-		try {
-			String request_id = this.request_id;
-			AuthorizeResponseType result = null;
-			AuthorizeRequestType req = new AuthorizeRequestType();
+		String request_id = this.request_id;
+		AuthorizeResponseType result = null;
+		AuthorizeRequestType req = new AuthorizeRequestType();
 
-			populateAuthzRequest(reader, req, request_id);
-			populateSubjectDetails(reader, req, request_id);
+		populateAuthzRequest(reader, req, request_id);
+		populateSubjectDetails(reader, req, request_id);
 
-			result = m_consumer.authorize(req);
+		result = m_consumer.authorize(req);
 
-			System.out.println("Error = "
-					+ (result.getErrorMessage() != null ? result
-							.getErrorMessage().getError().get(0).getMessage()
-							: "No Error"));
-			validateOutput(reader, result, request_id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Testcase should not fail." + e.getMessage());
-		}
-
+		System.out.println("Error = "
+				+ (result.getErrorMessage() != null ? result.getErrorMessage()
+						.getError().get(0).getMessage() : "No Error"));
+		validateOutput(reader, result, request_id);
 	}
 }
