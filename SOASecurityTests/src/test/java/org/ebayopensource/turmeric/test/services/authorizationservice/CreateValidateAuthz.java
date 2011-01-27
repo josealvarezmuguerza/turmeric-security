@@ -14,7 +14,7 @@ import org.ebayopensource.turmeric.test.services.utils.CommonUtils;
 import org.ebayopensource.turmeric.test.services.utils.TestDataReader;
 import static org.junit.Assert.*;
 
-public class CreateValidateAuthz extends CommonUtils{
+public class CreateValidateAuthz extends AbstractAuthorizationTestClass {
 	
 	public void populateAuthzRequest(TestDataReader reader, AuthorizeRequestType req, String request_id){
 		 String resName = reader.getPreEntryValue(request_id, "request_resourceName");
