@@ -21,10 +21,10 @@
   <version>0.9.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-  	<turmeric-runtime-version>0.9.0-Beta</turmeric-runtime-version>
-  	<turmeric-policy-version>0.9.0-Beta</turmeric-policy-version>
-  	<turmeric-ratelimiter-version>0.9.0-Beta</turmeric-ratelimiter-version>
-  	<turmeric-monitoring-version>0.9.0-Beta</turmeric-monitoring-version>
+  	<turmeric-runtime-version>0.9.1.0-SNAPSHOT</turmeric-runtime-version>
+  	<turmeric-policy-version>0.9.1.0-SNAPSHOT</turmeric-policy-version>
+  	<turmeric-ratelimiter-version>0.9.1.0-SNAPSHOT</turmeric-ratelimiter-version>
+  	<turmeric-monitoring-version>0.9.1.0-SNAPSHOT</turmeric-monitoring-version>
   </properties>
   <scm>
     <connection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/security</connection>
