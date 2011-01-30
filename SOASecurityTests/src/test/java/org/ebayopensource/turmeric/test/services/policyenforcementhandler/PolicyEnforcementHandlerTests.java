@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Proxy;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,34 +18,57 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.ebayopensource.turmeric.authentication.model.BasicAuth;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.pipeline.HandlerInitContextImpl;
 import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;
+import org.ebayopensource.turmeric.runtime.common.security.SecurityContext;
 import org.ebayopensource.turmeric.runtime.spf.security.ServerSecurityContext;
-import org.ebayopensource.turmeric.runtime.tests.common.jetty.AbstractWithServerTest;
 import org.ebayopensource.turmeric.runtime.tests.common.jetty.SimpleJettyServer;
 import org.ebayopensource.turmeric.services.policyenforcementservice.handler.PolicyEnforcementHandler;
 import org.ebayopensource.turmeric.test.services.extended.util.ExtendedTestUtils;
-import org.ebayopensource.turmeric.test.services.utils.CommonUtils;
+import org.ebayopensource.turmeric.test.services.policyenforcementhandler.BasicAuthenticatorTestBase.TestDAO;
+import org.ebayopensource.turmeric.test.services.policyenforcementhandler.BasicAuthenticatorTestBase.TestDAOImpl;
 import org.ebayopensource.turmeric.test.services.utils.PolicyDataModelHelper;
 import org.ebayopensource.turmeric.test.services.utils.SecurityTokenUtility;
 import org.ebayopensource.turmeric.test.services.utils.TestDataReader;
 import org.ebayopensource.turmeric.test.services.utils.TestTokenRetrivalObject;
+import org.ebayopensource.turmeric.utils.jpa.JPAAroundAdvice;
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class PolicyEnforcementHandlerTests  {
+public class PolicyEnforcementHandlerTests extends AbstractJPATest  {
 	private static TestDataReader reader = null;
 	private static SecurityTokenUtility util = null;
 	private static int maxpolicyId;
 	private static Class className = PolicyEnforcementHandlerTests.class;
 	protected static SimpleJettyServer jetty;
 	protected static URI serverUri;
+	
+	private static TestDAO testDAO;
+    private static final String[][] basicAuthData = {
+        {"jdoe","secret"}, {"rlcalcsvctest1", "secret"}
+    };
+    
+    
+    @BeforeClass
+    public static void initDAO() {
+        ClassLoader classLoader = PolicyEnforcementHandler.class.getClassLoader();
+        Class[] interfaces = {TestDAO.class};
+        TestDAO target = new TestDAOImpl();
+        testDAO = (TestDAO) Proxy.newProxyInstance(classLoader, interfaces, new JPAAroundAdvice(factory, target));
+        
+        for (String[] basicAuth : basicAuthData) {
+            testDAO.persistEntity(new BasicAuth(basicAuth[0], basicAuth[1]));
+        }        
+    }
 
-	@BeforeClass
-	public static void startServer() throws Exception {
+	@Before
+	public void startServer() throws Exception {
 		String externalServerPort = System.getProperty("external.jetty.server.port");
 		if(StringUtils.isNotBlank(externalServerPort)) {
 			int port = NumberUtils.toInt(externalServerPort);
@@ -57,8 +81,8 @@ public class PolicyEnforcementHandlerTests  {
 		serverUri = jetty.getSPFURI();
 	}
 
-	@AfterClass
-	public static void stopServer() throws Exception {
+	@After
+	public void stopServer() throws Exception {
 		if(jetty != null) {
 			jetty.stop();
 		}
@@ -148,14 +172,15 @@ public class PolicyEnforcementHandlerTests  {
 						"getSubtraction");
 
 		populateSubjectInContext(ctx);
-		ctx.getSecurityContext().setCredential("credential-userid", "admin");
-		ctx.getSecurityContext().setCredential("credential-password", "admin");
+		populateAuthnInfoInContext(ctx);
 
 
 		Map<String, String> option = new HashMap<String, String>();
 		option.put("policy-types", "AUTHZ");
 		option.put("service-location", this.jetty.getSPFURI().toString());
 		option.put("default-environment", "PESTestEnv");
+		option.put("credential-userid", "X-TURMERIC-SECURITY-USERID");
+		option.put("credential-password", "X-TURMeRIC-SECURITY-PASSWORD");
 
 		HandlerInitContextImpl initCtx = new HandlerInitContextImpl(
 				ctx.getServiceId(), "name", option);
@@ -180,9 +205,6 @@ public class PolicyEnforcementHandlerTests  {
 						"getSubtraction");
 
 		populateAuthnInfoInContext(ctx);
-
-		ctx.getSecurityContext().setCredential("userid", "admin");
-		ctx.getSecurityContext().setCredential("password", "admin");
 		
 		PolicyEnforcementHandler handler = new PolicyEnforcementHandler();
 
@@ -211,9 +233,6 @@ public class PolicyEnforcementHandlerTests  {
 						"getSubtraction");
 
 		populateAuthnInfoInContext(ctx);
-		ctx.getSecurityContext().setCredential("userid", "admin");
-		ctx.getSecurityContext().setCredential("password", "admin");
-		
 		PolicyEnforcementHandler handler = new PolicyEnforcementHandler();
 
 		Map<String, String> option = new HashMap<String, String>();
@@ -278,36 +297,39 @@ public class PolicyEnforcementHandlerTests  {
 	private void populateAuthnInfoInContext(MessageContext ctx)
 			throws Exception {
 		String subjectinfo = reader.getEntryValue("request_subjectdetails");
-		String domain = null;
-		String value = null;
+		String subjectName = null;
+		String password = null;
+		
 		if (subjectinfo != null) {
 			StringTokenizer st = new StringTokenizer(subjectinfo, ":");
-			domain = st.nextToken();
-			value = st.nextToken();
+			st.nextToken();
+			subjectName = st.nextToken();
+			password = st.nextToken();
 		} else
 			fail("subject list is not provided in the properties file");
+				
+		SecurityContext secctx = ctx.getSecurityContext();
+		secctx.setCredential("userid", subjectName);
+		secctx.setCredential("password", password);
+		
 
-		Map<String, String> map = new HashMap<String, String>();
-		map.put(domain, value);
-		String authmode = reader.getEntryValue("request_authenticationmode");
-		HashMap<String, String> mp = (HashMap) util.getSecurityToken(authmode,
-				map);
-		ctx.getSecurityContext().setCredential(authmode, mp.get(authmode));
 	}
 
 	private void populateSubjectInContext(MessageContext ctx)
 			throws ServiceException {
 		String subjectinfo = reader.getEntryValue("request_subjectdetails");
 		String domain = null;
-		String value = null;
+		String subjectName = null;
+		
 		if (subjectinfo != null) {
 			StringTokenizer st = new StringTokenizer(subjectinfo, ":");
 			domain = st.nextToken();
-			value = st.nextToken();
-		} else
+			subjectName = st.nextToken();
+		} else {
 			fail("subject list is not provided in the properties file");
-
-		ctx.getSecurityContext().setAuthnSubject(domain, value);
+		}
+		SecurityContext secctx = ctx.getSecurityContext();
+		secctx.setAuthnSubject(domain, subjectName);		
 	}
 
 	public static int totalPolicies(Class className) throws IOException {

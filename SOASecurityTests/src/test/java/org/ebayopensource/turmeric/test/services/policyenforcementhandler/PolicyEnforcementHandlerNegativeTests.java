@@ -42,7 +42,7 @@ public class PolicyEnforcementHandlerNegativeTests extends AbstractWithServerTes
 			e.printStackTrace();
 			// This is the valid message and should be fixed
 		    //	assertTrue(e.getMessage().equals("Authentication failed via getSubtraction auth method: CalculatorTestService"));
-			assertTrue(e.getMessage().contains("Authentication failed : invalid request: resource/resourcetype/operationname and credentials should be present"));
+			assertTrue(e.getMessage().contains("missing required credentials"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,8 +75,7 @@ public class PolicyEnforcementHandlerNegativeTests extends AbstractWithServerTes
 			fail("should throw error");
 		} catch (ServiceException e) {
 			e.printStackTrace();
-		//	assertTrue(e.getMessage().equals("PolicyEnforcement failed for resource: CalculatorTestService, operation: getDivision with error: \"Authorization failed for CalculatorTestService.getDivision with error: User is not authorized.\""));
-			assertTrue(e.getMessage().contains("PolicyEnforcement unexpected error: Authentication failed : invalid request: resource/resourcetype/operationname and credentials should be present"));
+			assertTrue(e.getMessage().contains("User is not authorized."));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,7 +107,7 @@ public class PolicyEnforcementHandlerNegativeTests extends AbstractWithServerTes
 			handler.invoke(ctx);
 			fail("should throw error");
 		} catch (ServiceException e) {
-			assertTrue(e.getMessage().contains("Authentication failed : invalid request: resource/resourcetype/operationname and credentials should be present"));
+			assertTrue(e.getMessage().contains("AUTHZS is not supported"));
 			// what is the error message
 		} catch (Exception e) {
 			e.printStackTrace();

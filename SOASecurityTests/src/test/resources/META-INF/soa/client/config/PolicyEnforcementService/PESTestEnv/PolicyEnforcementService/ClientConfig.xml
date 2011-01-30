@@ -17,18 +17,18 @@
 			<pipeline-config>
 				<request-handlers>
 					<chain name="clienthandlers">
-						<handler name="ClientTokenRetrievalHandler">
-							<class-name>org.ebayopensource.turmeric.securitycommon.sif.impl.handlers.ClientTokenRetrievalHandler
-							</class-name>
-							<options>
-								<option name="token-retrieval-style">
-									static
-                	  	        </option>
-								<option name="token-provider-impl-class-name">
-									org.ebayopensource.turmeric.test.services.policyenforcementhandler.CustomTokenProviderImpl
-								</option>
-							</options>
-						</handler>
+<!--						<handler name="ClientTokenRetrievalHandler">-->
+<!--							<class-name>org.ebayopensource.turmeric.securitycommon.sif.impl.handlers.ClientTokenRetrievalHandler-->
+<!--							</class-name>-->
+<!--							<options>-->
+<!--								<option name="token-retrieval-style">-->
+<!--									static-->
+<!--                	  	        </option>-->
+<!--								<option name="token-provider-impl-class-name">-->
+<!--									org.ebayopensource.turmeric.test.services.policyenforcementhandler.CustomTokenProviderImpl-->
+<!--								</option>-->
+<!--							</options>-->
+<!--						</handler>-->
 					</chain>
 				</request-handlers>
 			</pipeline-config>

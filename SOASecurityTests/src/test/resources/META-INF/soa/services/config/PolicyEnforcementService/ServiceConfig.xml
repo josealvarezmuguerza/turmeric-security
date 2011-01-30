@@ -17,24 +17,24 @@
     	<pipeline-config>
             <request-handlers>
                 <chain name="servicehandlers">
-                    <handler name="ServerCredentialHandler">
-                         <class-name>
-                         	org.ebayopensource.turmeric.securitycommon.spf.impl.handlers.ServerCredentialHandler
-                         </class-name>
-                         <options>
-                                <option name="credential-userid">
-                                       X-TURMERIC-SECURITY-USERID
-                                </option>
-                                <option name="credential-password">
-                                       X-TURMERIC-SECURITY-PASSWORD
-                                </option>  
-                         </options>
-                    </handler> 
-			        <handler name="AuthenticationHandler">
-                      	<class-name>
-                           	org.ebayopensource.turmeric.services.authenticationservice.impl.handler.AuthenticationHandler
-                       	</class-name>                       	
-                   	</handler>
+<!--                    <handler name="ServerCredentialHandler">-->
+<!--                         <class-name>-->
+<!--                         	org.ebayopensource.turmeric.securitycommon.spf.impl.handlers.ServerCredentialHandler-->
+<!--                         </class-name>-->
+<!--                         <options>-->
+<!--                                <option name="credential-userid">-->
+<!--                                       X-TURMERIC-SECURITY-USERID-->
+<!--                                </option>-->
+<!--                                <option name="credential-password">-->
+<!--                                       X-TURMERIC-SECURITY-PASSWORD-->
+<!--                                </option>  -->
+<!--                         </options>-->
+<!--                    </handler> -->
+<!--			        <handler name="AuthenticationHandler">-->
+<!--                      	<class-name>-->
+<!--                           	org.ebayopensource.turmeric.services.authenticationservice.impl.handler.AuthenticationHandler-->
+<!--                       	</class-name>                       	-->
+<!--                   	</handler>-->
                 </chain>
             </request-handlers>
         </pipeline-config>
