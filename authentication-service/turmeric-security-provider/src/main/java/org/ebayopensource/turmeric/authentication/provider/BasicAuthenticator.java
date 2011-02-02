@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 
-import org.ebayopensource.turmeric.authentication.model.BasicAuth;
-import org.ebayopensource.turmeric.authentication.model.BasicAuthDAO;
-import org.ebayopensource.turmeric.authentication.model.BasicAuthDAOImpl;
+import org.ebayopensource.turmeric.policyservice.model.BasicAuth;
+import org.ebayopensource.turmeric.policyservice.model.BasicAuthDAO;
+import org.ebayopensource.turmeric.policyservice.model.BasicAuthDAOImpl;
 import org.ebayopensource.turmeric.policyservice.model.Subject;
 import org.ebayopensource.turmeric.policyservice.model.SubjectDAO;
 import org.ebayopensource.turmeric.policyservice.model.SubjectDAOImpl;

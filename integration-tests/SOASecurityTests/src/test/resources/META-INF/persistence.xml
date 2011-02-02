@@ -19,7 +19,7 @@
 		<class>org.ebayopensource.turmeric.policyservice.model.Expression</class>
 		<class>org.ebayopensource.turmeric.policyservice.model.Condition</class>
 		<class>org.ebayopensource.turmeric.policyservice.model.AuditHistory</class>
-		<class>org.ebayopensource.turmeric.authentication.model.BasicAuth</class>
+		<class>org.ebayopensource.turmeric.policyservice.model.BasicAuth</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>

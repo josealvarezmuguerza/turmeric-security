@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.ebayopensource.turmeric.authentication.model.BasicAuth;
+import org.ebayopensource.turmeric.policyservice.model.BasicAuth;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.pipeline.HandlerInitContextImpl;
 import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;

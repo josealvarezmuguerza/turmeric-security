@@ -15,7 +15,7 @@ import org.ebayopensource.turmeric.utils.jpa.PersistenceContext;
 import org.junit.After;
 import org.junit.Before;
 
-public abstract class AbstractJPATest {
+public abstract class AbstractBasicAuthJPATest {
     protected EntityManagerFactory factory;
     
     @Before

@@ -1,4 +1,4 @@
-package org.ebayopensource.turmeric.authentication.model;
+package org.ebayopensource.turmeric.policyservice.model;
 
 import org.ebayopensource.turmeric.utils.jpa.AbstractDAO;
 

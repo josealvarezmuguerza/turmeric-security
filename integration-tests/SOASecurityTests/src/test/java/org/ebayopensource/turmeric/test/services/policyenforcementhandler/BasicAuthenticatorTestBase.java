@@ -4,7 +4,7 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ebayopensource.turmeric.authentication.model.BasicAuth;
+import org.ebayopensource.turmeric.policyservice.model.BasicAuth;
 import org.ebayopensource.turmeric.policyservice.model.Subject;
 import org.ebayopensource.turmeric.policyservice.model.SubjectGroup;
 import org.ebayopensource.turmeric.policyservice.model.SubjectType;

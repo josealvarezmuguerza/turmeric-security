@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.ebayopensource.turmeric.policy</groupId>
 		<artifactId>turmeric-policy-parent</artifactId>
-		<version>0.9.0.4-Beta-SNAPSHOT</version>
+		<version>0.9.1.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.policy.tests</groupId>
@@ -57,12 +57,12 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
 			<artifactId>turmeric-security-provider</artifactId>
-			<version>${turmeric-security-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
 			<artifactId>SecurityCommon</artifactId>
-			<version>${turmeric-security-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

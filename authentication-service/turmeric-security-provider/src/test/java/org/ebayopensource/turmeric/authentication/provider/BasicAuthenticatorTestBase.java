@@ -4,8 +4,10 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ebayopensource.turmeric.authentication.model.AbstractJPATest;
-import org.ebayopensource.turmeric.authentication.model.BasicAuth;
+
+
+import org.ebayopensource.turmeric.authentication.model.AbstractBasicAuthJPATest;
+import org.ebayopensource.turmeric.policyservice.model.BasicAuth;
 import org.ebayopensource.turmeric.policyservice.model.Subject;
 import org.ebayopensource.turmeric.policyservice.model.SubjectGroup;
 import org.ebayopensource.turmeric.policyservice.model.SubjectType;
@@ -13,7 +15,7 @@ import org.ebayopensource.turmeric.utils.jpa.AbstractDAO;
 import org.ebayopensource.turmeric.utils.jpa.JPAAroundAdvice;
 import org.junit.Before;
 
-public abstract class BasicAuthenticatorTestBase extends AbstractJPATest{
+public abstract class BasicAuthenticatorTestBase extends AbstractBasicAuthJPATest{
     private TestDAO testDAO;
     private static final String[][] typeData = {
         {"APP", "Application"},
