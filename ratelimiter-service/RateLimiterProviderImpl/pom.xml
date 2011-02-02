@@ -38,17 +38,17 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy</groupId>
 			<artifactId>turmeric-policy-provider</artifactId>
-			<version>${turmeric-policy-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.intf</groupId>
 			<artifactId>PolicyService</artifactId>
-			<version>${turmeric-policy-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
 			<artifactId>PolicyServiceConsumer</artifactId>
-			<version>${turmeric-policy-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.runtime</groupId>
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.intf</groupId>
 			<artifactId>GroupMembershipService</artifactId>
-			<version>${turmeric-policy-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.utils</groupId>
@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.errorlib</groupId>
 			<artifactId>PolicyErrorLibrary</artifactId>
-			<version>${turmeric-policy-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<!-- use for the challenge -->
 		<dependency>
@@ -91,7 +91,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
 			<artifactId>GroupMembershipServiceConsumer</artifactId>
-			<version>${turmeric-policy-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

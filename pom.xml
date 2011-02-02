@@ -80,6 +80,7 @@
 		<module>authorization-service</module>
 		<module>policy-service</module>
 		<module>policy-enforcement-service</module>
+                <module>ratelimiter-service</module>
 		<module>security-dist-mysql</module>
 		<module>security-dist-mysql-bin</module>
 	</modules>
