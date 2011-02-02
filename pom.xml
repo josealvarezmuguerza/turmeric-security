@@ -80,17 +80,9 @@
   <modules>
     <module>SecurityCommon</module>
     <module>SecurityErrorLibrary</module>
-    <module>AuthenticationService</module>
-    <module>AuthenticationServiceConsumer</module>
-    <module>SecurityProviderInterface</module>
-    <module>AuthenticationServiceImpl</module>
-    <module>AuthorizationService</module>
-    <module>AuthorizationServiceConsumer</module>
-    <module>AuthorizationServiceImpl</module>
-    <module>PolicyEnforcementService</module>
-    <module>PolicyEnforcementServiceConsumer</module>
-    <module>PolicyEnforcementServiceImpl</module>
-    <module>turmeric-security-provider</module>
+    <module>authentication-service</module>
+    <module>authorization-service</module>
+    <module>policy-enforcement-service</module>
     <module>security-dist-mysql</module>
     <module>security-dist-mysql-bin</module>
   </modules>
@@ -102,7 +94,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
-         <module>SOASecurityTests</module>
+         <module>integration-tests</module>
       </modules>
     </profile>
   </profiles>

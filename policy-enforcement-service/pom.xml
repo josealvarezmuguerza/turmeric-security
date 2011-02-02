@@ -12,19 +12,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.ebayopensource.turmeric.security</groupId>
-    <artifactId>turmeric-security-authentication-parent</artifactId>
+    <artifactId>turmeric-security-parent</artifactId>
     <version>0.9.1.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>org.ebayopensource.turmeric.security</groupId>
-  <artifactId>SecurityProviderInterface</artifactId>
-  <packaging>jar</packaging>
-  <name>Security :: Security provider interface</name>
-  <dependencies>
-     <dependency>
-       <groupId>org.ebayopensource.turmeric.intf</groupId>
-       <artifactId>AuthenticationService</artifactId>
-       <version>${project.version}</version>
-    </dependency>
-  </dependencies>
+  <artifactId>turmeric-security-pes-parent</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+      <module>PolicyEnforcementService</module>
+      <module>PolicyEnforcementServiceConsumer</module>
+      <module>PolicyEnforcementServiceImpl</module>
+  </modules>
 </project>
