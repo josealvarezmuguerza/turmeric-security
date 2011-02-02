@@ -26,11 +26,12 @@
       <artifactId>AuthenticationServiceImpl</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
+<!--    <dependency>
       <groupId>org.ebayopensource.turmeric.policy</groupId>
       <artifactId>turmeric-policy-provider</artifactId>
-      <version>${turmeric-policy-version}</version>
+      <version>${project.version}</version>
     </dependency>
+-->
     <dependency>
       <groupId>org.ebayopensource.turmeric.utils</groupId>
       <artifactId>turmeric-utils-jpa</artifactId>

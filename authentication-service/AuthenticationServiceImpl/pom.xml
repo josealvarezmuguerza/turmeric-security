@@ -54,12 +54,12 @@
     <dependency>
       <groupId>org.ebayopensource.turmeric.intf</groupId>
       <artifactId>PolicyService</artifactId>
-      <version>${turmeric-policy-version}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.ebayopensource.turmeric.client</groupId>
       <artifactId>PolicyServiceConsumer</artifactId>
-      <version>${turmeric-policy-version}</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -78,7 +78,6 @@
         <configuration>
           <verbose>true</verbose>
           <serviceName>AuthenticationService</serviceName>
-<!--          <serviceGroupId>org.ebau.interface</serviceGroupId>-->
         </configuration>
       </plugin>
     </plugins>
