@@ -25,7 +25,5 @@
     <module>RateLimiterServiceImpl</module>
     <module>RateLimiterErrorLibrary</module>
     <module>RateLimiterProviderImpl</module>
-    <module>RateLimiterTests</module>
-    <module>RateLimiterServiceTest</module>
   </modules>
 </project>
