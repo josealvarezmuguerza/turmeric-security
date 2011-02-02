@@ -59,12 +59,12 @@
     <dependency>
       <groupId>org.ebayopensource.turmeric.client</groupId>
       <artifactId>RateLimiterServiceConsumer</artifactId>
-      <version>${turmeric-ratelimiter-version}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.ebayopensource.turmeric.intf</groupId>
       <artifactId>RateLimiterService</artifactId>
-      <version>${turmeric-ratelimiter-version}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

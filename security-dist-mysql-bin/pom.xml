@@ -70,7 +70,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>RateLimiterServiceImpl</artifactId>
-			<version>${turmeric-ratelimiter-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
@@ -85,7 +85,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>RateLimiterProviderImpl</artifactId>
-			<version>${turmeric-ratelimiter-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy</groupId>

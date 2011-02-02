@@ -18,7 +18,6 @@
 	<packaging>pom</packaging>
 	<properties>
 		<turmeric-runtime-version>0.9.1.0-SNAPSHOT</turmeric-runtime-version>
-		<turmeric-ratelimiter-version>0.9.1.0-SNAPSHOT</turmeric-ratelimiter-version>
 		<turmeric-monitoring-version>0.9.1.0-SNAPSHOT</turmeric-monitoring-version>
 		<turmeric-jpa-utils-version>0.9.1.0-SNAPSHOT</turmeric-jpa-utils-version>
 	</properties>
