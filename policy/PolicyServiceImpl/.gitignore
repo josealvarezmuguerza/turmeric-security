@@ -1,0 +1,12 @@
+/target
+/build
+/bin
+/gen-meta-src
+/gen-src
+.classpath
+.project
+.settings
+*.swp
+*.patch
+*.diff
+*.log

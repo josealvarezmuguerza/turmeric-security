@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================================================== -->
+<!--  Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.            -->
+<!--  Licensed under the Apache License, Version 2.0 (the "License");   -->
+<!--  you may not use this file except in compliance with the License.  -->
+<!--  You may obtain a copy of the License at                           -->
+<!--                                                                    -->
+<!--     http://www.apache.org/licenses/LICENSE-2.0                     -->
+<!-- ================================================================== -->
+<ErrorBundle xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.ebayopensource.org/turmeric/common/config" xmlns="http://www.ebayopensource.org/turmeric/common/config"
+	libraryVersion="1.0.0"
+	packageName="org.ebayopensource.turmeric.errorlibrary.turmericpolicy"
+	domain="TurmericPolicy" organization="ebayopensource" errorLibraryName="PolicyErrorLibrary">
+	<errorlist>
+		<error id="20001" category="SYSTEM" subdomain="GROUPMEMBERSHIP"
+			severity="ERROR" errorGroup=""
+			name="svc_groupmembershipservice_invalid_calculated_sg" />
+		<error id="20002" category="SYSTEM" subdomain="GROUPMEMBERSHIP"
+			severity="ERROR" errorGroup=""
+			name="svc_groupmembershipservice_internal_error" />
+		<error id="20003" category="SYSTEM" subdomain="GROUPMEMBERSHIP"
+			severity="ERROR" errorGroup=""
+			name="svc_groupmembershipservice_invalid_input_error" />
+
+		<error id="20004" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_invalid_input_error" />
+		<error id="20005" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_provider_finder_error" />
+		<error id="20006" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_provider_delete_error" />
+		<error id="20007" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_provider_create_error" />
+		<error id="20008" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_provider_update_error" />
+		<error id="20009" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_provider_misc_error" />
+		<error id="20010" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_internal_error" />
+
+		<error id="20011" category="SYSTEM" subdomain="GROUPMEMBERSHIP"
+			severity="ERROR" errorGroup=""
+			name="svc_groupmembershipservice_invalid_provider_configuration" />
+		<error id="20012" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_invalid_provider_configuration" />
+		<error id="20013" category="SYSTEM" subdomain="POLICY" severity="ERROR"
+			errorGroup="" name="svc_policyservice_invalid_provider_type" />
+
+	</errorlist>
+
+</ErrorBundle>
