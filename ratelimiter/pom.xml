@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================================================== -->
+<!--  Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.            -->
+<!--  Licensed under the Apache License, Version 2.0 (the "License");   -->
+<!--  you may not use this file except in compliance with the License.  -->
+<!--  You may obtain a copy of the License at                           -->
+<!--                                                                    -->
+<!--     http://www.apache.org/licenses/LICENSE-2.0                     -->
+<!-- ================================================================== -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.ebayopensource.turmeric</groupId>
+    <artifactId>turmeric-project</artifactId>
+    <version>0.9.0-Beta</version>
+    <relativePath>../turmeric-project/pom.xml</relativePath>
+  </parent>
+  <groupId>org.ebayopensource.turmeric.ratelimiter</groupId>
+  <artifactId>turmeric-ratelimiter-parent</artifactId>
+  <version>0.9.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+  	<turmeric-runtime-version>0.9.0-Beta</turmeric-runtime-version>
+  	<turmeric-policy-version>0.9.1.0-SNAPSHOT</turmeric-policy-version>
+  	<turmeric-monitoring-version>0.9.1.0-SNAPSHOT</turmeric-monitoring-version>
+  	<turmeric-security-version>0.9.1.0-SNAPSHOT</turmeric-security-version>
+  </properties>
+  <scm>
+    <connection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/ratelimiter</connection>
+    <developerConnection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/ratelimiter</developerConnection>
+  </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <tagBase>http://www.ebayopensource.org/svn/turmeric/soa-platform/tags</tagBase>
+        </configuration>
+      </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+           <show>package</show>
+           <excludePackageNames>*.impl.*</excludePackageNames>
+        </configuration>
+	<executions>
+	  <execution>
+	    <id>rl-javadocs</id>
+	    <goals>
+		<goal>jar</goal>
+	    </goals>
+	  </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <modules>
+    <module>RateLimiterService</module>
+    <module>RateLimiterServiceConsumer</module>
+    <module>RateLimiterServiceImpl</module>
+    <module>RateLimiterErrorLibrary</module>
+    <module>RateLimiterProviderImpl</module>
+  </modules>
+ <profiles>
+   <profile>
+      <id>ratelimitertest</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>    
+      <modules>
+        <module>RateLimiterTests</module>
+        <module>RateLimiterServiceTest</module>
+      </modules>
+   </profile>
+  </profiles>
+</project>

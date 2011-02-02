@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================================================== -->
+<!--  Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.            -->
+<!--  Licensed under the Apache License, Version 2.0 (the "License");   -->
+<!--  you may not use this file except in compliance with the License.  -->
+<!--  You may obtain a copy of the License at                           -->
+<!--                                                                    -->
+<!--     http://www.apache.org/licenses/LICENSE-2.0                     -->
+<!-- ================================================================== -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="1.0">
+
+    <persistence-unit name="metrics" transaction-type="RESOURCE_LOCAL">
+        <class>org.ebayopensource.turmeric.utils.jpa.model.Persistent</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.Machine</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.MachineGroup</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.Metric</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.MetricClassifier</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.MetricComponentDef</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.MetricDef</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.MetricValue</class>
+        <class>org.ebayopensource.turmeric.monitoring.model.MetricComponentValue</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:turmeric" />
+            <property name="hibernate.connection.username" value="sa" />
+            <property name="hibernate.connection.password" value="" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.cache.use_second_level_cache" value="false" />
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
