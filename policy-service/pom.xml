@@ -25,17 +25,6 @@
 		<module>PolicyServiceImpl</module>
 		<module>PolicyErrorLibrary</module>
 		<module>turmeric-policy-provider</module>
+		<module>PolicyTestUtils</module>
 	</modules>
-	<profiles>
-		<profile>
-			<id>policytest</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<module>PolicyTestUtils</module>
-				<module>PolicyTests</module>
-			</modules>
-		</profile>
-	</profiles>
 </project>
