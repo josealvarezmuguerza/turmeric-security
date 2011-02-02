@@ -26,11 +26,6 @@
       <artifactId>PolicyServiceImpl</artifactId>
       <version>${project.version}</version>
     </dependency>
-     <dependency>
-      <groupId>org.ebayopensource.turmeric.security</groupId>
-      <artifactId>turmeric-security-provider</artifactId>
-      <version>${project.version}</version>
-    </dependency>
     <dependency>
       <groupId>org.ebayopensource.turmeric.utils</groupId>
       <artifactId>turmeric-utils-jpa</artifactId>

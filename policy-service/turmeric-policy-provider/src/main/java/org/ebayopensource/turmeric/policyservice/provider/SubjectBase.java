@@ -21,7 +21,6 @@ import java.util.Set;
 import javax.persistence.EntityManagerFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.ebayopensource.turmeric.authentication.model.BasicAuth;
 import org.ebayopensource.turmeric.groupmembershipservice.provider.CalculatedGroupMembershipProviderImpl;
 import org.ebayopensource.turmeric.policyservice.exceptions.PolicyCreationException;
 import org.ebayopensource.turmeric.policyservice.exceptions.PolicyDeleteException;
@@ -30,6 +29,7 @@ import org.ebayopensource.turmeric.policyservice.exceptions.PolicyProviderExcept
 import org.ebayopensource.turmeric.policyservice.exceptions.PolicyProviderException.Category;
 import org.ebayopensource.turmeric.policyservice.exceptions.PolicyUpdateException;
 import org.ebayopensource.turmeric.policyservice.model.AuditHistory;
+import org.ebayopensource.turmeric.policyservice.model.BasicAuth;
 import org.ebayopensource.turmeric.policyservice.model.SubjectDAO;
 import org.ebayopensource.turmeric.policyservice.model.SubjectDAOImpl;
 import org.ebayopensource.turmeric.policyservice.provider.common.SubjectGroupEditObject;
@@ -66,7 +66,6 @@ public abstract class SubjectBase implements SubjectTypeProvider {
 
 	private class SubjectBaseImpl implements SubjectTypeProvider {
 		private final SubjectDAO subjectDAO;
-//		private final BasicAuthDAO basicAuthDAO;
 		private final String subjectType;
 
 		private final CalculatedGroupMembershipProviderImpl calcProvider = CalculatedGroupMembershipProviderImpl
@@ -75,7 +74,6 @@ public abstract class SubjectBase implements SubjectTypeProvider {
 		public SubjectBaseImpl(String subjectType) {
 			this.subjectType = subjectType;
 			this.subjectDAO = new SubjectDAOImpl();
-//			this.basicAuthDAO = new BasicAuthDAOImpl();
 		}
 
 		@Override

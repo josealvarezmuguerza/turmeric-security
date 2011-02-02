@@ -21,7 +21,6 @@ import javax.xml.datatype.DatatypeFactory;
 
 import oasis.names.tc.xacml._2_0.policy.schema.os.SubjectMatchType;
 
-import org.ebayopensource.turmeric.authentication.model.BasicAuth;
 import org.ebayopensource.turmeric.policyservice.exceptions.PolicyFinderException;
 import org.ebayopensource.turmeric.policyservice.exceptions.PolicyProviderException.Category;
 import org.ebayopensource.turmeric.policyservice.provider.USERSubject;
@@ -252,7 +251,6 @@ public class SubjectDAOImpl extends AbstractDAO implements SubjectDAO {
 		org.ebayopensource.turmeric.security.v1.services.Subject subject = new org.ebayopensource.turmeric.security.v1.services.Subject();
 
 		subject.setSubjectName(externalSubject.getSubjectName());
-		subject.setExternalSubjectId(1L);
 		subject.setExternalSubjectId(externalSubject.getId());
 
 		AuditInfo auditInfo = externalSubject.getAuditInfo();

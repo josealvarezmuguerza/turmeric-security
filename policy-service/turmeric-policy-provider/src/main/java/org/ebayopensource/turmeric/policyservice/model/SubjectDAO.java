@@ -12,7 +12,6 @@ package org.ebayopensource.turmeric.policyservice.model;
 import java.util.Date;
 import java.util.List;
 
-import org.ebayopensource.turmeric.authentication.model.BasicAuth;
 import org.ebayopensource.turmeric.security.v1.services.SubjectGroupKey;
 import org.ebayopensource.turmeric.security.v1.services.SubjectKey;
 
