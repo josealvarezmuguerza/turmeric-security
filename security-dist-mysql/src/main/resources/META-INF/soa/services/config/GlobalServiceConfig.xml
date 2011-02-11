@@ -28,13 +28,6 @@
                     <supported-locale>zh-Hant_US</supported-locale>
                 </G11N-options>
                 <pipeline-config>
-<!--                    <request-handlers>-->
-<!--                        <handler name="G11N">-->
-<!--                            <class-name>org.ebayopensource.turmeric.runtime.spf.impl.handlers.G11nHandler</class-name>-->
-<!--                        </handler>-->
-<!--                    </request-handlers>-->
-<!--                    <response-handlers>-->
-<!--                    </response-handlers>-->
                    <response-handlers>
                         <handler name="RREH">
                             <class-name>org.ebayopensource.turmeric.runtime.error.ResponseResidentErrorLoggingHandler</class-name>
@@ -43,9 +36,6 @@
                     <logging-handler>
                         <class-name>org.ebayopensource.turmeric.runtime.spf.impl.pipeline.ServerLoggingHandler</class-name>
 							 <options>
-							    <option name="cal-request-trans-type">URL</option>
-							    <option name="cal-request-payload-log-level">ON</option>
-							    <option name="cal-response-payload-log-level">ON</option>
 							</options>
                     </logging-handler>
                     <logging-handler>
@@ -124,13 +114,6 @@
                     <supported-locale>zh-Hant_US</supported-locale>
                 </G11N-options>
                 <pipeline-config>
-<!--                    <request-handlers>-->
-<!--                        <handler name="G11N">-->
-<!--                            <class-name>org.ebayopensource.turmeric.runtime.spf.impl.handlers.G11nHandler</class-name>-->
-<!--                        </handler>-->
-<!--                    </request-handlers>-->
-<!--                    <response-handlers>-->
-<!--                    </response-handlers>-->
                    <response-handlers>
                         <handler name="RREH">
                             <class-name>org.ebayopensource.turmeric.runtime.error.ResponseResidentErrorLoggingHandler</class-name>
@@ -139,9 +122,6 @@
                     <logging-handler>
                         <class-name>org.ebayopensource.turmeric.runtime.spf.impl.pipeline.ServerLoggingHandler</class-name>
 							 <options>
-							    <option name="cal-request-trans-type">URL</option>
-							    <option name="cal-request-payload-log-level">ON</option>
-							    <option name="cal-response-payload-log-level">ON</option>
 							</options>
                     </logging-handler>
                     <logging-handler>
@@ -220,13 +200,6 @@
                     <supported-locale>zh-Hant_US</supported-locale>
                 </G11N-options>
                 <pipeline-config>
-<!--                    <request-handlers>-->
-<!--                        <handler name="G11N">-->
-<!--                            <class-name>org.ebayopensource.turmeric.runtime.spf.impl.handlers.G11nHandler</class-name>-->
-<!--                        </handler>-->
-<!--                    </request-handlers>-->
-<!--                    <response-handlers>-->
-<!--                    </response-handlers>-->
                    <response-handlers>
                         <handler name="RREH">
                             <class-name>org.ebayopensource.turmeric.runtime.error.ResponseResidentErrorLoggingHandler</class-name>
@@ -235,9 +208,6 @@
                     <logging-handler>
                         <class-name>org.ebayopensource.turmeric.runtime.spf.impl.pipeline.ServerLoggingHandler</class-name>
 							 <options>
-							    <option name="cal-request-trans-type">URL</option>
-							    <option name="cal-request-payload-log-level">ON</option>
-							    <option name="cal-response-payload-log-level">ON</option>
 							</options>
                     </logging-handler>
                     <logging-handler>
@@ -316,13 +286,6 @@
                     <supported-locale>zh-Hant_US</supported-locale>
                 </G11N-options>
                 <pipeline-config>
-<!--                    <request-handlers>-->
-<!--                        <handler name="G11N">-->
-<!--                            <class-name>org.ebayopensource.turmeric.runtime.spf.impl.handlers.G11nHandler</class-name>-->
-<!--                        </handler>-->
-<!--                    </request-handlers>-->
-<!--                    <response-handlers>-->
-<!--                    </response-handlers>-->
                    <response-handlers>
                         <handler name="RREH">
                             <class-name>org.ebayopensource.turmeric.runtime.error.ResponseResidentErrorLoggingHandler</class-name>
@@ -331,9 +294,6 @@
                     <logging-handler>
                         <class-name>org.ebayopensource.turmeric.runtime.spf.impl.pipeline.ServerLoggingHandler</class-name>
 							 <options>
-							    <option name="cal-request-trans-type">URL</option>
-							    <option name="cal-request-payload-log-level">ON</option>
-							    <option name="cal-response-payload-log-level">ON</option>
 							</options>
                     </logging-handler>
                     <logging-handler>
