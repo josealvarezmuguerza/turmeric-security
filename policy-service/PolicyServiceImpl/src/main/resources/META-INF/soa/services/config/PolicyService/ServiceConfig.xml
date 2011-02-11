@@ -55,6 +55,8 @@ PolicyService:enablePolicy:enablePolicyRequest/policyKey/policyName;
 PolicyService:enablePolicy:enablePolicyRequest/policyKey/policyId;
 PolicyService:deletePolicy:deletePolicyRequest/policyKey/policyName; 
 PolicyService:deletePolicy:deletePolicyRequest/policyKey/policyId;
+PolicyService:deletePolicy:findPoliciesRequest/policyKey/policyName; 
+PolicyService:deletePolicy:findPoliciesRequest/policyKey/policyId;
 							</option>
 							<option name="skip-on-local">true</option>
 	      				</options> 
