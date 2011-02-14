@@ -1,1 +1,0 @@
-This folder is to host policy related services, including the PolicyService and the GroupMembershipService.

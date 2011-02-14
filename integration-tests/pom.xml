@@ -21,7 +21,6 @@
   <packaging>pom</packaging>
   <modules>
       <module>SOASecurityTests</module>
-      <module>PolicyTests</module>
       <module>RateLimiterServiceTest</module>
       <module>RateLimiterTests</module>
   </modules>

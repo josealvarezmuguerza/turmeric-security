@@ -8,3 +8,7 @@ bin
 *.patch
 *.diff
 *.log
+ConfigRoot
+AuthzCacheToggle
+temp_per*.xml
+

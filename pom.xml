@@ -18,6 +18,7 @@
 	<packaging>pom</packaging>
 	<properties>
 		<turmeric-runtime-version>0.9.1.0-SNAPSHOT</turmeric-runtime-version>
+		<turmeric-policy-version>0.9.1.0-SNAPSHOT</turmeric-policy-version>
 		<turmeric-monitoring-version>0.9.1.0-SNAPSHOT</turmeric-monitoring-version>
 		<turmeric-jpa-utils-version>0.9.1.0-SNAPSHOT</turmeric-jpa-utils-version>
 	</properties>
@@ -77,7 +78,6 @@
 		<module>SecurityErrorLibrary</module>
 		<module>authentication-service</module>
 		<module>authorization-service</module>
-		<module>policy-service</module>
 		<module>policy-enforcement-service</module>
                 <module>ratelimiter-service</module>
 		<module>security-dist-mysql</module>
