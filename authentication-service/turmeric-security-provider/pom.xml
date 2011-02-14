@@ -29,7 +29,7 @@
     <dependency>
       <groupId>org.ebayopensource.turmeric.policy</groupId>
       <artifactId>turmeric-policy-provider</artifactId>
-      <version>${project.version}</version>
+	  <version>${turmeric-policy-version}</version>
     </dependency>
     <dependency>
       <groupId>org.ebayopensource.turmeric.utils</groupId>

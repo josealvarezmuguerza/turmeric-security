@@ -97,12 +97,12 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy.tests</groupId>
 			<artifactId>PolicyTestUtils</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
 			<artifactId>PolicyServiceConsumer</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
@@ -187,17 +187,17 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
 			<artifactId>GroupMembershipServiceConsumer</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>GroupMembershipServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.intf</groupId>
 			<artifactId>GroupMembershipService</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.runtime.tests</groupId>
@@ -218,17 +218,17 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy</groupId>
 			<artifactId>turmeric-policy-provider</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>PolicyServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>PolicyServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

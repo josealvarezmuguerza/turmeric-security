@@ -94,17 +94,17 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>PolicyServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>PolicyEnforcementServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>GroupMembershipServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
@@ -129,7 +129,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy</groupId>
 			<artifactId>turmeric-policy-provider</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
@@ -402,7 +402,7 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>amf</groupId>
 			<artifactId>flex-messaging-common</artifactId>
@@ -457,7 +457,7 @@
 			<version>1.5</version>
 			<type>jar</type>
 		</dependency>
-			
+
 
 		<!-- HtmlUnit dependencies -->
 		<dependency>
@@ -501,7 +501,7 @@
 				<version>2.6</version>
 				<configuration>
 					<testFailureIgnore>true</testFailureIgnore>
-<!--					<forkMode>once</forkMode>-->
+					<!-- <forkMode>once</forkMode> -->
 					<systemPropertyVariables>
 						<driver>${driver}</driver>
 						<url>${url}</url>
@@ -538,69 +538,69 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-war-plugin</artifactId>-->
-<!--				<version>2.1.1</version>-->
-<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>org.mortbay.jetty</groupId>-->
-<!--				<artifactId>maven-jetty-plugin</artifactId>-->
-<!--				<version>6.1.26</version>-->
-<!--				<configuration>-->
-<!--					<connectors>-->
-<!--						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">-->
-<!--							<port>8080</port>-->
-<!--							<maxIdleTime>60000</maxIdleTime>-->
-<!--						</connector>-->
-<!--					</connectors>-->
-<!--					<contextPath>/security</contextPath>-->
-<!--					<webApp>target/security.war</webApp>-->
-<!--					<stopKey>foo</stopKey>-->
-<!--					<stopPort>9999</stopPort>-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>start-jetty</id>-->
-<!--						<phase>pre-integration-test</phase>-->
-<!--						<goals>-->
-<!--							<goal>run</goal>-->
-<!--						</goals>-->
-<!--						<configuration>-->
-<!--							<scanIntervalSeconds>0</scanIntervalSeconds>-->
-<!--							<daemon>true</daemon>-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--					<execution>-->
-<!--						<id>stop-jetty</id>-->
-<!--						<phase>post-integration-test</phase>-->
-<!--						<goals>-->
-<!--							<goal>stop</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>eviware</groupId>-->
-<!--				<artifactId>maven-soapui-plugin</artifactId>-->
-<!--				<version>3.0</version>-->
-<!--				<configuration>-->
-<!--					<projectFile>${basedir}/src/test/resources/RateLimiterServiceV1-wsdl-soapui-project.xml-->
-<!--						</projectFile>-->
-<!--					<printReport>true</printReport>-->
-<!--					<junitReport>true</junitReport>-->
-<!--					<test.FailIgnore>true</test.FailIgnore>-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>soap-integration-test</id>-->
-<!--						<phase>integration-test</phase>-->
-<!--						<goals>-->
-<!--							<goal>test</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-war-plugin</artifactId> -->
+			<!-- <version>2.1.1</version> -->
+			<!-- </plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.mortbay.jetty</groupId> -->
+			<!-- <artifactId>maven-jetty-plugin</artifactId> -->
+			<!-- <version>6.1.26</version> -->
+			<!-- <configuration> -->
+			<!-- <connectors> -->
+			<!-- <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector"> -->
+			<!-- <port>8080</port> -->
+			<!-- <maxIdleTime>60000</maxIdleTime> -->
+			<!-- </connector> -->
+			<!-- </connectors> -->
+			<!-- <contextPath>/security</contextPath> -->
+			<!-- <webApp>target/security.war</webApp> -->
+			<!-- <stopKey>foo</stopKey> -->
+			<!-- <stopPort>9999</stopPort> -->
+			<!-- </configuration> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>start-jetty</id> -->
+			<!-- <phase>pre-integration-test</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>run</goal> -->
+			<!-- </goals> -->
+			<!-- <configuration> -->
+			<!-- <scanIntervalSeconds>0</scanIntervalSeconds> -->
+			<!-- <daemon>true</daemon> -->
+			<!-- </configuration> -->
+			<!-- </execution> -->
+			<!-- <execution> -->
+			<!-- <id>stop-jetty</id> -->
+			<!-- <phase>post-integration-test</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>stop</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>eviware</groupId> -->
+			<!-- <artifactId>maven-soapui-plugin</artifactId> -->
+			<!-- <version>3.0</version> -->
+			<!-- <configuration> -->
+			<!-- <projectFile>${basedir}/src/test/resources/RateLimiterServiceV1-wsdl-soapui-project.xml -->
+			<!-- </projectFile> -->
+			<!-- <printReport>true</printReport> -->
+			<!-- <junitReport>true</junitReport> -->
+			<!-- <test.FailIgnore>true</test.FailIgnore> -->
+			<!-- </configuration> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>soap-integration-test</id> -->
+			<!-- <phase>integration-test</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>test</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
@@ -655,5 +655,5 @@
 		</password>
 		<soapui-project>${basedir}/src/test/resources/RateLimiterServiceV1-wsdl-soapui-project.xml</soapui-project>
 	</properties>
-	
+
 </project>
