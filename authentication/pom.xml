@@ -22,7 +22,7 @@
       <module>AuthenticationService</module>
       <module>AuthenticationServiceConsumer</module>
       <module>AuthenticationServiceImpl</module>
-      <module>SecurityProviderInterface</module>
+      <module>AuthenticationProvider</module>
       <module>turmeric-security-provider</module>
   </modules>
 </project>
