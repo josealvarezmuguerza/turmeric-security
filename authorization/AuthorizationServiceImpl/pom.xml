@@ -44,7 +44,7 @@
     <dependency>
       <groupId>org.ebayopensource.turmeric.intf</groupId>
       <artifactId>GroupMembershipService</artifactId>
-      <version>${project.version}</version>
+      <version>${turmeric-policy-version}</version>
     </dependency>
     <dependency>
       <groupId>org.ebayopensource.turmeric.utils</groupId>
