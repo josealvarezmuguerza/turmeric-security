@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ebayopensource.turmeric</groupId>
 		<artifactId>turmeric-project</artifactId>
-		<version>1.1.0.0-SNAPSHOT</version>
+		<version>1.1.0</version>
 		<relativePath>../turmeric-project/pom.xml</relativePath>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.security</groupId>
@@ -16,9 +16,9 @@
 	<version>1.0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<turmeric-runtime-version>1.0.0.1-SNAPSHOT</turmeric-runtime-version>
-		<turmeric-policy-version>1.0.0-Beta</turmeric-policy-version>
-		<turmeric-monitoring-version>1.0.0-Alpha</turmeric-monitoring-version>
+		<turmeric-runtime-version>1.0.0-Beta-RC1</turmeric-runtime-version>
+		<turmeric-policy-version>1.0.0-Beta-RC1</turmeric-policy-version>
+		<turmeric-monitoring-version>1.0.0-Alpha-RC1</turmeric-monitoring-version>
 		<turmeric-jpa-utils-version>1.0.0-Beta</turmeric-jpa-utils-version>
 	</properties>
 	<scm>
