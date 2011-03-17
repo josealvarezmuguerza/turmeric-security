@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.ebayopensource.turmeric.security</groupId>
 		<artifactId>turmeric-security-parent</artifactId>
-		<version>1.0.0.1-SNAPSHOT</version>
+		<version>1.0.0-Beta-RC1</version>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.security</groupId>
 	<artifactId>security-dist-mysql</artifactId>
