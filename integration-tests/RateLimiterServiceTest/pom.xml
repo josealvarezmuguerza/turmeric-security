@@ -17,6 +17,13 @@
 	</parent>
 	<groupId>org.ebayopensource.turmeric.ratelimiter</groupId>
 	<artifactId>RateLimiterServiceProviderTest</artifactId>
+	<name>Turmeric :: Security :: Rate Limiter :: SOAP UI Ratelimiter Provider Tests</name>
+	<description>
+		This test uses SOAP UI to make calls to the service and verify that the Rate Limiter Provider is
+		being executed.   TURMERIC-1241 had requested that this test be merged in with the RateLimiterTests
+		project, but the items are addressing two different types of tests.  Plus there is extra setup that needs
+		to be done that is just specific to this test that it is better to keep them seperated.  Please do not
+		merge this in wit Rate Limiter Tests artifact.	</description>
 	<packaging>war</packaging>
 	<repositories>
 		<repository>
