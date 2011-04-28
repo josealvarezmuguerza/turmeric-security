@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericratelimiter.ErrorConstants;
+import org.ebayopensource.turmeric.ratelimiter.provider.RateLimiterProvider;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.utils.LogManager;
@@ -28,7 +29,7 @@ import org.ebayopensource.turmeric.services.ratelimiterservice.intf.RateLimiterS
 
 public class RateLimiterServiceProviderFactory {
 	
-	private static Map<String, RateLimiterService>  s_serviceProviderMap = new HashMap<String, RateLimiterService>();
+	private static Map<String, RateLimiterProvider>  s_serviceProviderMap = new HashMap<String, RateLimiterProvider>();
 	private static Set<String> s_failedProviders = new HashSet<String>();
 	private static String s_defaultProviderKey;
 	private static volatile CommonErrorData s_errorData;
@@ -49,11 +50,11 @@ public class RateLimiterServiceProviderFactory {
 		
 	}
 	
-	public static RateLimiterService create() throws ServiceException {
+	public static RateLimiterProvider create() throws ServiceException {
 		return create(s_defaultProviderKey);
 	}
 
-	public static RateLimiterService create(String providerKey) throws ServiceException { 
+	public static RateLimiterProvider create(String providerKey) throws ServiceException { 
 		
 		if (s_errorData != null) 
 			throw new ServiceException(s_errorData);
@@ -61,7 +62,7 @@ public class RateLimiterServiceProviderFactory {
 		if (providerKey == null)
 			providerKey = s_defaultProviderKey;
 		
-		RateLimiterService providerImpl = s_serviceProviderMap.get(providerKey);
+		RateLimiterProvider providerImpl = s_serviceProviderMap.get(providerKey);
 		RateLimiterServiceProviderConfigManager configMngr = RateLimiterServiceProviderConfigManager.getInstance();
 		
 		if (providerImpl == null) {
@@ -96,12 +97,12 @@ public class RateLimiterServiceProviderFactory {
 		return providerImpl;
 	}
 
-	private static RateLimiterService getServiceDataModelProviderInstance(String rateLimiterServiceProviderClassName) {
+	private static RateLimiterProvider getServiceDataModelProviderInstance(String rateLimiterServiceProviderClassName) {
 		
-		RateLimiterService serviceProviderImpl = null;
+		RateLimiterProvider serviceProviderImpl = null;
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
 		try {
-			serviceProviderImpl = ReflectionUtils.createInstance(rateLimiterServiceProviderClassName, RateLimiterService.class, cl);
+			serviceProviderImpl = ReflectionUtils.createInstance(rateLimiterServiceProviderClassName, RateLimiterProvider.class, cl);
 
 		} catch (Exception e) {
 			s_Logger.log(Level.SEVERE, 

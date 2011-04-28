@@ -20,12 +20,12 @@ import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.BlackListPolicy;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.RateLimiterPolicy;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.WhiteListPolicy;
+import org.ebayopensource.turmeric.ratelimiter.provider.RateLimiterProvider;
 import org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest;
 import org.ebayopensource.turmeric.security.v1.services.IsRateLimitedResponse;
 import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 import org.ebayopensource.turmeric.services.policyservice.intf.gen.BasePolicyServiceConsumer;
 import org.ebayopensource.turmeric.services.ratelimiterservice.impl.RateLimiterException;
-import org.ebayopensource.turmeric.services.ratelimiterservice.intf.RateLimiterService;
 
 /**
  * This class is an example of a Rate Limiter Provider implementation. It
@@ -40,7 +40,7 @@ import org.ebayopensource.turmeric.services.ratelimiterservice.intf.RateLimiterS
  * 
  */
 
-public class RateLimiterProviderImpl implements RateLimiterService {
+public class RateLimiterProviderImpl implements RateLimiterProvider {
 	// used in mock
 	private BasePolicyServiceConsumer consumer;
 

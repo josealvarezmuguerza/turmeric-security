@@ -30,6 +30,12 @@
       <artifactId>RateLimiterService</artifactId>
       <version>${project.version}</version>
     </dependency>
+     <dependency>
+      <groupId>org.ebayopensource.turmeric.ratelimiter</groupId>
+      <artifactId>RateLimiterProvider</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
     <dependency>
       <groupId>org.ebayopensource.turmeric.utils</groupId>
       <artifactId>TurmericUtils</artifactId>
@@ -62,7 +68,6 @@
         <configuration>
           <verbose>true</verbose>
           <serviceName>RateLimiterService</serviceName>
-<!--          <serviceGroupId>org.ebayopensource.turmeric.services.intf</serviceGroupId>-->
         </configuration>
       </plugin>
     </plugins>

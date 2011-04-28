@@ -21,6 +21,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>RateLimiterService</module>
+    <module>RateLimiterProvider</module>
     <module>RateLimiterServiceConsumer</module>
     <module>RateLimiterServiceImpl</module>
     <module>RateLimiterErrorLibrary</module>

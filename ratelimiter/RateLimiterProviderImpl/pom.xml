@@ -30,6 +30,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.ebayopensource.turmeric.ratelimiter</groupId>
+			<artifactId>RateLimiterProvider</artifactId>
+			<version>${project.version}</version>		
+		</dependency>
+		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>RateLimiterServiceImpl</artifactId>
 			<version>${project.version}</version>

@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericratelimiter.ErrorConstants;
+import org.ebayopensource.turmeric.ratelimiter.provider.RateLimiterProvider;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceRuntimeException;
@@ -29,7 +30,7 @@ import org.ebayopensource.turmeric.services.ratelimiterservice.intf.RateLimiterS
 public class RateLimiterServiceImpl
     implements RateLimiterService
 {
-	private static volatile RateLimiterService s_provider;
+	private static volatile RateLimiterProvider s_provider;
 	
 	private static final String s_providerPropFilePath = 
 		"META-INF/soa/services/config/RateLimiterService/service_provider.properties";
@@ -46,7 +47,7 @@ public class RateLimiterServiceImpl
 			if (s_provider == null) {
 				synchronized (RateLimiterServiceImpl.class) {
 					if (s_provider == null)	{						
-						s_provider = (RateLimiterService) RateLimiterServiceProviderFactory.create(getPreferredProvider());
+						s_provider = RateLimiterServiceProviderFactory.create(getPreferredProvider());
 					}
 				}
 			}
