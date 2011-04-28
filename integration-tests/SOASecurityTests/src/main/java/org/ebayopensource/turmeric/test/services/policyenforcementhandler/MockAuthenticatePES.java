@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2006-2011 eBay Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at 
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *    
+ *******************************************************************************/
+
 package org.ebayopensource.turmeric.test.services.policyenforcementhandler;
 
 import java.util.ArrayList;
@@ -9,7 +19,7 @@ import org.ebayopensource.turmeric.authentication.provider.AuthenticationRespons
 import org.ebayopensource.turmeric.authentication.provider.Authenticator;
 import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 
-public class TestAuthenticatePES implements Authenticator{
+public class MockAuthenticatePES implements Authenticator{
 	private static List<String> s_requiredCredentials;
 	public static final String CREDENTIAL_TOKEN = "testtoken";
 	private String authnMethod = "TestAuthenticatePES";
@@ -31,7 +41,7 @@ public class TestAuthenticatePES implements Authenticator{
 		return authnMethod;
 	}
 	
-	public TestAuthenticatePES(String authnMethod) {
+	public MockAuthenticatePES(String authnMethod) {
 		this.authnMethod = authnMethod;
 	}
 
