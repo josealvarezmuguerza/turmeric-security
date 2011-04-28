@@ -78,7 +78,8 @@
 		<module>authentication</module>
 		<module>authorization</module>
 		<module>policy-enforcement</module>
-                <module>ratelimiter</module>
+		<module>group-membership</module>
+        <module>ratelimiter</module>
 		<module>security-dist-mysql</module>
 		<module>security-dist-mysql-bin</module>
 	</modules>
