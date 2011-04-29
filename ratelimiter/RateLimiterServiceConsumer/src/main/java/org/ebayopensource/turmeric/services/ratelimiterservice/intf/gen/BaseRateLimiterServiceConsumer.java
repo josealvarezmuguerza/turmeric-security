@@ -40,9 +40,18 @@ public class BaseRateLimiterServiceConsumer {
     private String m_authToken = null;
     private Cookie[] m_cookies;
 
+    /**
+     * Instantiates a new base rate limiter service consumer.
+     */
     public BaseRateLimiterServiceConsumer() {
     }
 
+    /**
+     * Sets the service location.
+     *
+     * @param serviceLocation the new service location
+     * @throws MalformedURLException the malformed url exception
+     */
     protected void setServiceLocation(String serviceLocation)
         throws MalformedURLException
     {
@@ -61,21 +70,29 @@ public class BaseRateLimiterServiceConsumer {
     }
 
     /**
-     * Use this method to set User Credentials (Token) 
-     * 
+     * Use this method to set User Credentials (Token).
+     *
+     * @param authToken the new auth token
      */
     protected void setAuthToken(String authToken) {
         m_authToken = authToken;
     }
 
     /**
-     * Use this method to set User Credentials (Cookie)
-     * 
+     * Use this method to set User Credentials (Cookie).
+     *
+     * @param cookies the new cookies
      */
     protected void setCookies(Cookie[] cookies) {
         m_cookies = cookies;
     }
 
+    /**
+     * Gets the proxy.
+     *
+     * @return the proxy
+     * @throws ServiceException the service exception
+     */
     protected AsyncRateLimiterService getProxy()
         throws ServiceException
     {
@@ -86,6 +103,13 @@ public class BaseRateLimiterServiceConsumer {
         return m_proxy;
     }
 
+    /**
+     * Checks if is rate limited async.
+     *
+     * @param param0 the param0
+     * @param param1 the param1
+     * @return the future
+     */
     public Future<?> isRateLimitedAsync(IsRateLimitedRequest param0, AsyncHandler<IsRateLimitedResponse> param1) {
         Future<?> result = null;
         try {
@@ -97,6 +121,12 @@ public class BaseRateLimiterServiceConsumer {
         return result;
     }
 
+    /**
+     * Checks if is rate limited async.
+     *
+     * @param param0 the param0
+     * @return the response
+     */
     public Response<IsRateLimitedResponse> isRateLimitedAsync(IsRateLimitedRequest param0) {
         Response<IsRateLimitedResponse> result = null;
         try {
@@ -108,6 +138,12 @@ public class BaseRateLimiterServiceConsumer {
         return result;
     }
 
+    /**
+     * Checks if is rate limited.
+     *
+     * @param param0 the param0
+     * @return the checks if is rate limited response
+     */
     public IsRateLimitedResponse isRateLimited(IsRateLimitedRequest param0) {
         IsRateLimitedResponse result = null;
         try {

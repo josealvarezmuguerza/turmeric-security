@@ -27,6 +27,9 @@ import org.ebayopensource.turmeric.utils.ContextUtils;
 
 import org.ebayopensource.turmeric.services.ratelimiterservice.intf.RateLimiterService;
 
+/**
+ * The Class RateLimiterServiceImpl.
+ */
 public class RateLimiterServiceImpl
     implements RateLimiterService
 {
@@ -80,6 +83,9 @@ public class RateLimiterServiceImpl
 		return provider;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
     public IsRateLimitedResponse isRateLimited(IsRateLimitedRequest rateLimiterRequest) {
     
     	initialize();

@@ -60,6 +60,9 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 	 */
 	private static final String CONSUMER_ID = "consumer-id";
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler#init(org.ebayopensource.turmeric.runtime.common.pipeline.Handler.InitContext)
+	 */
 	@Override
 	public void init(InitContext ctx) throws ServiceException {
 		super.init(ctx);
@@ -122,6 +125,9 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler#invoke(org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext)
+	 */
 	@Override
 	public void invoke(MessageContext ctx) throws ServiceException {
 
@@ -173,6 +179,11 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 		ctx.getRequestMessage().setTransportHeader(tokenType, token);
 	}
 
+	/**
+	 * Log cal msg.
+	 *
+	 * @param msg the msg
+	 */
 	private static void logCalMsg(String msg) {
 		if (s_logger.isLoggable(Level.INFO)) {
 			s_logger.log(Level.SEVERE, "PolicyEnforcementDebugInfo : " + msg);

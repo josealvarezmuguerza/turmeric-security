@@ -25,10 +25,18 @@ import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;
  */
 public class ServerCredentialHandler extends BaseHandler {
 
+	/** The CREDENTIA l_ prefix. */
 	private final String CREDENTIAL_PREFIX = "credential";
+	
+	/** The DELIMITER. */
 	private final String DELIMITER = "-";
+	
+	/** The m_credential name header map. */
 	private Map<String, String> m_credentialNameHeaderMap;
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler#init(org.ebayopensource.turmeric.runtime.common.pipeline.Handler.InitContext)
+	 */
 	@Override
 	public void init(InitContext ctx) throws ServiceException
 	{
@@ -49,6 +57,9 @@ public class ServerCredentialHandler extends BaseHandler {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler#invoke(org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext)
+	 */
 	@Override
 	public void invoke(MessageContext ctx) throws ServiceException {
 

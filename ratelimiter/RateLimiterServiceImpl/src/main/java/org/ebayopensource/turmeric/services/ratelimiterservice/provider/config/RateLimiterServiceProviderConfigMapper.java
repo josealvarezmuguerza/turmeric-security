@@ -19,14 +19,18 @@ import org.w3c.dom.NodeList;
 
 
 
+/**
+ * The Class RateLimiterServiceProviderConfigMapper.
+ */
 public class RateLimiterServiceProviderConfigMapper {
 
 	/**
-	 * Map subject group service configuration
-	 * @param filename
-	 * @param rateLimiterConfig
-	 * @param dst
-	 * @throws Exception
+	 * Map subject group service configuration.
+	 *
+	 * @param filename the filename
+	 * @param topLevel the top level
+	 * @param dst the dst
+	 * @throws ConfigurationException the configuration exception
 	 */
 	public static void map(String filename, Element topLevel, RateLimiterServiceProviderConfig dst) throws ConfigurationException {
 	
@@ -36,6 +40,14 @@ public class RateLimiterServiceProviderConfigMapper {
 		mapRateLimiterServiceProviderConfig(filename, topLevel, dst);
 	}
 	
+	/**
+	 * Map rate limiter service provider config.
+	 *
+	 * @param filename the filename
+	 * @param rateLimiterServiceConfigProvider the rate limiter service config provider
+	 * @param dst the dst
+	 * @throws ConfigurationException the configuration exception
+	 */
 	public static void mapRateLimiterServiceProviderConfig(String filename, Element rateLimiterServiceConfigProvider, RateLimiterServiceProviderConfig dst) throws ConfigurationException {
 		try {
 			String defProviderKey = DomParseUtils.getElementText(filename, rateLimiterServiceConfigProvider, "default");

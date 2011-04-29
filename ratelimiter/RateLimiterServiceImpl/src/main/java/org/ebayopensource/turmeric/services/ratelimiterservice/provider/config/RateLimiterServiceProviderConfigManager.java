@@ -14,6 +14,9 @@ import org.ebayopensource.turmeric.utils.config.exceptions.ConfigurationExceptio
 import org.w3c.dom.Element;
 
 
+/**
+ * The Class RateLimiterServiceProviderConfigManager.
+ */
 public class RateLimiterServiceProviderConfigManager extends BaseConfigManager { 
 	
 	private static final String CONFIG_FILENAME = "RateLimiterServiceProviderConfig.xml";
@@ -25,6 +28,11 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
 	
 	
 
+	/**
+	 * Gets the single instance of RateLimiterServiceProviderConfigManager.
+	 *
+	 * @return single instance of RateLimiterServiceProviderConfigManager
+	 */
 	public static RateLimiterServiceProviderConfigManager getInstance() {
     	if (s_instance == null) {
     		s_instance = new RateLimiterServiceProviderConfigManager();
@@ -33,11 +41,23 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
     }
 	
 	
+	/**
+	 * Gets the config.
+	 *
+	 * @return the config
+	 * @throws ConfigurationException the configuration exception
+	 */
 	public synchronized RateLimiterServiceProviderConfig getConfig() throws ConfigurationException {
 		loadConfig();
 		return m_config;
 	}
 	
+	/**
+	 * Gets the config for update.
+	 *
+	 * @return the config for update
+	 * @throws ConfigurationException the configuration exception
+	 */
 	public synchronized RateLimiterServiceProviderConfig getConfigForUpdate() throws ConfigurationException {
 		loadConfig();
 		if (m_config == null) {
@@ -46,7 +66,10 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
 		return m_config.copy();
 	}
 	
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public void map(Element rootData) throws ConfigurationException {
 		// if no rootData, reset config to null (clean up previous instance)
 		if (rootData == null) {
@@ -56,16 +79,25 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
 			RateLimiterServiceProviderConfigMapper.map(getConfigFileName(), rootData, m_config);				
 		}
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public String getConfigFileName() {
 		return CONFIG_FILENAME;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public String getSchemaFileName() {
 		return SCHEMA_FILENAME;
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public String getRootElementName() {
 		return ROOT_ELEMENT;
 	}

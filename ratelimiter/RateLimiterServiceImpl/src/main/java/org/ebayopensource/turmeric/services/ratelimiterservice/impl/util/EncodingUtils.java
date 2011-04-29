@@ -27,6 +27,13 @@ public class EncodingUtils {
 
 
 	
+	/**
+	 * Encode error message.
+	 *
+	 * @param ack the ack
+	 * @param errMsg the err msg
+	 * @return the string
+	 */
 	public static String encodeErrorMessage(AckValue ack, ErrorMessage errMsg) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("ack=").append(String.valueOf(ack)).append(";");

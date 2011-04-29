@@ -31,15 +31,29 @@ import org.ebayopensource.turmeric.security.v1.services.SupportedPrimitive;
 import org.ebayopensource.turmeric.security.v1.services.Target;
 
 /**
+ * The Class RateLimiterProviderAbstractTest.
+ *
  * @author gbaal
- * 
  */
 public abstract class RateLimiterProviderAbstractTest {
+	
+	/** The VERSION. */
 	final String VERSION = "1.0";
+	
+	/** The WHITELIST. */
 	final String WHITELIST = "WHITELIST";
+	
+	/** The RL. */
 	final String RL = "RL";
+	
+	/** The BLACKLIST. */
 	final String BLACKLIST = "BLACKLIST";
 
+	/**
+	 * Gets the bL find policies request.
+	 *
+	 * @return the bL find policies request
+	 */
 	protected FindPoliciesRequest getBLFindPoliciesRequest() {
 		PolicyKey policyKey = new PolicyKey();
 		policyKey.setPolicyType(BLACKLIST);
@@ -55,6 +69,11 @@ public abstract class RateLimiterProviderAbstractTest {
 		return policyRequest;
 	}
 
+	/**
+	 * Gets the wL find policies request.
+	 *
+	 * @return the wL find policies request
+	 */
 	protected FindPoliciesRequest getWLFindPoliciesRequest() {
 		PolicyKey policyKey = new PolicyKey();
 		policyKey.setPolicyType(WHITELIST);
@@ -70,6 +89,11 @@ public abstract class RateLimiterProviderAbstractTest {
 		return policyRequest;
 	}
 
+	/**
+	 * Gets the rL find policies request.
+	 *
+	 * @return the rL find policies request
+	 */
 	protected FindPoliciesRequest getRLFindPoliciesRequest() {
 		PolicyKey policyKey = new PolicyKey();
 		policyKey.setPolicyType(RL);
@@ -85,6 +109,12 @@ public abstract class RateLimiterProviderAbstractTest {
 		return policyRequest;
 	}
 
+	/**
+	 * Generate is rate limited request.
+	 *
+	 * @param rateLimitRequest the rate limit request
+	 * @return the checks if is rate limited request
+	 */
 	protected IsRateLimitedRequest generateIsRateLimitedRequest(
 			IsRateLimitedRequest rateLimitRequest) {
 		rateLimitRequest.setOperationName("performSearch");
@@ -95,6 +125,11 @@ public abstract class RateLimiterProviderAbstractTest {
 	}
 
 	// create BlackList
+	/**
+	 * Generate bl find policies response.
+	 *
+	 * @return the find policies response
+	 */
 	protected FindPoliciesResponse generateBLFindPoliciesResponse() {
 		FindPoliciesResponse findPoliciesResponse = initFindPoliciesResponse();
 		findPoliciesResponse.getPolicySet().getPolicy().addAll(
@@ -103,6 +138,11 @@ public abstract class RateLimiterProviderAbstractTest {
 	}
 
 	// create WHITELIST
+	/**
+	 * Generate wl find policies response.
+	 *
+	 * @return the find policies response
+	 */
 	protected FindPoliciesResponse generateWLFindPoliciesResponse() {
 		FindPoliciesResponse findPoliciesResponse = initFindPoliciesResponse();
 		findPoliciesResponse.getPolicySet().getPolicy().addAll(
@@ -111,6 +151,11 @@ public abstract class RateLimiterProviderAbstractTest {
 	}
 
 	// create RL
+	/**
+	 * Generate rl find policies response.
+	 *
+	 * @return the find policies response
+	 */
 	protected FindPoliciesResponse generateRLFindPoliciesResponse() {
 		FindPoliciesResponse findPoliciesResponse = initFindPoliciesResponse();
 		findPoliciesResponse.getPolicySet().getPolicy().addAll(

@@ -21,9 +21,15 @@ import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;
 
 public class SkipLocalValidationUtil {
 
+	/** The Constant SKIP_RESOURCE. */
 	private static final String SKIP_RESOURCE = "PolicyService";
+	
+	/** The Constant SKIP_OPERATIONS. */
 	private static final String[] SKIP_OPERATIONS = {"getAuthenticationPolicy", "findPolicies"};
 	
+	/**
+	 * Instantiates a new skip local validation util.
+	 */
 	private SkipLocalValidationUtil() {
 		
 	}
@@ -51,6 +57,12 @@ public class SkipLocalValidationUtil {
 		return false;
 	}
 	
+	/**
+	 * Gets the resource name.
+	 *
+	 * @param ctx the ctx
+	 * @return the resource name
+	 */
 	private static String getResourceName(MessageContext ctx) {
 		String resourceName = ctx.getAdminName();
 		if (resourceName == null ) { // For Backward compatibility

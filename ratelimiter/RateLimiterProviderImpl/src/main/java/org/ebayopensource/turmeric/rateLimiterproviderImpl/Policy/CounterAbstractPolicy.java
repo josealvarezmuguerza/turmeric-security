@@ -18,20 +18,27 @@ import org.ebayopensource.turmeric.security.v1.services.Resources;
 import org.ebayopensource.turmeric.security.v1.services.Rule;
 
 /**
+ * The Class CounterAbstractPolicy.
+ *
  * @author gbaal
- * 
  */
 public abstract class CounterAbstractPolicy {
 	// variables
 	// all hits
+	/** The Constant HITS. */
 	public static final String HITS = "HITS";
 	// service.operation:count
+	/** The Constant SERVICECOUNT. */
 	public static final String SERVICECOUNT = ".count";
 	// 101.12.69.105:hits
+	/** The Constant IPHITS. */
 	public static final String IPHITS = ":hits";
 	private static Map<String, RateLimiterPolicyModel> activeRL;
 	private static Map<String, RateLimiterPolicyModel> activeEffect;
 
+	/**
+	 * Instantiates a new counter abstract policy.
+	 */
 	public CounterAbstractPolicy() {
 		super();
 		// Initialised maps
@@ -39,18 +46,34 @@ public abstract class CounterAbstractPolicy {
 		getActiveEffects();
 	}
 
+	/**
+	 * Gets the active rl.
+	 *
+	 * @return the active rl
+	 */
 	protected Map<String, RateLimiterPolicyModel> getActiveRL() {
 		activeRL = (activeRL == null) ? new HashMap<String, RateLimiterPolicyModel>()
 				: activeRL;
 		return activeRL;
 	}
 
+	/**
+	 * Gets the active effects.
+	 *
+	 * @return the active effects
+	 */
 	protected Map<String, RateLimiterPolicyModel> getActiveEffects() {
 		activeEffect = (activeEffect == null) ? new HashMap<String, RateLimiterPolicyModel>()
 				: activeEffect;
 		return activeEffect;
 	}
 
+	/**
+	 * Increment counter.
+	 *
+	 * @param ipOrSubjectGroup the ip or subject group
+	 * @param rateLimiterPolicyModel the rate limiter policy model
+	 */
 	protected void incrementCounter(String ipOrSubjectGroup,
 			RateLimiterPolicyModel rateLimiterPolicyModel) {
 		if (!isSpecialVAR(ipOrSubjectGroup)) {
@@ -78,6 +101,12 @@ public abstract class CounterAbstractPolicy {
 	}
 
 	// check if we need to reset counter base on RolloverPeriod
+	/**
+	 * Reset counter.
+	 *
+	 * @param ipOrSubjectGroup the ip or subject group
+	 * @param rule the rule
+	 */
 	protected void resetCounter(String ipOrSubjectGroup, Rule rule) {
 		if (!rule.getCondition().getExpression().getPrimitiveValue().getValue()
 				.contains(ipOrSubjectGroup)) {
@@ -129,6 +158,13 @@ public abstract class CounterAbstractPolicy {
 	}
 
 	// add to database
+	/**
+	 * Adds the to active effects.
+	 *
+	 * @param currentSubjectOrGroup the current subject or group
+	 * @param rule the rule
+	 * @param currentlimiterStatus the currentlimiter status
+	 */
 	protected void addToActiveEffects(String currentSubjectOrGroup, Rule rule,
 			RateLimiterStatus currentlimiterStatus) {
 		if (currentSubjectOrGroup != null) {
@@ -146,6 +182,9 @@ public abstract class CounterAbstractPolicy {
 	}
 
 	// checks and reset effect
+	/**
+	 * Check all effects.
+	 */
 	protected void checkAllEffects() {
 		for (Map.Entry<String, RateLimiterPolicyModel> entry : getActiveEffects()
 				.entrySet()) {
@@ -154,6 +193,11 @@ public abstract class CounterAbstractPolicy {
 
 	}
 
+	/**
+	 * Creates the service counters.
+	 *
+	 * @param policy the policy
+	 */
 	protected void createServiceCounters(Policy policy) {
 		if (policy == null)
 			return;
@@ -189,6 +233,12 @@ public abstract class CounterAbstractPolicy {
 
 	}
 
+	/**
+	 * Gets the limiter status.
+	 *
+	 * @param type the type
+	 * @return the limiter status
+	 */
 	protected RateLimiterStatus getlimiterStatus(EffectType type) {
 		RateLimiterStatus rateLimiterStatus = null;
 		// convert type
@@ -246,6 +296,13 @@ public abstract class CounterAbstractPolicy {
 		return model;
 	}
 
+	/**
+	 * Find rule.
+	 *
+	 * @param rules the rules
+	 * @param name the name
+	 * @return the rule
+	 */
 	protected Rule findRule(List<Rule> rules, String name) {
 		if (rules != null && name != null)
 			for (Rule rule : rules) {
@@ -264,6 +321,11 @@ public abstract class CounterAbstractPolicy {
 	}
 
 	// remove form database if effect duration is < now
+	/**
+	 * Reset effect.
+	 *
+	 * @param currentSubjectOrGroup the current subject or group
+	 */
 	protected void resetEffect(String currentSubjectOrGroup) {
 		if (currentSubjectOrGroup != null) {
 			currentSubjectOrGroup = currentSubjectOrGroup.trim();
@@ -288,6 +350,12 @@ public abstract class CounterAbstractPolicy {
 	}
 
 	// special variable
+	/**
+	 * Checks if is special var.
+	 *
+	 * @param str the str
+	 * @return true, if is special var
+	 */
 	public static boolean isSpecialVAR(String str) {
 		// hits for all
 		if (HITS.equalsIgnoreCase(str)) {
@@ -299,6 +367,12 @@ public abstract class CounterAbstractPolicy {
 		return false;
 	}
 
+	/**
+	 * Extract variable.
+	 *
+	 * @param str2 the str2
+	 * @return the string
+	 */
 	public String extractVariable(String str2) {
 		String[] delim = { ">", "<", "=" };
 		String[] words;
@@ -340,6 +414,14 @@ public abstract class CounterAbstractPolicy {
 	// retrieve from database or variable
 	// ex testService:op1.count retrieve it from somewhere
 	// if not found throw Error
+	/**
+	 * Gets the variable.
+	 *
+	 * @param str the str
+	 * @param ipOrSubjectGroup the ip or subject group
+	 * @return the variable
+	 * @throws Exception the exception
+	 */
 	protected int getVariable(String str, String ipOrSubjectGroup)
 			throws Exception {
 		if (isIpCount(str)) {

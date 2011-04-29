@@ -25,37 +25,60 @@ import org.ebayopensource.turmeric.security.v1.services.SubjectGroup;
 import org.ebayopensource.turmeric.security.v1.services.SupportedPrimitive;
 import org.ebayopensource.turmeric.services.ratelimiterservice.impl.RateLimiterException;
 
+/**
+ * The Class RateLimiterPolicy.
+ */
 public class RateLimiterPolicy extends AbstractPolicy {
 	private List<Policy> rateLimeterPolicy = new ArrayList<Policy>();
 	private String currentSubjectOrGroup;
 	private RateLimiterStatus currentlimiterStatus;
 	private Rule currentRule;
 
+	/**
+	 * Instantiates a new rate limiter policy.
+	 *
+	 * @param rlRequest the rl request
+	 */
 	public RateLimiterPolicy(IsRateLimitedRequest rlRequest) {
 		super(rlRequest);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isExcluded()
+	 */
 	@Override
 	public boolean isExcluded() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isIncluded()
+	 */
 	@Override
 	public boolean isIncluded() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isEmpty()
+	 */
 	@Override
 	public boolean isEmpty() {
 		return rateLimeterPolicy == null || rateLimeterPolicy.isEmpty();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#getPolicyType()
+	 */
 	@Override
 	public String getPolicyType() {
 		return "RL";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#evaluate(org.ebayopensource.turmeric.security.v1.services.IsRateLimitedResponse, org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest)
+	 */
 	@Override
 	public IsRateLimitedResponse evaluate(IsRateLimitedResponse response,
 			IsRateLimitedRequest rlRequest) throws RateLimiterException {
@@ -201,11 +224,12 @@ public class RateLimiterPolicy extends AbstractPolicy {
 	}
 
 	/**
-	 * covert EffectType to RateLimiterStatus and get the highest severity
-	 * 
-	 * @param type
-	 * @param response
-	 * @return
+	 * covert EffectType to RateLimiterStatus and get the highest severity.
+	 *
+	 * @param type the type
+	 * @param response the response
+	 * @param getTheHighest the get the highest
+	 * @return the rate limiter status
 	 */
 	public RateLimiterStatus convertGetTheHigestSeverity(EffectType type,
 			IsRateLimitedResponse response, boolean getTheHighest) {

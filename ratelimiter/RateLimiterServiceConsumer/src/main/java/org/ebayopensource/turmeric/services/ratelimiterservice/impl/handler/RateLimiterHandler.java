@@ -48,12 +48,18 @@ public class RateLimiterHandler extends BaseHandler {
 	private static String delimiter = "[delimiter]";
 	private static final String SUBJECT_TYPE_ID_SUFFIX = "_ID" ;
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler#init(org.ebayopensource.turmeric.runtime.common.pipeline.Handler.InitContext)
+	 */
 	@Override
 	public void init(InitContext ctx) throws ServiceException {
 		super.init(ctx);
 		HandlerPreconditions.checkServerSide(ctx, this.getClass()); // Server Side Only	
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler#invoke(org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext)
+	 */
 	@Override
 	public void invoke(MessageContext ctx) throws ServiceException {
 		long startTime = System.nanoTime();

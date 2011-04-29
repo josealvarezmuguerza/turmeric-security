@@ -27,6 +27,9 @@ import org.ebayopensource.turmeric.utils.config.exceptions.ConfigurationExceptio
 
 import org.ebayopensource.turmeric.services.ratelimiterservice.intf.RateLimiterService;
 
+/**
+ * A factory for creating RateLimiterServiceProvider objects.
+ */
 public class RateLimiterServiceProviderFactory {
 	
 	private static Map<String, RateLimiterProvider>  s_serviceProviderMap = new HashMap<String, RateLimiterProvider>();
@@ -50,10 +53,23 @@ public class RateLimiterServiceProviderFactory {
 		
 	}
 	
+	/**
+	 * Creates the.
+	 *
+	 * @return the rate limiter provider
+	 * @throws ServiceException the service exception
+	 */
 	public static RateLimiterProvider create() throws ServiceException {
 		return create(s_defaultProviderKey);
 	}
 
+	/**
+	 * Creates the.
+	 *
+	 * @param providerKey the provider key
+	 * @return the rate limiter provider
+	 * @throws ServiceException the service exception
+	 */
 	public static RateLimiterProvider create(String providerKey) throws ServiceException { 
 		
 		if (s_errorData != null) 

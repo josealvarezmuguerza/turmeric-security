@@ -45,10 +45,18 @@ public class RateLimiterProviderImpl implements RateLimiterProvider {
 	private BasePolicyServiceConsumer consumer;
 
 	// used in mock
+	/**
+	 * Sets the consumer.
+	 *
+	 * @param consumer the new consumer
+	 */
 	public void setConsumer(BasePolicyServiceConsumer consumer) {
 		this.consumer = consumer;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public IsRateLimitedResponse isRateLimited(
 			IsRateLimitedRequest isRateLimitedRequest) {
 		IsRateLimitedResponse response = new IsRateLimitedResponse();

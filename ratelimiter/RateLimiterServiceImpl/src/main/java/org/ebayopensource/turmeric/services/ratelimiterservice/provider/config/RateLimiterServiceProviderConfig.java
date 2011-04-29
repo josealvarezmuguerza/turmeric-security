@@ -16,17 +16,23 @@ import org.ebayopensource.turmeric.runtime.binding.utils.CollectionUtils;
 import org.ebayopensource.turmeric.utils.config.BaseConfigHolder;
 
 /**
- * This class represents the ratelimiter service provider configuration
- * 
+ * This class represents the ratelimiter service provider configuration.
+ *
  * @author rpallikonda
  */
 public class RateLimiterServiceProviderConfig extends BaseConfigHolder {
+	
+	/** The m_default. */
 	String m_default;
+	
+	/** The m_provider map. */
 	Map<String, String> m_providerMap;
 
 	private static final char NL = '\n';
 
 	/**
+	 * Gets the default provider.
+	 *
 	 * @return m_default The default provider name
 	 */
 	public String getDefaultProvider() {
@@ -34,6 +40,9 @@ public class RateLimiterServiceProviderConfig extends BaseConfigHolder {
 	}
 	
 	/**
+	 * Gets the provider impl class name.
+	 *
+	 * @param providerKey the provider key
 	 * @return m_default The default provider name
 	 */
 	public String getProviderImplClassName(String providerKey) {
@@ -42,8 +51,9 @@ public class RateLimiterServiceProviderConfig extends BaseConfigHolder {
 	
 	
 	/**
-	 * @param className
-	 *            the m_default to set
+	 * Sets the default provider.
+	 *
+	 * @param providerKey the new default provider
 	 */
 	public void setDefaultProvider(String providerKey) {
 		checkReadOnly();
@@ -51,6 +61,8 @@ public class RateLimiterServiceProviderConfig extends BaseConfigHolder {
 	}
 	
 	/**
+	 * Gets the provider map.
+	 *
 	 * @return the m_providerMap or copy as needed
 	 */
 	public Map<String, String> getProviderMap() {
@@ -62,13 +74,20 @@ public class RateLimiterServiceProviderConfig extends BaseConfigHolder {
 	
 	
 	/**
-	 * @return set the m_providerMap 
+	 * Sets the provider map.
+	 *
+	 * @param providerMap the provider map
 	 */
 	public void setProviderMap(Map<String, String> providerMap) {
 		checkReadOnly();
 		m_providerMap = providerMap;
 	}
 
+	/**
+	 * Copy.
+	 *
+	 * @return the rate limiter service provider config
+	 */
 	public RateLimiterServiceProviderConfig copy() {
 		RateLimiterServiceProviderConfig result = new RateLimiterServiceProviderConfig();
 		result.m_default = m_default;
@@ -85,6 +104,11 @@ public class RateLimiterServiceProviderConfig extends BaseConfigHolder {
 		
 	}
 	
+	/**
+	 * Dump.
+	 *
+	 * @param sb the sb
+	 */
 	public void dump(StringBuffer sb) {
 		sb.append("========== RateLimiter Service Provider Config =========="+"\n");
 

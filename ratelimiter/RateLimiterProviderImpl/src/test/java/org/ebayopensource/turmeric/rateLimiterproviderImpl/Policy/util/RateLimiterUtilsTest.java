@@ -12,22 +12,32 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * The Class RateLimiterUtilsTest.
+ *
  * @author gbaal
- * 
  */
 public class RateLimiterUtilsTest {
 	private RateLimiterUtils limiterUtils;
 
+	/**
+	 * Inits the.
+	 */
 	@Before
 	public void init() {
 		limiterUtils = new RateLimiterUtils("test");
 	}
 
+	/**
+	 * Tear down.
+	 */
 	@After
 	public void tearDown() {
 		limiterUtils = null;
 	}
 
+	/**
+	 * Testsimple exp.
+	 */
 	@Test
 	public void testsimpleExp() {
 		Boolean flag;
@@ -45,6 +55,10 @@ public class RateLimiterUtilsTest {
 		}
 
 	}
+	
+	/**
+	 * Test or exp.
+	 */
 	@Test
 	public void testOrExp() {
 		Boolean flag;
@@ -62,6 +76,10 @@ public class RateLimiterUtilsTest {
 		}
 
 	}
+	
+	/**
+	 * Test and exp.
+	 */
 	@Test
 	public void testAndExp() {
 		Boolean flag;
@@ -78,11 +96,18 @@ public class RateLimiterUtilsTest {
 		}
 
 	}
+	
+	/**
+	 * Test init provider.
+	 */
 	@Test
 	public void testInitProvider() {
 		assertNotNull("limiterUtils is null", limiterUtils);
 	}
 	
+	/**
+	 * Test ivalid expression.
+	 */
 	@Test
 	public void testIvalidExpression(){
 		Boolean flag;

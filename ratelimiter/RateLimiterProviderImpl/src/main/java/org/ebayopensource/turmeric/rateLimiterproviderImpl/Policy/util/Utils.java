@@ -24,10 +24,19 @@ import org.ebayopensource.turmeric.security.v1.services.Subject;
 import org.ebayopensource.turmeric.security.v1.services.SubjectGroup;
 
 
+/**
+ * The Class Utils.
+ */
 public class Utils
 {
 	private static Logger s_Logger = LogManager.getInstance(Utils.class);
 	
+	/**
+	 * Sets the subject group id.
+	 *
+	 * @param sg the sg
+	 * @param id the id
+	 */
 	public static void setSubjectGroupId(SubjectGroup sg, Long id)
 	{
 		SubjectMatchType subjectMatchType = null;
@@ -35,6 +44,12 @@ public class Utils
 		sg.setSubjectMatch( subjectMatchType );
 	}
 	
+	/**
+	 * Sets the exclusion subject group id.
+	 *
+	 * @param sg the sg
+	 * @param id the id
+	 */
 	public static void setExclusionSubjectGroupId(SubjectGroup sg, Long id)
 	{
 		SubjectMatchType subjectMatchType = null;
@@ -43,6 +58,13 @@ public class Utils
 
 		sg.setSubjectMatch( subjectMatchType );
 	}
+	
+	/**
+	 * Gets the subject match type.
+	 *
+	 * @param id the id
+	 * @return the subject match type
+	 */
 	public static SubjectMatchType getSubjectMatchType(Long id)
 	{
 		SubjectMatchType subjectMatchType = new SubjectMatchType();
@@ -59,6 +81,12 @@ public class Utils
 		return subjectMatchType;
 	}
 	
+	/**
+	 * Gets the subject match type.
+	 *
+	 * @param idStr the id str
+	 * @return the subject match type
+	 */
 	public static SubjectMatchType getSubjectMatchType(String idStr)
 	{
 		SubjectMatchType subjectMatchType = new SubjectMatchType();
@@ -76,6 +104,12 @@ public class Utils
 		return subjectMatchType;
 	}
 		
+	/**
+	 * Sets the subject id.
+	 *
+	 * @param subject the subject
+	 * @param id the id
+	 */
 	public static void setSubjectId(Subject subject, Long id)
 	{
 		SubjectMatchType subjectMatchType = null;
@@ -83,6 +117,12 @@ public class Utils
 		subject.getSubjectMatch().add( subjectMatchType );
 	}
 	
+	/**
+	 * Sets the exclusion subject id.
+	 *
+	 * @param subject the subject
+	 * @param id the id
+	 */
 	public static void setExclusionSubjectId(Subject subject, Long id)
 	{
 		SubjectMatchType subjectMatchType = null;
@@ -91,12 +131,23 @@ public class Utils
 		subject.getSubjectMatch().add( subjectMatchType );
 	}
 	
+	/**
+	 * Sets the all subject id.
+	 *
+	 * @param subject the new all subject id
+	 */
 	public static void setAllSubjectId(Subject subject) {
 		String idString = "[0-9]+";
 		SubjectMatchType subjectMatchType = getSubjectMatchType(idString);
 		subject.getSubjectMatch().add( subjectMatchType );
 	}
 
+	/**
+	 * Gets the subject id.
+	 *
+	 * @param subject the subject
+	 * @return the subject id
+	 */
 	public static Long getSubjectId(Subject subject)
 	{
 		Long id = null;
@@ -111,6 +162,12 @@ public class Utils
 		return id;
 	}
 	
+	/**
+	 * Gets the subject group id.
+	 *
+	 * @param sg the sg
+	 * @return the subject group id
+	 */
 	public static Long getSubjectGroupId(SubjectGroup sg )
 	{	
 		SubjectMatchType matchType = sg.getSubjectMatch();
@@ -118,6 +175,12 @@ public class Utils
 		return getIdFromSubjectMatch(matchType);
 	}
 	
+	/**
+	 * Gets the id from subject match.
+	 *
+	 * @param matchType the match type
+	 * @return the id from subject match
+	 */
 	public static Long getIdFromSubjectMatch(SubjectMatchType matchType)
 	{
 		Long subjectId = null;
@@ -152,18 +215,36 @@ public class Utils
 		return subjectId;
 	}
 	
+	/**
+	 * Checks if is exclusion.
+	 *
+	 * @param subject the subject
+	 * @return true, if is exclusion
+	 */
 	public static boolean isExclusion(Subject subject)
 	{
 		List<SubjectMatchType> subjectMatchs = subject.getSubjectMatch();
 		return isExclusion(subjectMatchs);
 	}
 	
+	/**
+	 * Checks if is subject type.
+	 *
+	 * @param subject the subject
+	 * @return true, if is subject type
+	 */
 	public static boolean isSubjectType(Subject subject)
 	{
 		List<SubjectMatchType> subjectMatchs = subject.getSubjectMatch();
 		return isSubjectType(subjectMatchs);
 	}
 	
+	/**
+	 * Checks if is exclusion.
+	 *
+	 * @param subjectGroup the subject group
+	 * @return true, if is exclusion
+	 */
 	public static boolean isExclusion(SubjectGroup subjectGroup)
 	{
 		SubjectMatchType subjectMatchType = subjectGroup.getSubjectMatch();
@@ -172,6 +253,12 @@ public class Utils
 		return isExclusion(subjectMatchs);
 	}
 	
+	/**
+	 * Checks if is exclusion.
+	 *
+	 * @param matchTypes the match types
+	 * @return true, if is exclusion
+	 */
 	public static boolean isExclusion(List<SubjectMatchType> matchTypes) {
 		boolean isExclusion = false;
 		for (SubjectMatchType matchType : matchTypes) {
@@ -184,6 +271,12 @@ public class Utils
 		return isExclusion;
 	}
 	
+	/**
+	 * Checks if is subject type.
+	 *
+	 * @param matchTypes the match types
+	 * @return true, if is subject type
+	 */
 	public static boolean isSubjectType(List<SubjectMatchType> matchTypes) {
 		boolean isSubjectType = false;
 		for (SubjectMatchType matchType : matchTypes) {

@@ -18,34 +18,57 @@ import org.ebayopensource.turmeric.security.v1.services.Subject;
 import org.ebayopensource.turmeric.security.v1.services.SubjectGroup;
 import org.ebayopensource.turmeric.services.ratelimiterservice.impl.RateLimiterException;
 
+/**
+ * The Class WhiteListPolicy.
+ */
 public class WhiteListPolicy extends AbstractPolicy {
 
 	private static List<Policy> whitelistPolicy;
 
+	/**
+	 * Instantiates a new white list policy.
+	 *
+	 * @param rlRequest the rl request
+	 */
 	public WhiteListPolicy(IsRateLimitedRequest rlRequest) {
 		super(rlRequest);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isExcluded()
+	 */
 	@Override
 	public boolean isExcluded() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isIncluded()
+	 */
 	@Override
 	public boolean isIncluded() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isEmpty()
+	 */
 	@Override
 	public boolean isEmpty() {
 		return whitelistPolicy == null || whitelistPolicy.isEmpty();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#getPolicyType()
+	 */
 	@Override
 	public String getPolicyType() {
 		return "WHITELIST";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#evaluate(org.ebayopensource.turmeric.security.v1.services.IsRateLimitedResponse, org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest)
+	 */
 	@Override
 	public IsRateLimitedResponse evaluate(IsRateLimitedResponse response,
 			IsRateLimitedRequest rlRequest) throws RateLimiterException {

@@ -35,17 +35,34 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 
+/**
+ * The Class RateLimiterProviderImplTest.
+ */
 public class RateLimiterProviderImplTest extends
 		RateLimiterProviderAbstractTest {
 
+	/** The provider. */
 	RateLimiterProviderImpl provider = null;
+	
+	/** The rate limit request. */
 	IsRateLimitedRequest rateLimitRequest = null;
 	// mock
+	/** The base policy service consumer mock. */
 	BasePolicyServiceConsumer basePolicyServiceConsumerMock;
 
+	/**
+	 * The Class IsPolicyType.
+	 */
 	class IsPolicyType extends ArgumentMatcher<FindPoliciesRequest> {
+		
+		/** The type. */
 		String type;
 
+		/**
+		 * Instantiates a new checks if is policy type.
+		 *
+		 * @param type the type
+		 */
 		public IsPolicyType(String type) {
 			this.type = type;
 			// set as defualt
@@ -54,6 +71,9 @@ public class RateLimiterProviderImplTest extends
 			}
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		public boolean matches(Object list) {
 			if (((FindPoliciesRequest) list) != null) {
 				List<PolicyKey> policyKeys = ((FindPoliciesRequest) list)
@@ -70,6 +90,9 @@ public class RateLimiterProviderImplTest extends
 		}
 	}
 
+	/**
+	 * Sets the up.
+	 */
 	@Before
 	public void setUp() {
 		basePolicyServiceConsumerMock = mock(BasePolicyServiceConsumer.class);
@@ -92,6 +115,9 @@ public class RateLimiterProviderImplTest extends
 				.thenReturn(super.generateRLFindPoliciesResponse());
 	}
 
+	/**
+	 * Tear down.
+	 */
 	@After
 	public void tearDown() {
 
@@ -106,11 +132,17 @@ public class RateLimiterProviderImplTest extends
 		rateLimitRequest = null;
 	}
 
+	/**
+	 * Test init provider.
+	 */
 	@Test
 	public void testInitProvider() {
 		assertNotNull("Provider is null", provider);
 	}
 
+	/**
+	 * Test is rate limited response not null.
+	 */
 	@Test
 	public void testIsRateLimitedResponseNotNull() {
 		IsRateLimitedResponse rateLimitResponse = provider
@@ -118,6 +150,9 @@ public class RateLimiterProviderImplTest extends
 		assertNotNull(rateLimitResponse);
 	}
 
+	/**
+	 * Test is status ok.
+	 */
 	@Test
 	public void testIsStatusOK() {
 		rateLimitRequest.setOperationName("performSearch");
@@ -133,6 +168,9 @@ public class RateLimiterProviderImplTest extends
 				rateLimitResponse.getStatus());
 	}
 
+	/**
+	 * Test is status blocked.
+	 */
 	@Test
 	public void testIsStatusBlocked() {
 		IsRateLimitedResponse rateLimitResponse = provider
@@ -141,6 +179,9 @@ public class RateLimiterProviderImplTest extends
 				rateLimitResponse.getStatus());
 	}
 
+	/**
+	 * Test unsupported status.
+	 */
 	@Test
 	public void testUnsupportedStatus() {
 		rateLimitRequest.setOperationName("performSearch");
@@ -153,6 +194,9 @@ public class RateLimiterProviderImplTest extends
 
 	}
 
+	/**
+	 * Test timestamp set.
+	 */
 	@Test
 	public void testTimestampSet() {
 
@@ -161,6 +205,9 @@ public class RateLimiterProviderImplTest extends
 		assertNotNull("Missing Time Stamp", rateLimitResponse.getTimestamp());
 	}
 
+	/**
+	 * Test mockfor rl.
+	 */
 	@Test
 	public void testMockforRL() {
 		PolicyKey policyKey2 = new PolicyKey();
@@ -184,6 +231,9 @@ public class RateLimiterProviderImplTest extends
 				.findPolicies(policyRequest2));
 	}
 
+	/**
+	 * Test mockfor wl.
+	 */
 	@Test
 	public void testMockforWL() {
 		PolicyKey policyKey2 = new PolicyKey();
@@ -207,6 +257,9 @@ public class RateLimiterProviderImplTest extends
 				.findPolicies(policyRequest2));
 	}
 
+	/**
+	 * Test mockfor bl.
+	 */
 	@Test
 	public void testMockforBL() {
 		// createMock
@@ -236,6 +289,9 @@ public class RateLimiterProviderImplTest extends
 
 	}
 
+	/**
+	 * Test in b locked.
+	 */
 	@Test
 	public void testInBLocked() {
 		rateLimitRequest = super.generateIsRateLimitedRequest(rateLimitRequest);
@@ -253,6 +309,9 @@ public class RateLimiterProviderImplTest extends
 
 	}
 
+	/**
+	 * Test in not in b land not in wl.
+	 */
 	@Test
 	public void testInNotInBLandNotInWL() {
 		rateLimitRequest = super.generateIsRateLimitedRequest(rateLimitRequest);
@@ -267,6 +326,9 @@ public class RateLimiterProviderImplTest extends
 				rateLimitResponse.getStatus());
 	}
 
+	/**
+	 * Test in block group.
+	 */
 	@Test
 	public void testInBlockGroup() {
 		rateLimitRequest = super.generateIsRateLimitedRequest(rateLimitRequest);
@@ -280,6 +342,9 @@ public class RateLimiterProviderImplTest extends
 				rateLimitResponse.getStatus());
 	}
 
+	/**
+	 * Test in wl sub.
+	 */
 	@Test
 	public void testInWLSub() {
 		rateLimitRequest = super.generateIsRateLimitedRequest(rateLimitRequest);
@@ -294,6 +359,9 @@ public class RateLimiterProviderImplTest extends
 				rateLimitResponse.getStatus());
 	}
 
+	/**
+	 * Test in wl sub group.
+	 */
 	@Test
 	public void testInWLSubGroup() {
 		rateLimitRequest = super.generateIsRateLimitedRequest(rateLimitRequest);
@@ -315,6 +383,9 @@ public class RateLimiterProviderImplTest extends
 	// block
 	// HITS >8 allowed connection to all is 8 effect duration is 8000l
 	// rolloverPeriod 20000l effect block
+	/**
+	 * Test in rl.
+	 */
 	@Test
 	public void testInRL() {
 		rateLimitRequest = super.generateIsRateLimitedRequest(rateLimitRequest);
@@ -370,6 +441,9 @@ public class RateLimiterProviderImplTest extends
 	}
 
 	// HITS >8
+	/**
+	 * Test hits.
+	 */
 	@Test
 	public void testHITS() {
 		rateLimitRequest = super.generateIsRateLimitedRequest(rateLimitRequest);
@@ -406,6 +480,9 @@ public class RateLimiterProviderImplTest extends
 	// "ServiceName.checkout:count > 15 effect is BLOCK effect duration 8000l
 	// roll over period 20000l
 
+	/**
+	 * Test servicecount.
+	 */
 	@Test
 	public void testServicecount() {
 		// ServiceName.checkout:count > 15

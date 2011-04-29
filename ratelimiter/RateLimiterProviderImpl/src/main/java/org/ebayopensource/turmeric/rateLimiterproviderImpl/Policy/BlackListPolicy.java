@@ -20,41 +20,67 @@ import org.ebayopensource.turmeric.security.v1.services.SubjectGroup;
 import org.ebayopensource.turmeric.services.ratelimiterservice.impl.RateLimiterException;
 
 /**
- * This class is used to
- * 
+ * This class is used to.
+ *
  * @author dcarver
- * 
  */
 public class BlackListPolicy extends AbstractPolicy {
 
 	private static List<Policy> blacklistPolicy;
 
+	/**
+	 * Instantiates a new black list policy.
+	 *
+	 * @param rlRequest the rl request
+	 */
 	public BlackListPolicy(IsRateLimitedRequest rlRequest) {
 		super(rlRequest);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isExcluded()
+	 */
 	@Override
 	public boolean isExcluded() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isIncluded()
+	 */
 	@Override
 	public boolean isIncluded() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#isEmpty()
+	 */
 	@Override
 	public boolean isEmpty() {
 		return blacklistPolicy == null || blacklistPolicy.isEmpty();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#getPolicyType()
+	 */
 	@Override
 	public String getPolicyType() {
 		return "BLACKLIST";
 	}
 
 	// check list against BlackList
+	/**
+	 * Check black list.
+	 *
+	 * @param response the response
+	 * @param request the request
+	 * @param subjects the subjects
+	 * @param domain the domain
+	 * @return the checks if is rate limited response
+	 * @throws RateLimiterException the rate limiter exception
+	 */
 	public IsRateLimitedResponse checkBlackList(IsRateLimitedResponse response,
 			IsRateLimitedRequest request, List<String> subjects,
 			List<String> domain) throws RateLimiterException {
@@ -87,6 +113,9 @@ public class BlackListPolicy extends AbstractPolicy {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.AbstractPolicy#evaluate(org.ebayopensource.turmeric.security.v1.services.IsRateLimitedResponse, org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest)
+	 */
 	@Override
 	public IsRateLimitedResponse evaluate(IsRateLimitedResponse response,
 			IsRateLimitedRequest rlRequest) throws RateLimiterException {

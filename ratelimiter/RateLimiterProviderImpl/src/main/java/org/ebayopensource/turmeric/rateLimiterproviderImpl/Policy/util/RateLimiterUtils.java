@@ -6,9 +6,17 @@ import java.util.StringTokenizer;
 
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.CounterAbstractPolicy;
 
+/**
+ * The Class RateLimiterUtils.
+ */
 public class RateLimiterUtils extends CounterAbstractPolicy {
 	private String ipOrSubjectGroup = null;
 
+	/**
+	 * Instantiates a new rate limiter utils.
+	 *
+	 * @param ipOrSubjectGroup the ip or subject group
+	 */
 	public RateLimiterUtils(String ipOrSubjectGroup) {
 		super();
 		this.ipOrSubjectGroup = ipOrSubjectGroup;
@@ -16,6 +24,13 @@ public class RateLimiterUtils extends CounterAbstractPolicy {
 
 
 
+	/**
+	 * Gets the finalresult.
+	 *
+	 * @param val the val
+	 * @return the finalresult
+	 * @throws Exception the exception
+	 */
 	public Boolean getFinalresult(String val) throws Exception {
 		List<String> expression = simplifyExpression(val,
 				new LinkedList<String>());

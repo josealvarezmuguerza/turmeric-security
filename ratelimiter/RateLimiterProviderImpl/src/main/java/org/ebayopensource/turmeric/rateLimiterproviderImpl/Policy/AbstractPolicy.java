@@ -36,22 +36,45 @@ import org.ebayopensource.turmeric.services.policyservice.intf.gen.BasePolicySer
 import org.ebayopensource.turmeric.services.ratelimiterservice.impl.RateLimiterException;
 import org.ebayopensource.turmeric.services.ratelimiterservice.impl.util.EncodingUtils;
 
+/**
+ * The Class AbstractPolicy.
+ */
 public abstract class AbstractPolicy extends CounterAbstractPolicy {
 
+	/** The rl request. */
 	protected IsRateLimitedRequest rlRequest = null;
+	
+	/** The request subjects. */
 	protected List<String> requestSubjects = new LinkedList<String>();
+	
+	/** The request subject groups. */
 	protected List<String> requestSubjectGroups = new LinkedList<String>();
 	private static BasePolicyServiceConsumer consumer;
 
 	// used in mock
+	/**
+	 * Sets the consumer.
+	 *
+	 * @param consumer1 the new consumer
+	 */
 	public void setConsumer(BasePolicyServiceConsumer consumer1) {
 		consumer = consumer1;
 	}
 
+	/**
+	 * Gets the consumer.
+	 *
+	 * @return the consumer
+	 */
 	public BasePolicyServiceConsumer getConsumer() {
 		return consumer == null ? new BasePolicyServiceConsumer() : consumer;
 	}
 
+	/**
+	 * Instantiates a new abstract policy.
+	 *
+	 * @param rlRequest the rl request
+	 */
 	public AbstractPolicy(IsRateLimitedRequest rlRequest) {
 		this.rlRequest = rlRequest;
 		populate();
@@ -99,23 +122,36 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 	public abstract boolean isExcluded();
 
 	/**
-	 * Is the resource included in the Policy and thus rate limiting applies
-	 * 
-	 * @return
+	 * Is the resource included in the Policy and thus rate limiting applies.
+	 *
+	 * @return true, if is included
 	 */
 	public abstract boolean isIncluded();
 
 	/**
 	 * There is no Policy defined of this type.
-	 * 
-	 * @return
+	 *
+	 * @return true, if is empty
 	 */
 	public abstract boolean isEmpty();
 
+	/**
+	 * Evaluate.
+	 *
+	 * @param response the response
+	 * @param rlRequest the rl request
+	 * @return the checks if is rate limited response
+	 * @throws RateLimiterException the rate limiter exception
+	 */
 	public abstract IsRateLimitedResponse evaluate(
 			IsRateLimitedResponse response, IsRateLimitedRequest rlRequest)
 			throws RateLimiterException;
 
+	/**
+	 * Gets the policy type.
+	 *
+	 * @return the policy type
+	 */
 	public abstract String getPolicyType();
 
 	private FindPoliciesResponse getPoliciesResponse()
@@ -137,6 +173,12 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 		return policyResponse;
 	}
 
+	/**
+	 * Gets the policies.
+	 *
+	 * @return the policies
+	 * @throws RateLimiterException the rate limiter exception
+	 */
 	protected List<Policy> getPolicies() throws RateLimiterException {
 		FindPoliciesResponse policyResponse = getPoliciesResponse();
 		
@@ -160,6 +202,12 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 		return policies;
 	}
 
+	/**
+	 * Checks if is subject type valid.
+	 *
+	 * @param st the st
+	 * @return true, if is subject type valid
+	 */
 	protected boolean isSubjectTypeValid(SubjectType st) {
 		if (st != null && st.getValue() != null && st.getDomain() != null
 				&& st.getValue().trim().length() != 0
@@ -175,6 +223,12 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 				.length() != 0);
 	}
 
+	/**
+	 * Checks if is policy subject group valid.
+	 *
+	 * @param st the st
+	 * @return true, if is policy subject group valid
+	 */
 	protected boolean isPolicySubjectGroupValid(Policy st) {
 		if (st != null && st.getTarget() != null
 				&& st.getTarget().getSubjects() != null
@@ -184,6 +238,15 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 		return false;
 	}
 
+	/**
+	 * Checks if is found in request.
+	 *
+	 * @param request the request
+	 * @param reqSubjects the req subjects
+	 * @param reqSubjectGroups the req subject groups
+	 * @param checkPolicies the check policies
+	 * @return true, if is found in request
+	 */
 	protected boolean isFoundInRequest(IsRateLimitedRequest request,
 			List<String> reqSubjects, List<String> reqSubjectGroups,
 			List<Policy> checkPolicies) {
