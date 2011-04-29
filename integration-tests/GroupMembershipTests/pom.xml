@@ -41,8 +41,8 @@
 			<version>${turmeric-monitoring-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.ebayopensource.turmeric.policy</groupId>
-			<artifactId>turmeric-policy-provider</artifactId>
+			<groupId>org.ebayopensource.turmeric.groupmembership</groupId>
+			<artifactId>turmeric-groupmembership-provider</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

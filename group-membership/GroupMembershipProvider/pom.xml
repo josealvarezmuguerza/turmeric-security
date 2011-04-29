@@ -8,21 +8,24 @@
        http://www.apache.org/licenses/LICENSE-2.0
        
  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.ebayopensource.turmeric.security</groupId>
-    <artifactId>turmeric-security-parent</artifactId>
+    <groupId>org.ebayopensource.turmeric.groupmembership</groupId>
+    <artifactId>turmeric-security-groupmembership-parent</artifactId>
     <version>1.0.0.2-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>org.ebayopensource.turmeric.groupmembership</groupId>
-  <artifactId>turmeric-security-groupmembership-parent</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-      <module>GroupMembershipProvider</module>
-      <module>turmeric-groupmembership-provider</module>
-      <module>GroupMembershipService</module>
-      <module>GroupMembershipServiceConsumer</module>
-      <module>GroupMembershipServiceImpl</module>
-  </modules>
+  <artifactId>GroupMembershipProviderInterface</artifactId>
+  <packaging>jar</packaging>
+  <name>Turmeric :: Security :: Group Membership :: Group Membership Provider Interface</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.ebayopensource.turmeric.intf</groupId>
+      <artifactId>GroupMembershipService</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 </project>
