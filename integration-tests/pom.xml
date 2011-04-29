@@ -23,6 +23,5 @@
       <module>SOASecurityTests</module>
       <module>RateLimiterServiceTest</module>
       <module>RateLimiterTests</module>
-      <module>GroupMembershipTests</module>
   </modules>
 </project>
