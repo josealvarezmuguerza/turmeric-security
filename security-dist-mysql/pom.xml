@@ -68,6 +68,11 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.ebayopensource.turmeric.groupmembership</groupId>
+			<artifactId>turmeric-groupmembership-provider</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>RateLimiterServiceImpl</artifactId>
 			<version>${project.version}</version>
