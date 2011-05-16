@@ -16,9 +16,9 @@
 	<version>1.0.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<turmeric-runtime-version>1.0.0-Beta-RC1</turmeric-runtime-version>
-		<turmeric-policy-version>1.0.0-Beta-RC1</turmeric-policy-version>
-		<turmeric-monitoring-version>1.0.0.2-SNAPSHOT</turmeric-monitoring-version>
+		<turmeric-runtime-version>1.0.0</turmeric-runtime-version>
+		<turmeric-policy-version>1.0.0-Beta-RC2</turmeric-policy-version>
+		<turmeric-monitoring-version>1.0.0-Beta-RC2</turmeric-monitoring-version>
 		<turmeric-jpa-utils-version>1.0.0-Beta</turmeric-jpa-utils-version>
 	</properties>
 	<scm>
