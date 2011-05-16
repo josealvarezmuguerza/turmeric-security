@@ -65,12 +65,12 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>GroupMembershipServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.groupmembership</groupId>
 			<artifactId>turmeric-groupmembership-provider</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
