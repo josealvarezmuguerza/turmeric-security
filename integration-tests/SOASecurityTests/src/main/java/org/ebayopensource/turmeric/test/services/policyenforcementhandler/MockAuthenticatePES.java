@@ -19,8 +19,13 @@ import org.ebayopensource.turmeric.authentication.provider.AuthenticationRespons
 import org.ebayopensource.turmeric.authentication.provider.Authenticator;
 import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 
+/**
+ * The Class MockAuthenticatePES.
+ */
 public class MockAuthenticatePES implements Authenticator{
 	private static List<String> s_requiredCredentials;
+	
+	/** The Constant CREDENTIAL_TOKEN. */
 	public static final String CREDENTIAL_TOKEN = "testtoken";
 	private String authnMethod = "TestAuthenticatePES";
 	
@@ -31,23 +36,37 @@ public class MockAuthenticatePES implements Authenticator{
 	}
  
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#initialize()
+	 */
 	@Override
 	public void initialize() throws AuthenticationException {
 		// no init
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#getAuthenticationMethod()
+	 */
 	@Override
 	public String getAuthenticationMethod() {
 		return authnMethod;
 	}
 	
+	/**
+	 * Instantiates a new mock authenticate pes.
+	 *
+	 * @param authnMethod the authn method
+	 */
 	public MockAuthenticatePES(String authnMethod) {
 		this.authnMethod = authnMethod;
 	}
 
 	
 	/**
-	 * Authenticate the subject from the incoming request
+	 * Authenticate the subject from the incoming request.
+	 *
+	 * @param authnRequest the authn request
+	 * @return the authentication response
 	 */
 	public AuthenticationResponse authenticate(AuthenticationRequest authnRequest) {	
 		List<SubjectType> sublist = new ArrayList<SubjectType>();
@@ -63,7 +82,9 @@ public class MockAuthenticatePES implements Authenticator{
 	}
 	
 	/**
-	 * Get the required credentials needed by the authenticator
+	 * Get the required credentials needed by the authenticator.
+	 *
+	 * @return the required credentials
 	 */
 	public List<String> getRequiredCredentials() {
 		return s_requiredCredentials;
