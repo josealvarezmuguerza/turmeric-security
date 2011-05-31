@@ -70,6 +70,7 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void map(Element rootData) throws ConfigurationException {
 		// if no rootData, reset config to null (clean up previous instance)
 		if (rootData == null) {
@@ -83,6 +84,7 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getConfigFileName() {
 		return CONFIG_FILENAME;
 	}
@@ -90,6 +92,7 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getSchemaFileName() {
 		return SCHEMA_FILENAME;
 
@@ -98,6 +101,7 @@ public class RateLimiterServiceProviderConfigManager extends BaseConfigManager {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getRootElementName() {
 		return ROOT_ELEMENT;
 	}

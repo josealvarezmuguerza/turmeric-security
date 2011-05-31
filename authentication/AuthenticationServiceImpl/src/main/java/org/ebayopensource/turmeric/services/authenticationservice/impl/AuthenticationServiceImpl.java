@@ -46,7 +46,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     /* (non-Javadoc)
      * @see org.ebayopensource.turmeric.services.authenticationservice.intf.AuthenticationService#authenticate(org.ebayopensource.turmeric.security.v1.services.AuthenticateRequestType)
      */
-    public AuthenticateResponseType authenticate(AuthenticateRequestType request) {
+    @Override
+	public AuthenticateResponseType authenticate(AuthenticateRequestType request) {
 
     	AuthenticateResponseType response = new AuthenticateResponseType();
     	

@@ -68,6 +68,7 @@ public class MockAuthenticatePES implements Authenticator{
 	 * @param authnRequest the authn request
 	 * @return the authentication response
 	 */
+	@Override
 	public AuthenticationResponse authenticate(AuthenticationRequest authnRequest) {	
 		List<SubjectType> sublist = new ArrayList<SubjectType>();
 		SubjectType sub1 = new SubjectType();
@@ -86,6 +87,7 @@ public class MockAuthenticatePES implements Authenticator{
 	 *
 	 * @return the required credentials
 	 */
+	@Override
 	public List<String> getRequiredCredentials() {
 		return s_requiredCredentials;
 	}

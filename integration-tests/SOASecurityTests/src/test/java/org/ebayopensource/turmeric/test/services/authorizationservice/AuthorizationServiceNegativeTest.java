@@ -7,8 +7,6 @@ import static org.ebayopensource.turmeric.test.services.authorizationservice.Aut
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -22,26 +20,16 @@ import org.ebayopensource.turmeric.common.v1.types.ErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorMessage;
 import org.ebayopensource.turmeric.common.v1.types.ErrorParameter;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorDataCollection;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.security.v1.services.AuthorizeRequestType;
 import org.ebayopensource.turmeric.security.v1.services.AuthorizeResponseType;
-import org.ebayopensource.turmeric.security.v1.services.FindPoliciesResponse;
-import org.ebayopensource.turmeric.security.v1.services.PolicyKey;
 import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 import org.ebayopensource.turmeric.services.authorizationservice.intf.gen.BaseAuthorizationServiceConsumer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.omg.CORBA.PolicyHelper;
-
-import org.ebayopensource.turmeric.test.services.utils.FindPolicyHelper;
-import org.ebayopensource.turmeric.test.services.utils.PolicyDataModelHelper;
-import org.ebayopensource.turmeric.test.services.utils.PolicyServiceTestHelper;
 import org.ebayopensource.turmeric.test.services.utils.TestDataReader;
 
 /**

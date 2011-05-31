@@ -9,13 +9,9 @@
  *******************************************************************************/
 package org.ebayopensource.turmeric.services.ratelimiterservice.impl.util;
 
-import java.util.Arrays;
-
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.common.v1.types.ErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorMessage;
-import org.ebayopensource.turmeric.security.v1.services.SubjectGroupType;
-import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 
 /**
  * Utility methods for encoding various classes to string (and decoding them from

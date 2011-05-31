@@ -71,6 +71,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 	private static Logger s_logger = Logger
 			.getInstance(PolicyEnforcementServiceImpl.class);
 
+	@Override
 	public VerifyAccessResponse verifyAccess(VerifyAccessRequest request) {
 		VerifyAccessResponse response = new VerifyAccessResponse();
 

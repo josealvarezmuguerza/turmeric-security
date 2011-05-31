@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -597,7 +596,7 @@ public class AuthorizationServiceCacheTestValidation extends
 		Iterator<ResourceInfoType> itr = res.iterator();
 		ResourceInfoType resource = null;
 		while (itr.hasNext()) {
-			resource = (ResourceInfoType) itr.next();
+			resource = itr.next();
 			System.out.println("resource = "
 					+ EncodingUtils.encodeResOpKey(resource.getResOp()
 							.getResourceType(), resource.getResOp()
@@ -610,7 +609,7 @@ public class AuthorizationServiceCacheTestValidation extends
 		Iterator<SGInfoType> sgitr = sgtype.iterator();
 		SGInfoType sg = null;
 		while (sgitr.hasNext()) {
-			sg = (SGInfoType) sgitr.next();
+			sg = sgitr.next();
 			System.out.println("SG name=" + sg.getSgName() + " hits= "
 					+ sg.getHits());
 		}

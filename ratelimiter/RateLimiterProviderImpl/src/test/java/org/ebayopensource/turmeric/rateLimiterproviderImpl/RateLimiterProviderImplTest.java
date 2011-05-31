@@ -74,6 +74,7 @@ public class RateLimiterProviderImplTest extends
 		/**
 		 * {@inheritDoc}
 		 */
+		@Override
 		public boolean matches(Object list) {
 			if (((FindPoliciesRequest) list) != null) {
 				List<PolicyKey> policyKeys = ((FindPoliciesRequest) list)
@@ -419,7 +420,8 @@ public class RateLimiterProviderImplTest extends
 				RateLimiterStatus.SERVE_OK, rateLimitResponse.getStatus());
 		// for the effect duration to reset it
 		try {
-			Thread.currentThread().sleep(3000);
+			Thread.currentThread();
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

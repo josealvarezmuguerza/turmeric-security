@@ -25,8 +25,6 @@ import org.ebayopensource.turmeric.runtime.common.impl.utils.LogManager;
 import org.ebayopensource.turmeric.utils.ReflectionUtils;
 import org.ebayopensource.turmeric.utils.config.exceptions.ConfigurationException;
 
-import org.ebayopensource.turmeric.services.ratelimiterservice.intf.RateLimiterService;
-
 /**
  * A factory for creating RateLimiterServiceProvider objects.
  */

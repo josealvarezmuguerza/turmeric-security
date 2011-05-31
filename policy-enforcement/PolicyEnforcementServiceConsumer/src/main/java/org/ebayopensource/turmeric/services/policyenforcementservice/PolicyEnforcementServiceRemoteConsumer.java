@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.utils.ReflectionUtils;
 import org.ebayopensource.turmeric.runtime.common.types.SOAConstants;
-import org.ebayopensource.turmeric.runtime.common.types.SOAHeaders;
 import org.ebayopensource.turmeric.runtime.sif.service.EnvironmentMapper;
 import org.ebayopensource.turmeric.runtime.sif.service.Service;
 import org.ebayopensource.turmeric.runtime.sif.service.ServiceFactory;
@@ -97,7 +96,8 @@ public class PolicyEnforcementServiceRemoteConsumer extends BasePolicyEnforcemen
      * Method returns an instance of Service which has been initilized for this Consumer
      * 
      */
-    public Service getService()
+    @Override
+	public Service getService()
         throws ServiceException
     {
         String svcAdminName = "PolicyEnforcementService";

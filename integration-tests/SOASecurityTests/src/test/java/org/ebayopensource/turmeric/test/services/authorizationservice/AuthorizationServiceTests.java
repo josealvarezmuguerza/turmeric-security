@@ -1,7 +1,5 @@
 package org.ebayopensource.turmeric.test.services.authorizationservice;
 
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,9 +12,7 @@ import org.ebayopensource.turmeric.security.v1.services.AuthorizeResponseType;
 import org.ebayopensource.turmeric.services.authorizationservice.intf.gen.BaseAuthorizationServiceConsumer;
 import org.ebayopensource.turmeric.test.services.utils.TestDataReader;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

@@ -86,7 +86,8 @@ public class RateLimiterServiceImpl
 	/**
 	 * {@inheritDoc}
 	 */
-    public IsRateLimitedResponse isRateLimited(IsRateLimitedRequest rateLimiterRequest) {
+    @Override
+	public IsRateLimitedResponse isRateLimited(IsRateLimitedRequest rateLimiterRequest) {
     
     	initialize();
     

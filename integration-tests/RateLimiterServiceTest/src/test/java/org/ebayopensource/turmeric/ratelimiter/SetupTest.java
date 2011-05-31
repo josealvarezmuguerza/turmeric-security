@@ -1,16 +1,11 @@
 package org.ebayopensource.turmeric.ratelimiter;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.XmlDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.ebayopensource.turmeric.runtime.spf.pipeline.SPFServlet;
@@ -20,8 +15,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.eviware.soapui.tools.SoapUITestCaseRunner;
@@ -162,6 +155,7 @@ public class SetupTest extends DBTestCase {
 
 	}
 
+	@Override
 	protected DatabaseOperation getSetUpOperation() throws Exception {
 		return DatabaseOperation.CLEAN_INSERT;
 	}

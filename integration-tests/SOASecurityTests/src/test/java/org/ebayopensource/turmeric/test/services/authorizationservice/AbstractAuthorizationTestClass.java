@@ -417,7 +417,8 @@ public abstract class AbstractAuthorizationTestClass extends CommonUtils {
 			is = ClassLoader.getSystemResourceAsStream(a);
 		}
 		if (is == null) {
-			URL resource = Thread.currentThread().getContextClassLoader()
+			Thread.currentThread().getContextClassLoader();
+			URL resource = ClassLoader
 					.getSystemClassLoader().getResource(a);
 			try {
 				is = new FileInputStream(new File(resource.toExternalForm()));

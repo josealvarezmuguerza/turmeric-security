@@ -31,7 +31,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.tools.ant.taskdefs.LoadProperties;
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyRequest;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyResponse;
@@ -56,9 +55,7 @@ import org.ebayopensource.turmeric.services.ratelimiterservice.intf.gen.BaseRate
 import org.ebayopensource.turmeric.test.services.utils.FindPolicyHelper;
 import org.ebayopensource.turmeric.test.services.utils.PolicyServiceTestHelper;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -486,7 +483,8 @@ public class RatelimiterTests{
 			is =ClassLoader.getSystemResourceAsStream(a);
 		}
 		if(is ==null){
-			URL resource = Thread.currentThread().getContextClassLoader().getSystemClassLoader().getResource(a);    
+			Thread.currentThread().getContextClassLoader();
+			URL resource = ClassLoader.getSystemClassLoader().getResource(a);    
 		    try {
 				is = new FileInputStream(new File(resource.toExternalForm()));
 		    }catch (Exception e) {

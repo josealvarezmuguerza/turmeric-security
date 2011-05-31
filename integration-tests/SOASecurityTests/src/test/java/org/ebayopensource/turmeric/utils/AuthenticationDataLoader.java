@@ -8,13 +8,9 @@ import javax.persistence.EntityManagerFactory;
 
 import org.ebayopensource.turmeric.policyservice.model.BasicAuth;
 import org.ebayopensource.turmeric.policyservice.model.Subject;
-import org.ebayopensource.turmeric.policyservice.model.SubjectGroup;
-import org.ebayopensource.turmeric.policyservice.model.SubjectType;
 import org.ebayopensource.turmeric.utils.jpa.AbstractDAO;
 import org.ebayopensource.turmeric.utils.jpa.JPAAroundAdvice;
 import org.ebayopensource.turmeric.utils.jpa.PersistenceContext;
-import org.junit.After;
-import org.junit.Before;
 
 public class AuthenticationDataLoader {
 
@@ -101,6 +97,7 @@ public class AuthenticationDataLoader {
 	}
 
 	public static class TestDAOImpl extends AbstractDAO implements TestDAO {
+		@Override
 		public void persistEntity(Object entity) {
 			try {
 				super.persistEntity(entity);

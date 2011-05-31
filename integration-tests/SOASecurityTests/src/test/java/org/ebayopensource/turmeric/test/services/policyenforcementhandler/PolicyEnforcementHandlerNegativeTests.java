@@ -27,7 +27,7 @@ public class PolicyEnforcementHandlerNegativeTests extends AbstractWithServerTes
 
 		Map<String, String> option = new HashMap<String, String>();
 		option.put("policy-types", "AUTHN");
-		option.put("service-location",this.jetty.getSPFURI().toString());
+		option.put("service-location",AbstractWithServerTest.jetty.getSPFURI().toString());
 		option.put("default-environment","PESTestEnv");
 
 		try {
@@ -66,7 +66,7 @@ public class PolicyEnforcementHandlerNegativeTests extends AbstractWithServerTes
 			Map<String, String> option = new HashMap<String, String>();
 			option.put("policy-types", "AUTHZ");
 			option.put("default-environment","PESTestEnv");
-			option.put("service-location",this.jetty.getSPFURI().toString());
+			option.put("service-location",AbstractWithServerTest.jetty.getSPFURI().toString());
 
 			HandlerInitContextImpl initCtx = new HandlerInitContextImpl(ctx.getServiceId(), "name", option);
 			handler.init(initCtx);
@@ -99,7 +99,7 @@ public class PolicyEnforcementHandlerNegativeTests extends AbstractWithServerTes
 			Map<String, String> option = new HashMap<String, String>();
 			option.put("policy-types", "AUTHZS");
 			option.put("default-environment","PESTestEnv");
-			option.put("service-location",this.jetty.getSPFURI().toString());
+			option.put("service-location",AbstractWithServerTest.jetty.getSPFURI().toString());
 
 			HandlerInitContextImpl initCtx = new HandlerInitContextImpl(ctx.getServiceId(), "name", option);
 			handler.init(initCtx);

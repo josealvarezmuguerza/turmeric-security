@@ -35,6 +35,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	 * 
 	 * @see org.ebayopensource.turmeric.services.authorizationservice.intf.AuthorizationService#authorize(org.ebayopensource.turmeric.security.v1.services.AuthorizeRequestType)
 	 */
+	@Override
 	public AuthorizeResponseType authorize(AuthorizeRequestType param0) {
 		return InternalAuthorizationServiceImpl.getInstance().authorize(param0);
 	}

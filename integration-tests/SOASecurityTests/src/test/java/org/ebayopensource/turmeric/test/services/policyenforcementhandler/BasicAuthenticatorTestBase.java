@@ -79,7 +79,8 @@ public abstract class BasicAuthenticatorTestBase extends AbstractJPATest{
     }
     
     public static class TestDAOImpl extends AbstractDAO implements TestDAO{
-        public void persistEntity(Object entity) {
+        @Override
+		public void persistEntity(Object entity) {
             try {
                 super.persistEntity(entity);
             } catch (Throwable th) {

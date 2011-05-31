@@ -52,6 +52,7 @@ public class AuthorizationServiceInitializer implements Initializer {
 	 * @return the list of service names the initialization was performed for.
 	 * @see org.ebayopensource.turmeric.runtime.spf.impl.internal.config.Initializer#getServiceNames()
 	 */
+	@Override
 	public List<String> getServiceNames() {
 		synchronized (m_serviceNames) {
 			return Collections.unmodifiableList(m_serviceNames);

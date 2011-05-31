@@ -33,7 +33,6 @@ import org.ebayopensource.turmeric.runtime.common.impl.utils.LogManager;
 import org.ebayopensource.turmeric.runtime.common.pipeline.InboundMessage;
 import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;
 import org.ebayopensource.turmeric.runtime.common.types.SOAConstants;
-import org.ebayopensource.turmeric.runtime.common.types.SOAHeaders;
 import org.ebayopensource.turmeric.runtime.spf.security.ServerSecurityContext;
 import org.ebayopensource.turmeric.security.v1.services.KeyValuePair;
 import org.ebayopensource.turmeric.security.v1.services.OperationKey;

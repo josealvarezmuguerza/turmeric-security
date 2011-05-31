@@ -70,6 +70,7 @@ import org.ebayopensource.turmeric.security.v1.services.KeyValuePairType;
 		 * @param authnRequest the authn request
 		 * @return the authentication response
 		 */
+		@Override
 		public AuthenticationResponse authenticate(AuthenticationRequest authnRequest) {
 			int num = 0;
 			if(authnRequest.getCredential("TYPE")!=null)
@@ -114,6 +115,7 @@ import org.ebayopensource.turmeric.security.v1.services.KeyValuePairType;
 		 *
 		 * @return the required credentials
 		 */
+		@Override
 		public List<String> getRequiredCredentials() {
 			return s_requiredCredentials;
 		}

@@ -136,7 +136,7 @@ public class PolicyEnforcementHandlerTests extends AbstractJPATest  {
 		Map<String, String> option = new HashMap<String, String>();
 		option.put("policy-types", "AUTHN");
 		option.put("default-environment", "PESTestEnv");
-		option.put("service-location", this.jetty.getSPFURI().toString());
+		option.put("service-location", PolicyEnforcementHandlerTests.jetty.getSPFURI().toString());
 
 		HandlerInitContextImpl initCtx = new HandlerInitContextImpl(
 				ctx.getServiceId(), "name", option);
@@ -177,7 +177,7 @@ public class PolicyEnforcementHandlerTests extends AbstractJPATest  {
 
 		Map<String, String> option = new HashMap<String, String>();
 		option.put("policy-types", "AUTHZ");
-		option.put("service-location", this.jetty.getSPFURI().toString());
+		option.put("service-location", PolicyEnforcementHandlerTests.jetty.getSPFURI().toString());
 		option.put("default-environment", "PESTestEnv");
 		option.put("credential-userid", "X-TURMERIC-SECURITY-USERID");
 		option.put("credential-password", "X-TURMeRIC-SECURITY-PASSWORD");
@@ -211,7 +211,7 @@ public class PolicyEnforcementHandlerTests extends AbstractJPATest  {
 		Map<String, String> option = new HashMap<String, String>();
 		option.put("policy-types", "AUTHN");
 		option.put("default-environment", "PESTestEnv");
-		option.put("service-location", this.jetty.getSPFURI().toString());
+		option.put("service-location", PolicyEnforcementHandlerTests.jetty.getSPFURI().toString());
 
 		HandlerInitContextImpl initCtx = new HandlerInitContextImpl(
 				ctx.getServiceId(), "name", option);
@@ -237,7 +237,7 @@ public class PolicyEnforcementHandlerTests extends AbstractJPATest  {
 
 		Map<String, String> option = new HashMap<String, String>();
 		option.put("policy-types", "AUTHN,AUTHZ");
-		option.put("service-location", this.jetty.getSPFURI().toString());
+		option.put("service-location", PolicyEnforcementHandlerTests.jetty.getSPFURI().toString());
 		option.put("default-environment", "PESTestEnv");
 
 		HandlerInitContextImpl initCtx = new HandlerInitContextImpl(

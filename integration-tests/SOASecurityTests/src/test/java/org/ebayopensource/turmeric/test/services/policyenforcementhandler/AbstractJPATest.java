@@ -12,9 +12,7 @@ package org.ebayopensource.turmeric.test.services.policyenforcementhandler;
 import javax.persistence.EntityManagerFactory;
 
 import org.ebayopensource.turmeric.utils.jpa.PersistenceContext;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 public abstract class AbstractJPATest {

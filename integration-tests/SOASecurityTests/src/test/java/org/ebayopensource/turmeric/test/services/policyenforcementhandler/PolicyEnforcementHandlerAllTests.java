@@ -1,7 +1,5 @@
 package org.ebayopensource.turmeric.test.services.policyenforcementhandler;
 
-import org.ebayopensource.turmeric.test.services.policyenforcementservice.PolicyEnforcementServiceAuthzNegativeTest;
-import org.ebayopensource.turmeric.test.services.policyenforcementservice.PolicyEnforcementServiceTests;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
