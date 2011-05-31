@@ -56,7 +56,7 @@ public class CacheAuthorizationPolicyRetriever implements AuthorizationPolicyRet
 		if (resOpKeys == null) return null;
 		Map<String, List<AuthorizationPolicy>> ret = 
 			new LinkedHashMap<String, List<AuthorizationPolicy>>(resOpKeys.length);
-		for (String resOpKey : resOpKeys) { // XXX this loop will disappear once we have a multi-key get
+		for (String resOpKey : resOpKeys) { 
 			try {
 				List<AuthorizationPolicy> cachePolicies = m_policyCache.get(resOpKey);
 				ret.put(resOpKey, cachePolicies);

@@ -45,7 +45,6 @@ import org.ebayopensource.turmeric.test.services.utils.TestDataReader;
 public class AuthorizationServiceNegativeTest extends CreateValidateAuthz {
 
 	private BaseAuthorizationServiceConsumer m_consumer = null;
-	private String policyId;
 	private String request_id;
 	private String testcaseNumber;
 	private String testcaseDesc;
@@ -75,19 +74,16 @@ public class AuthorizationServiceNegativeTest extends CreateValidateAuthz {
 	public AuthorizationServiceNegativeTest(String policyId, String request_id,
 			String testcaseNumber, String testcaseDesc) {
 		System.err.println("AuthorizationServiceNegativeTest: testcaseNumber ="+testcaseNumber);
-		this.policyId = policyId;
 		this.request_id = request_id;
 		this.testcaseNumber = testcaseNumber;
 		this.testcaseDesc = testcaseDesc;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Parameters
-	public static Collection data() throws IOException {
+	public static Collection<?> data() throws IOException {
 		return loadInputData();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static Collection loadInputData() throws IOException {
 		Properties props = new Properties();
 		List list = new ArrayList();

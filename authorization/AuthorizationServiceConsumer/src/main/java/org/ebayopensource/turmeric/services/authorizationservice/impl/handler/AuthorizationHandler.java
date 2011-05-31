@@ -167,7 +167,6 @@ public class AuthorizationHandler extends BaseHandler {
 			propagateSecurityInfoFromSOA(secCtx, soaAuthzResponse);
 
 			if (soaAuthzResponse.getAck() == AckValue.FAILURE) {
-				// TODO: error mapping
 				List<CommonErrorData> errorDataList = soaAuthzResponse
 						.getErrorMessage().getError();
 				String errorText = "Generic authorization error";

@@ -87,7 +87,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 			return checkRateLimiter(response, rlRequest, super.requestSubjects,
 					super.requestSubjectGroups);
 		} catch (Exception e) {
-			// FIXME fix exception
+			
 		}
 		return response;
 	}
@@ -108,9 +108,6 @@ public class RateLimiterPolicy extends AbstractPolicy {
 						// adds resource for service counts
 						super.createServiceCounters(p);
 
-						// FIXME use groupmemberShip Service to determine if a
-						// subject belongs to a subject group
-						// check subjectgroup
 						for (SubjectGroup subjectGroup : p.getTarget()
 								.getSubjects().getSubjectGroup()) {
 							// we only check attributes for Inclusion
@@ -154,7 +151,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 					}
 				}
 				if (RateLimiterStatus.SERVE_GIF.equals(response.getStatus())) {
-					// FIXME generate challenge image
+					// Implement ratelimiter captcha information here.
 				}
 			}
 

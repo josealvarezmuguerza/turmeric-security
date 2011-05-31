@@ -182,11 +182,10 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 			for (Policy policy : policyResponse.getPolicySet().getPolicy()) {
 				Target target = policy.getTarget();
 				org.ebayopensource.turmeric.security.v1.services.Resources resources = target.getResources();
-				org.ebayopensource.turmeric.security.v1.services.Subjects subjects = target.getSubjects();
 				if ( resources != null && !resources.getResource().isEmpty()) {
 					String rlResourceName = rlRequest.getResourceName();
 					for (org.ebayopensource.turmeric.security.v1.services.Resource resource : resources.getResource()) {
-						if (resource.getResourceName().equals(rlRequest.getResourceName())) {
+						if (resource.getResourceName().equals(rlResourceName)) {
 							policies.add(policy);
 						}
 					}

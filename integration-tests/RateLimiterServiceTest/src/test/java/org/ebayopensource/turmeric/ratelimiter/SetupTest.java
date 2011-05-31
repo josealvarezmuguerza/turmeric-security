@@ -52,7 +52,6 @@ public class SetupTest extends DBTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		// TODO Auto-generated method stub
 		super.setUp();
 		startServer();
 	}

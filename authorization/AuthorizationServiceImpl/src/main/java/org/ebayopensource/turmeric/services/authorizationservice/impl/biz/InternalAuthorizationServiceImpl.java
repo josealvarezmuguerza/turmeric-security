@@ -338,7 +338,6 @@ public class InternalAuthorizationServiceImpl {
 	 */
 	private AuthorizeResponseType mapError(AuthorizeRequestType authzReq, AuthorizationException ex) {
 		AuthorizeResponseType respType = new AuthorizeResponseType();
-		// TODO: map security framework errorId to service specific errors
 		String errorId = ex.getErrorId();
 		Object[] errArgArr = AuthorizationServiceImplUtils.createErrorArguments(ex.getMessage(), authzReq, null);
     	CommonErrorData errorData = 
