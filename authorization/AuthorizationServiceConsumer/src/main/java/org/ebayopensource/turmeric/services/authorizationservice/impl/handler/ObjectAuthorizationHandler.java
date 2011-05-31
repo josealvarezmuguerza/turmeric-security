@@ -31,7 +31,7 @@ import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;
 import org.ebayopensource.turmeric.runtime.common.types.SOAConstants;
 import org.ebayopensource.turmeric.runtime.spf.impl.pipeline.ServerLoggingHandlerUtils;
 import org.ebayopensource.turmeric.runtime.spf.security.ServerSecurityContext;
-import org.ebayopensource.turmeric.security.errorlibrary.ErrorConstants;
+import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
 import org.ebayopensource.turmeric.security.v1.services.AuthorizeRequestType;
 import org.ebayopensource.turmeric.security.v1.services.AuthorizeResponseType;
 import org.ebayopensource.turmeric.security.v1.services.SubjectGroupType;
