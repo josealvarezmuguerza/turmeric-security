@@ -162,7 +162,7 @@ public class AuthorizationServiceNegativeTest extends CreateValidateAuthz {
 			validateNegativeOutput(result, error, req, policy);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("Testcase should not fail: "+e.getMessage());
+			fail("Testcase should not fail: "+ e.getMessage());
 		}
 
 	}
@@ -260,7 +260,7 @@ public class AuthorizationServiceNegativeTest extends CreateValidateAuthz {
 	 * value.
 	 * 
 	 * @param errMsgStr
-	 *            TODO
+	 *            
 	 * @param errParamList
 	 *            error parameters list
 	 * @param idx

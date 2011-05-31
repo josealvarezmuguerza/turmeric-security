@@ -86,9 +86,6 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 				if (!requestSubjects.contains(st.getValue().trim()))
 					requestSubjects.add(st.getValue().trim());
 				// add to group list
-				// TODO DO we need to add this?
-				// if (!domain.contains(st.getDomain()))
-				// domain.add(st.getDomain().trim());
 				processIncrementSubjectOrGroup(st.getValue().trim());
 			}
 
