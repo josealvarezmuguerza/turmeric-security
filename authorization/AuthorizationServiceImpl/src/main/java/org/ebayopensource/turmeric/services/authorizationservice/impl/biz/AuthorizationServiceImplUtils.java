@@ -15,7 +15,7 @@ import java.util.List;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorMessage;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.security.v1.services.AuthorizeRequestType;
 import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 
@@ -53,7 +53,7 @@ public class AuthorizationServiceImplUtils {
 			AuthorizeRequestType authzReq, List<AuthorizationPolicy> authzPolicyList) {		
 		Object[] errArgArr = AuthorizationServiceImplUtils.createErrorArguments(UNAUTHORIZED_ERR_MSG, authzReq, authzPolicyList);
     	CommonErrorData errorData = 
-    		ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_APP_AUTHZ_UNAUTHORIZED_USER, 
+    		ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_APP_AUTHZ_UNAUTHORIZED_USER, 
     				ErrorConstants.ERRORDOMAIN.toString(), errArgArr);
 			
 		ErrorMessage errMsg = new ErrorMessage();

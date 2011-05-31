@@ -20,7 +20,7 @@ import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorMessage;
 import org.ebayopensource.turmeric.common.v1.types.ErrorParameter;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.security.v1.services.AuthorizeRequestType;
 import org.ebayopensource.turmeric.security.v1.services.AuthorizeResponseType;
 import org.ebayopensource.turmeric.services.authorizationservice.impl.AuthorizationException;
@@ -342,7 +342,7 @@ public class InternalAuthorizationServiceImpl {
 		String errorId = ex.getErrorId();
 		Object[] errArgArr = AuthorizationServiceImplUtils.createErrorArguments(ex.getMessage(), authzReq, null);
     	CommonErrorData errorData = 
-    		ErrorUtils.createErrorData(errorId, ErrorConstants.ERRORDOMAIN.toString(), errArgArr);
+    		ErrorDataFactory.createErrorData(errorId, ErrorConstants.ERRORDOMAIN.toString(), errArgArr);
 		
 		respType.setAck(AckValue.FAILURE);
 		ErrorMessage errMsg = new ErrorMessage();

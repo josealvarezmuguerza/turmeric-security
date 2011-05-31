@@ -18,7 +18,7 @@ import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.exceptions.SecurityException;
 import org.ebayopensource.turmeric.runtime.common.handler.HandlerPreconditions;
@@ -179,9 +179,8 @@ public class AuthorizationHandler extends BaseHandler {
 				}
 				secCtx.setAuthzFailure(errorText, errorId, null, null);
 
-				// TODO: error mapping
 				throw new SecurityException(
-						ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_AUTHZ_FAILED,
+						ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_AUTHZ_FAILED,
 								ErrorConstants.ERRORDOMAIN.toString(),
 						new Object[] { request.getOperationName(),
 								request.getResourceName() }));
@@ -194,7 +193,7 @@ public class AuthorizationHandler extends BaseHandler {
 		} catch (Exception e) {
 			s_logger.log(Level.SEVERE, "exception ", e);
 			throw new SecurityException(
-					ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHZ_ERROR,
+					ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHZ_ERROR,
 							ErrorConstants.ERRORDOMAIN.toString(),
 					new Object[] { e.getMessage() }));
 		}

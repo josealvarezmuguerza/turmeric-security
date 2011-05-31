@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.handler.HandlerPreconditions;
 import org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler;
@@ -80,7 +80,7 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 		if (m_tokenRetrievalStyle == null || m_tokenRetrievalStyle.isEmpty()) {
 			logCalMsg("Token retrieval style not specified.");
 			throw new ServiceException(
-					ErrorUtils
+					ErrorDataFactory
 							.createErrorData(
 									ErrorConstants.SVC_SECURITY_CLIENTTOKENRETRIEVAL_HANDLER_INIT_FAILED,
 									ErrorConstants.ERRORDOMAIN.toString(),
@@ -91,7 +91,7 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 				&& !("dynamic".equalsIgnoreCase(m_tokenRetrievalStyle))) {
 			logCalMsg("Invalid token retrieval style.");
 			throw new ServiceException(
-					ErrorUtils
+					ErrorDataFactory
 							.createErrorData(
 									ErrorConstants.SVC_SECURITY_CLIENTTOKENRETRIEVAL_HANDLER_INIT_FAILED,
 									ErrorConstants.ERRORDOMAIN.toString(),
@@ -111,7 +111,7 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 			} catch (Exception e) {
 				logCalMsg("Unable to load TokenProvider Impl class: " + e);
 				throw new ServiceException(
-						ErrorUtils
+						ErrorDataFactory
 								.createErrorData(
 										ErrorConstants.SVC_SECURITY_CLIENTTOKENRETRIEVAL_HANDLER_INIT_FAILED,
 										ErrorConstants.ERRORDOMAIN.toString(),
@@ -137,7 +137,7 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 		if ("dynamic".equalsIgnoreCase(m_tokenRetrievalStyle)
 				&& consumerId == null) {
 			throw new ServiceException(
-					ErrorUtils
+					ErrorDataFactory
 							.createErrorData(
 									ErrorConstants.SVC_SECURITY_CLIENTTOKENRETRIEVAL_HANDLER_INIT_FAILED,
 									ErrorConstants.ERRORDOMAIN.toString(),
@@ -155,22 +155,20 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 		if (m_tokenProviderImpl == null) {
 			logCalMsg("TokenProvider Class not loaded !");
 			throw new ServiceException(
-					ErrorUtils
+					ErrorDataFactory
 							.createErrorData(
 									ErrorConstants.SVC_SECURITY_CLIENTTOKENRETRIEVAL_HANDLER_ERROR,
 									ErrorConstants.ERRORDOMAIN.toString(),
 									new Object[] { "TokenProvider Class not loaded." }));
 		}
 
-		// s_tokenProviderImpl.init(options); //This can be called in case of
-		// esams
 		String tokenType = m_tokenProviderImpl.getTokenType();
 		String token = m_tokenProviderImpl.getToken(options);
 
 		if (ctx.getRequestMessage() == null) {
 			logCalMsg("System Error !! Message context not initialized.");
 			throw new ServiceException(
-					ErrorUtils
+					ErrorDataFactory
 							.createErrorData(
 									ErrorConstants.SVC_SECURITY_CLIENTTOKENRETRIEVAL_HANDLER_ERROR,
 									ErrorConstants.ERRORDOMAIN.toString(),

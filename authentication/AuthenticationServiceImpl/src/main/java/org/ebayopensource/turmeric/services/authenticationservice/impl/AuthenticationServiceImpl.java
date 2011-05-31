@@ -21,7 +21,7 @@ import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorMessage;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.utils.LogManager;
 import org.ebayopensource.turmeric.security.v1.services.AuthenticateRequestType;
@@ -55,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     	if(request == null || request.getOperationName() == null || 
     			request.getResourceName() == null || request.getResourceType() == null || 
     			request.getCredential().isEmpty()) {
-    		setErrorInResponse(response, ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_INVALID_REQUEST, 
+    		setErrorInResponse(response, ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_INVALID_REQUEST, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[] {"resource/resourcetype/operationname and credentials should be present" }));
     		return response;
@@ -78,7 +78,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				// step 3: lookup the registered authenticator for this authn method
 				Authenticator authenticator = s_AuthnStore.getAuthenticator(authnMethod);
 				if (authenticator == null) {
-					throw new ServiceException(ErrorUtils.createErrorData(
+					throw new ServiceException(ErrorDataFactory.createErrorData(
 							ErrorConstants.SVC_SECURITY_AUTHN_NO_AUTHENTICATOR_CONFIGURED,
 							ErrorConstants.ERRORDOMAIN.toString(), new Object[] { authnMethod}));
 				}
@@ -102,7 +102,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			        	s_logger.log(Level.SEVERE, "unexpected null response from authenticator: " + authnMethod);
 			        	
 			        	setErrorInResponse(response, 
-			        			ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHN_ERROR, 
+			        			ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHN_ERROR, 
 			        					ErrorConstants.ERRORDOMAIN.toString(), 
 			        					new Object[] {"unexpected null response from authenticator" }));
 			        }
@@ -114,18 +114,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				setErrorInResponse(response, e.getErrorMessage().getError().get(0));
 			} else {
 				setErrorInResponse(response, 
-	        			ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_INTERNAL_ERROR, 
+	        			ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_INTERNAL_ERROR, 
 	        					ErrorConstants.ERRORDOMAIN.toString()));
 			}
 		} catch (AuthenticationException e) {
 			setErrorInResponse(response, 
-        			ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHN_ERROR, 
+        			ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHN_ERROR, 
         					ErrorConstants.ERRORDOMAIN.toString(),
         					new Object[] {"Authenticator exception: " + e.getMessage()}));
 		}
 
     	if (!hasRequiredCredentials)
-    		setErrorInResponse(response, ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_MISSING_REQ_CREDENTIALS, 
+    		setErrorInResponse(response, ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_MISSING_REQ_CREDENTIALS, 
         					ErrorConstants.ERRORDOMAIN.toString()));
     	return response;
     }
@@ -141,33 +141,33 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			response = consumer.getAuthenticationPolicy(request);
 		} catch (Exception e) { 
 			s_logger.log(Level.SEVERE, "PolicyService exception",  e);
-			throw new ServiceException (ErrorUtils.createErrorData(
+			throw new ServiceException (ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_AUTHN_INTERNAL_ERROR, ErrorConstants.ERRORDOMAIN.toString()),
 					e);
 		}
 		if (response == null) {
 			s_logger.log(Level.SEVERE, "PolicyService response is null");
-			throw new ServiceException (ErrorUtils.createErrorData(
+			throw new ServiceException (ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_AUTHN_INTERNAL_ERROR, ErrorConstants.ERRORDOMAIN.toString()));
 		}
 		
 		// validate the response
     	if (response.getAck() != AckValue.SUCCESS) {
     		s_logger.log(Level.SEVERE, "PolicyService getAuthenticationPolicy call returned failure");
-    		throw new ServiceException (ErrorUtils.createErrorData(
+    		throw new ServiceException (ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_AUTHN_INTERNAL_ERROR, ErrorConstants.ERRORDOMAIN.toString()));
     	}
     	
     	if (response.getPolicy() == null ) {
     		s_logger.log(Level.SEVERE, "PolicyService authnPolicy  is null and does not have required info");
-    		throw new ServiceException (ErrorUtils.createErrorData(
+    		throw new ServiceException (ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_AUTHN_POLICY_NOT_FOUND, ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[]{request.getResourceName(), request.getOperationName()}));
     	}
     	
     	if (response.getPolicy().getAuthenticationScheme().isEmpty()) {
     		s_logger.log(Level.SEVERE, "PolicyService response is empty and does not have required info");
-    		throw new ServiceException (ErrorUtils.createErrorData(
+    		throw new ServiceException (ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_AUTHN_POLICY_MISSING_AUTHN_METHOD, ErrorConstants.ERRORDOMAIN.toString(),
 					new Object[]{request.getResourceName(), request.getOperationName()}));
     	}

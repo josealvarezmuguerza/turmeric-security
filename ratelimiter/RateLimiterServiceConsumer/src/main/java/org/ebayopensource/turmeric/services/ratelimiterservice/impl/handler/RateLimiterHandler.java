@@ -21,7 +21,7 @@ import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericratelimiter.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.handler.HandlerPreconditions;
 import org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler;
@@ -156,7 +156,7 @@ public class RateLimiterHandler extends BaseHandler {
 		} catch (Exception e) {
 			s_logger.log(Level.SEVERE, "exception",  e);
 			throw new ServiceException(
-					ErrorUtils.createErrorData(ErrorConstants.SVC_RATELIMITER_SYSTEM_ERROR,
+					ErrorDataFactory.createErrorData(ErrorConstants.SVC_RATELIMITER_SYSTEM_ERROR,
 					ErrorConstants.ERRORDOMAIN.toString(), new Object[] { e.getMessage() }));
 		}
 
@@ -171,7 +171,7 @@ public class RateLimiterHandler extends BaseHandler {
 				
 
 			throw new ServiceException(
-					ErrorUtils.createErrorData(ErrorConstants.SVC_RATELIMITER_SYSTEM_ERROR,
+					ErrorDataFactory.createErrorData(ErrorConstants.SVC_RATELIMITER_SYSTEM_ERROR,
 							ErrorConstants.ERRORDOMAIN.toString(), new Object[] { request.getOperationName(),
 								request.getResourceName(),
 								errorText}));
@@ -179,7 +179,7 @@ public class RateLimiterHandler extends BaseHandler {
 			String status = isRateLimitedResponse.getStatus().value();
 					
 			if (status.equals(TrafficLimiterStatusEnum.SERVE_BLOCK.getName())) {
-				throw new ServiceException(ErrorUtils.createErrorData(ErrorConstants.SVC_RATELIMITER_CALL_EXCEEDED_LIMIT,
+				throw new ServiceException(ErrorDataFactory.createErrorData(ErrorConstants.SVC_RATELIMITER_CALL_EXCEEDED_LIMIT,
 						ErrorConstants.ERRORDOMAIN.toString(), new Object[] { request.getOperationName(),
 					request.getResourceName() }));
 			}

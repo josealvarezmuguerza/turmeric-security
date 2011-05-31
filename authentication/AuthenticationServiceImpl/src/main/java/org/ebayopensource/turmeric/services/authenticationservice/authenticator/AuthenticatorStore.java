@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 import org.ebayopensource.turmeric.authentication.provider.Authenticator;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.utils.LogManager;
 import org.ebayopensource.turmeric.utils.DomParseUtils;
@@ -110,7 +110,7 @@ public class AuthenticatorStore extends BaseConfigManager {
 	 */
 	public Authenticator getAuthenticator(String authnMethod) throws ServiceException {
 		if (m_initFlag) {
-			throw new ServiceException(ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_CONFIG_INIT_ERROR, 
+			throw new ServiceException(ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_CONFIG_INIT_ERROR, 
 					ErrorConstants.ERRORDOMAIN));
 		}
 		

@@ -23,7 +23,7 @@ import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
 import org.ebayopensource.turmeric.runtime.binding.objectnode.ObjectNode;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.handler.HandlerPreconditions;
 import org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler;
@@ -98,7 +98,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
 
         String policyTypes = options.get("policy-types");
         if (isEmpty(policyTypes)) {
-        	throw new ServiceException(ErrorUtils.createErrorData(
+        	throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_UNEXPECTED_POLICYENFORCEMENT_ERROR, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[] { "Invalid Policy Type : null or empty." }));
@@ -111,7 +111,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
             policy = policy.trim();
             if (policy == null) {
                 logCalMsgForDebug("The policy type can not be null.");
-                throw new ServiceException(ErrorUtils.createErrorData(
+                throw new ServiceException(ErrorDataFactory.createErrorData(
     					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_UNEXPECTED_POLICYENFORCEMENT_ERROR, 
     					ErrorConstants.ERRORDOMAIN.toString(), 
     					new Object[] { "Invalid Policy Type : " + policy }));
@@ -121,7 +121,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
                         .add(policy.toUpperCase());
             } catch (IllegalArgumentException e) {
                 logCalMsgForDebug(e.getMessage());
-                throw new ServiceException(ErrorUtils.createErrorData(
+                throw new ServiceException(ErrorDataFactory.createErrorData(
     					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_UNEXPECTED_POLICYENFORCEMENT_ERROR, 
     					ErrorConstants.ERRORDOMAIN.toString(), 
     					new Object[] { "Invalid Policy Type : " + policy }));
@@ -194,7 +194,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
             }
         } catch (MalformedURLException me) {
             logCalMsgForDebug(me.getMessage());
-            throw new ServiceException(ErrorUtils.createErrorData(
+            throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_INVALID_URL_PATH, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[] { me.getMessage() }));
@@ -296,7 +296,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
                 
                 setPolicyValidationStatus(secCtx, errorText, errorId);
 
-              	 throw new ServiceException(ErrorUtils.createErrorData(
+              	 throw new ServiceException(ErrorDataFactory.createErrorData(
                 			ErrorSubDomainEnum.valueOf(subdomain.toUpperCase()).getErrorDomain(), 
              				ErrorConstants.ERRORDOMAIN.toString(), 
              				new Object[] { request.getOperationKey().getResourceName(),
@@ -313,7 +313,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
 
 	                if (status.equals(TrafficLimiterStatusEnum.SERVE_BLOCK
 	                        .getName())) {
-	                	throw new ServiceException(ErrorUtils.createErrorData(
+	                	throw new ServiceException(ErrorDataFactory.createErrorData(
 	         					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_HANDLER_RL_LIMIT_EXCEED, 
 	         					ErrorConstants.ERRORDOMAIN.toString(), 
 	         					new Object[] { request.getOperationKey().getResourceName(),
@@ -327,7 +327,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
             throw e;
         } catch (Exception e) {
             logCalMsgForDebug(e.getMessage());
-            throw new ServiceException(ErrorUtils.createErrorData(
+            throw new ServiceException(ErrorDataFactory.createErrorData(
  					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_HANDLER_UNEXPECTED_ERROR, 
  					ErrorConstants.ERRORDOMAIN.toString(), 
  					new Object[] { e.getMessage() }));
@@ -391,7 +391,7 @@ public class PolicyEnforcementHandler extends BaseHandler {
                         request.getAccessControlObject().addAll(accessObjects);
                     } catch (Exception e) {
                         s_logger.log(Level.SEVERE, "error: " , e);
-                        throw new ServiceException(ErrorUtils.createErrorData(
+                        throw new ServiceException(ErrorDataFactory.createErrorData(
              					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_HANDLER_UNEXPECTED_ERROR, 
              					ErrorConstants.ERRORDOMAIN.toString(), 
              					new Object[] { e.getMessage() }));

@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericratelimiter.ErrorConstants;
 import org.ebayopensource.turmeric.ratelimiter.provider.RateLimiterProvider;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.impl.utils.LogManager;
 import org.ebayopensource.turmeric.utils.ReflectionUtils;
@@ -130,7 +130,7 @@ public class RateLimiterServiceProviderFactory {
 
 	private static CommonErrorData getConfigError(
 			RateLimiterServiceProviderConfigManager configMngr) {
-		return ErrorUtils.createErrorData(
+		return ErrorDataFactory.createErrorData(
 				ErrorConstants.SVC_RATELIMITER_INVALID_PROVIDER_CONFIGURATION, 
 				ErrorConstants.ERRORDOMAIN.toString(),
 				new Object[] {new String("RateLimiterService"), 

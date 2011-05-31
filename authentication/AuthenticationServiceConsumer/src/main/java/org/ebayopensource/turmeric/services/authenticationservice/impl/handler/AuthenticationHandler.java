@@ -20,7 +20,7 @@ import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.exceptions.SecurityException;
 import org.ebayopensource.turmeric.runtime.common.handler.HandlerPreconditions;
@@ -281,16 +281,11 @@ public class AuthenticationHandler extends BaseHandler {
 				}
 				secCtx.setAuthnFailure(errorText, errorId, null, null);
 
-				throw new SecurityException(ErrorUtils.createErrorData(
+				throw new SecurityException(ErrorDataFactory.createErrorData(
 						ErrorConstants.SVC_SECURITY_AUTHN_FAILED,
 						ErrorConstants.ERRORDOMAIN.toString(),
 						new Object[] { errorText }));
 
-				// throw new SecurityException(
-				// SystemErrorTypes.SVC_SECURITY_AUTHN_FAILED,
-				// new Object[] {
-				// soaAuthnResponse.getAuthenticationMethod(),
-				// errorText });
 			} else {
 				secCtx.setAuthnSuccess(null, null, null);
 			}
@@ -300,14 +295,13 @@ public class AuthenticationHandler extends BaseHandler {
 		} catch (Exception e) {
 			s_logger.log(Level.SEVERE, "exception ", e);
 
-			throw new SecurityException(ErrorUtils.createErrorData(
+			throw new SecurityException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHN_ERROR,
 					ErrorConstants.ERRORDOMAIN.toString(),
 					new Object[] { e.getMessage() }));
 		}
 	}
 
-	// copy the subject list from authn response to the security context
 	/**
 	 * Copy the subject list from authn response to the security context.
 	 * 

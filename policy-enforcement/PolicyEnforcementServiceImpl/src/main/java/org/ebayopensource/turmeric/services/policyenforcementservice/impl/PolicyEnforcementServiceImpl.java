@@ -19,7 +19,7 @@ import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.common.v1.types.ErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericsecurity.ErrorConstants;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.security.v1.services.AuthenticateRequestType;
 import org.ebayopensource.turmeric.security.v1.services.AuthenticateResponseType;
@@ -203,7 +203,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 						.getLocalizedMessage());
 			}
 			
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_UNEXPECTED_AUTHZ_ERROR, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[] {e.getMessage()}));
@@ -219,15 +219,12 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 		// Error Mapping
 		List<CommonErrorData> errorDataList = authzResponse.getErrorMessage().getError();
 		String errorText = "Generic authorization error";
-		// String errorId = "0";
 		if (errorDataList.size() > 0) {
 			ErrorData errorData = errorDataList.get(0);
 			errorText = errorData.getMessage();
-			// errorId = String.valueOf(errorData.getErrorId());
 		}
-		// secCtx.setAuthzFailure(errorText, errorId, null, null);
 
-		throw new ServiceException(ErrorUtils.createErrorData(
+		throw new ServiceException(ErrorDataFactory.createErrorData(
 				ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_AUTHZ_FAILED, 
 				ErrorConstants.ERRORDOMAIN.toString(), 
 				new Object[] {authzRequest.getResourceName(), authzRequest.getOperationName(), errorText}));
@@ -241,7 +238,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 	private void validateRequest(VerifyAccessRequest request)
 			throws ServiceException {
 		if (request == null) {
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_INVALID_NULL_INPUT, 
 					ErrorConstants.ERRORDOMAIN.toString()));
 		}
@@ -250,26 +247,26 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 				|| request.getOperationKey().getOperationName() == null
 				|| request.getOperationKey().getResourceName() == null
 				|| request.getOperationKey().getResourceType() == null) {
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_MISSING_RESOURCE_INPUT, 
 					ErrorConstants.ERRORDOMAIN.toString()));
 		}
 
 		if (request.getPolicyType().size() <= 0) {
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_MISSING_POLICY_TYPE_INPUT, 
 					ErrorConstants.ERRORDOMAIN.toString()));
 		}
 		if (request.getPolicyType().contains(POLICY_TYPE_BLACKLIST)
 				|| request.getPolicyType().contains(POLICY_TYPE_WHITELIST)) {
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_UNSUPPORTED_POLICY_TYPE_INPUT, 
 					ErrorConstants.ERRORDOMAIN.toString()));
 		}
 
 		for (String policyType : request.getPolicyType()) {
 			if (!s_policyTypeSet.contains(policyType)) {
-				throw new ServiceException(ErrorUtils.createErrorData(
+				throw new ServiceException(ErrorDataFactory.createErrorData(
 						ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_INVALID_POLICY_TYPE_INPUT, 
 						ErrorConstants.ERRORDOMAIN.toString(), new Object[]{policyType}));
 			}
@@ -325,14 +322,12 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 			if (soaAuthnResponse.getAck() == AckValue.FAILURE) {
 				List<CommonErrorData> errorDataList = soaAuthnResponse.getErrorMessage().getError();
 				String errorText = "Generic authentication error";
-				// String errorId = "0";
 				if (errorDataList.size() > 0) {
 					ErrorData errorData = errorDataList.get(0);
 					errorText = errorData.getMessage();
-					// errorId = String.valueOf(errorData.getErrorId());
 				}
 
-				throw new ServiceException(ErrorUtils.createErrorData(
+				throw new ServiceException(ErrorDataFactory.createErrorData(
 						ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_AUTHN_FAILED, 
 						ErrorConstants.ERRORDOMAIN.toString(), 
 						new Object[] {soaAuthnResponse.getAuthenticationMethod(), errorText}));
@@ -349,7 +344,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 				logError("%s failed due to exception : %s ", "Authentication",
 						e.getLocalizedMessage());
 			}
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_AUTHN_FAILED, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[] {e.getMessage()}));
@@ -390,12 +385,6 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 			isRateLimitedRequest.getSubject().addAll(rlSubjectList);
 		}
 
-		// :TODO set the Challenge info
-		/*
-		 * if(request.getChallengeAnswer() != null) {
-		 * isRateLimitedRequest.setChallengeAnswer(request.getChallengeAnswer()); }
-		 */
-
 		SubjectGroupType sg = new SubjectGroupType();
 		sg.setName("AllIP");
 		sg.setDomain("IP");
@@ -416,7 +405,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 			while (i.hasNext()) {
 				SubjectType sub = i.next();
 				if (sub.getDomain() == null || sub.getValue() == null) {
-					throw new ServiceException(ErrorUtils.createErrorData(
+					throw new ServiceException(ErrorDataFactory.createErrorData(
 							ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_INVALID_SUBJECT_DOMAIN_INPUT, 
 							ErrorConstants.ERRORDOMAIN.toString()));
 				}
@@ -482,7 +471,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 				logError("RateLimiting failed due to exception : %s ", e
 						.getLocalizedMessage());
 			}
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_RL_FAILED, 
 					ErrorConstants.ERRORDOMAIN.toString(), new Object[]{e.getMessage()}));
 		}
@@ -495,7 +484,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 				errorText = errorData.getMessage();
 			}
 
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_UNEXPECTED_RL_ERROR, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[]{isRateLimitedRequest.getResourceName(), isRateLimitedRequest.getOperationName(), errorText}));
@@ -571,7 +560,7 @@ public class PolicyEnforcementServiceImpl implements PolicyEnforcementService {
 				logError("%s failed due to exception : %s ", "Authorization", e
 						.getLocalizedMessage());
 			}
-			throw new ServiceException(ErrorUtils.createErrorData(
+			throw new ServiceException(ErrorDataFactory.createErrorData(
 					ErrorConstants.SVC_SECURITY_POLICYENFORCEMENT_UNEXPECTED_AUTHZ_ERROR, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[] {e.getMessage()}));

@@ -17,7 +17,7 @@ import java.util.Properties;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.errorlibrary.turmericratelimiter.ErrorConstants;
 import org.ebayopensource.turmeric.ratelimiter.provider.RateLimiterProvider;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceRuntimeException;
 import org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest;
@@ -93,7 +93,7 @@ public class RateLimiterServiceImpl
     
     	if (s_provider == null ) {
     	    throw new ServiceRuntimeException(
-    	    		ErrorUtils.createErrorData(
+    	    		ErrorDataFactory.createErrorData(
     	    				ErrorConstants.SVC_RATELIMITER_SERVICE_INIT_FAILED,
     	    				ErrorConstants.ERRORDOMAIN.toString(),
     	    				new Object[] {"invalid configuraton"}));

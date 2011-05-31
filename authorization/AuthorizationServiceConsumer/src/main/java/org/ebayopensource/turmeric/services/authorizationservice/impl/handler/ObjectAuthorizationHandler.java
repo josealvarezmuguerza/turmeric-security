@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.runtime.binding.objectnode.ObjectNode;
-import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.SecurityException;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.handler.HandlerPreconditions;
@@ -216,7 +216,7 @@ public class ObjectAuthorizationHandler extends BaseHandler {
 
 			
 			throw new SecurityException(
-					ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_AUTHZ_FAILED,
+					ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_AUTHZ_FAILED,
 							ErrorConstants.ERRORDOMAIN.toString(),
 								new Object[] { request.getOperationName(),
 										request.getResourceName() }));
@@ -226,7 +226,7 @@ public class ObjectAuthorizationHandler extends BaseHandler {
 		} catch (Exception e) {
 			s_logger.log(Level.SEVERE, "exception", e);
 			throw new SecurityException(
-					ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHZ_ERROR,
+					ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_UNEXPECTED_AUTHZ_ERROR,
 							ErrorConstants.ERRORDOMAIN.toString(),
 						new Object[] { e.getMessage() }));
 		}
