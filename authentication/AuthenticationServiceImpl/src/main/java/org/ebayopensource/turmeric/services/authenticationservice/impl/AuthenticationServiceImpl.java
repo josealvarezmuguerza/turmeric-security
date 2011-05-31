@@ -35,11 +35,17 @@ import org.ebayopensource.turmeric.services.authenticationservice.authenticator.
 import org.ebayopensource.turmeric.services.authenticationservice.intf.AuthenticationService;
 import org.ebayopensource.turmeric.services.policyservice.intf.gen.BasePolicyServiceConsumer;
 
+/**
+ * The Class AuthenticationServiceImpl.
+ */
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 	private static  Logger s_logger = LogManager.getInstance(AuthenticationServiceImpl.class);
 	private static AuthenticatorStore s_AuthnStore = AuthenticatorStore.getInstance();
 	
+    /* (non-Javadoc)
+     * @see org.ebayopensource.turmeric.services.authenticationservice.intf.AuthenticationService#authenticate(org.ebayopensource.turmeric.security.v1.services.AuthenticateRequestType)
+     */
     public AuthenticateResponseType authenticate(AuthenticateRequestType request) {
 
     	AuthenticateResponseType response = new AuthenticateResponseType();

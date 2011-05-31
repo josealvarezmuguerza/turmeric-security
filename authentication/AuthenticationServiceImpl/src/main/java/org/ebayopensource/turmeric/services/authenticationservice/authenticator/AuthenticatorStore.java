@@ -26,6 +26,9 @@ import org.ebayopensource.turmeric.utils.config.exceptions.ConfigurationExceptio
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * The Class AuthenticatorStore.
+ */
 public class AuthenticatorStore extends BaseConfigManager {
 
      private static  Logger s_logger = LogManager.getInstance(AuthenticatorStore.class);
@@ -43,7 +46,12 @@ public class AuthenticatorStore extends BaseConfigManager {
 		 super();
 	}
 	 
-	 public static AuthenticatorStore getInstance() {
+	 /**
+ 	 * Gets the single instance of AuthenticatorStore.
+ 	 *
+ 	 * @return single instance of AuthenticatorStore
+ 	 */
+ 	public static AuthenticatorStore getInstance() {
 	    if (s_instance == null) {
 	    	s_instance = new AuthenticatorStore();
 	    	s_instance.initialize();
@@ -93,6 +101,13 @@ public class AuthenticatorStore extends BaseConfigManager {
 		}
 	}
 	
+	/**
+	 * Gets the authenticator.
+	 *
+	 * @param authnMethod the authn method
+	 * @return the authenticator
+	 * @throws ServiceException the service exception
+	 */
 	public Authenticator getAuthenticator(String authnMethod) throws ServiceException {
 		if (m_initFlag) {
 			throw new ServiceException(ErrorUtils.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_CONFIG_INIT_ERROR, 
@@ -102,21 +117,33 @@ public class AuthenticatorStore extends BaseConfigManager {
 		return m_authenticatorMap.get(authnMethod.toLowerCase());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.utils.config.BaseConfigManager#getConfigFileName()
+	 */
 	@Override
 	public String getConfigFileName() {
 		return CONFIG_FILENAME;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.utils.config.BaseConfigManager#getRootElementName()
+	 */
 	@Override
 	public String getRootElementName() {		
 		return ROOT_ELEMENT;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.utils.config.BaseConfigManager#getSchemaFileName()
+	 */
 	@Override
 	public String getSchemaFileName() {
 		return SCHEMA_FILENAME;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.turmeric.utils.config.BaseConfigManager#map(org.w3c.dom.Element)
+	 */
 	@Override
 	public void map(Element rootData) throws ConfigurationException {
 		

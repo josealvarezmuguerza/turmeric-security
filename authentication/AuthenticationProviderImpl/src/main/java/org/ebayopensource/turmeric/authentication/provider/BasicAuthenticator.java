@@ -22,10 +22,18 @@ import org.ebayopensource.turmeric.utils.jpa.PersistenceContext;
 import edu.emory.mathcs.backport.java.util.Arrays;
 import edu.emory.mathcs.backport.java.util.Collections;
 
+/**
+ * The Class BasicAuthenticator.
+ */
 public class BasicAuthenticator implements Authenticator {
     private final EntityManagerFactory factory;
     private final Authenticator impl;
     
+    /**
+     * Instantiates a new basic authenticator.
+     *
+     * @param type the type
+     */
     public BasicAuthenticator(String type) {
     	 factory = PersistenceContext.createEntityManagerFactory("policyservice");
          
@@ -35,6 +43,9 @@ public class BasicAuthenticator implements Authenticator {
          impl = (Authenticator) Proxy.newProxyInstance(classLoader, interfaces, new JPAAroundAdvice(factory, target));
     }
     
+    /**
+     * Instantiates a new basic authenticator.
+     */
     public BasicAuthenticator() {
         factory = PersistenceContext.createEntityManagerFactory("policyservice");
         
@@ -112,22 +123,34 @@ public class BasicAuthenticator implements Authenticator {
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#initialize()
+     */
     @Override
     public void initialize() throws AuthenticationException {
         impl.initialize(); 
     }
 
+    /* (non-Javadoc)
+     * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#authenticate(org.ebayopensource.turmeric.authentication.provider.AuthenticationRequest)
+     */
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest authnRequest)
                     throws AuthenticationException {
         return impl.authenticate(authnRequest);
     }
 
+    /* (non-Javadoc)
+     * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#getAuthenticationMethod()
+     */
     @Override
     public String getAuthenticationMethod() {
         return impl.getAuthenticationMethod();
     }
 
+    /* (non-Javadoc)
+     * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#getRequiredCredentials()
+     */
     @Override
     public List<String> getRequiredCredentials() {
         return impl.getRequiredCredentials();

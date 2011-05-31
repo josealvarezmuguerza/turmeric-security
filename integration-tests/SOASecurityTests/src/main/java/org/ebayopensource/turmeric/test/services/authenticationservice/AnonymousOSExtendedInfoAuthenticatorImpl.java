@@ -21,10 +21,9 @@ import org.ebayopensource.turmeric.security.v1.services.KeyValuePairType;
 
 /**
  * Anonymous authenticator (used when the request is meant to be public such
- * that there's no "real" authentication needed)
- * 
+ * that there's no "real" authentication needed).
+ *
  * @author sukoneru
- * 
  */
 
 	public class AnonymousOSExtendedInfoAuthenticatorImpl implements Authenticator {
@@ -39,23 +38,37 @@ import org.ebayopensource.turmeric.security.v1.services.KeyValuePairType;
 		}
 	 
 		
+		/* (non-Javadoc)
+		 * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#initialize()
+		 */
 		@Override
 		public void initialize() throws AuthenticationException {
 			// no init
 		}
 		
+		/* (non-Javadoc)
+		 * @see org.ebayopensource.turmeric.authentication.provider.Authenticator#getAuthenticationMethod()
+		 */
 		@Override
 		public String getAuthenticationMethod() {
 			return authnMethod;
 		}
 		
+		/**
+		 * Instantiates a new anonymous os extended info authenticator impl.
+		 *
+		 * @param authnMethod the authn method
+		 */
 		public AnonymousOSExtendedInfoAuthenticatorImpl(String authnMethod) {
 			this.authnMethod = authnMethod;
 		}
 
 		
 		/**
-		 * Authenticate the subject from the incoming request
+		 * Authenticate the subject from the incoming request.
+		 *
+		 * @param authnRequest the authn request
+		 * @return the authentication response
 		 */
 		public AuthenticationResponse authenticate(AuthenticationRequest authnRequest) {
 			int num = 0;
@@ -97,7 +110,9 @@ import org.ebayopensource.turmeric.security.v1.services.KeyValuePairType;
 		}
 		
 		/**
-		 * Get the required credentials needed by the authenticator
+		 * Get the required credentials needed by the authenticator.
+		 *
+		 * @return the required credentials
 		 */
 		public List<String> getRequiredCredentials() {
 			return s_requiredCredentials;
