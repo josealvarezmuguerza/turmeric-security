@@ -55,7 +55,7 @@ public class BasicAuthenticator implements Authenticator {
         impl = (Authenticator) Proxy.newProxyInstance(classLoader, interfaces, new JPAAroundAdvice(factory, target));
     }
 
-    private class BasicAuthenticatorImpl implements Authenticator {
+    private static class BasicAuthenticatorImpl implements Authenticator {
         private final static String CRED_SUBJECT = "userid";
         private final static String CRED_PASSWORD = "password";
         private final static String AUTHN_METHOD = "BASIC";

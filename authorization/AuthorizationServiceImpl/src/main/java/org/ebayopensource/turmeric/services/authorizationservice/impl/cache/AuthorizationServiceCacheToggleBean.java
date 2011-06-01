@@ -113,7 +113,7 @@ public class AuthorizationServiceCacheToggleBean extends BaseConfigBean {
 					if (!(newValue instanceof Boolean)) {
 						if (LOGGER.isLogEnabled(LogLevel.WARN)) {
 							LOGGER.log(LogLevel.WARN, "Unknown new value " + newValue
-									+ ((newValue == null) ? "" : " of class " + newValue.getClass().getName())
+									+ " of class " + newValue.getClass().getName()
 									+ " was passed in - ignoring..."); 
 						}
 					}

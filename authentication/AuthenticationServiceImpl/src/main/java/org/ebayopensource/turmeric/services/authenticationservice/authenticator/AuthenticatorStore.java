@@ -53,8 +53,9 @@ public class AuthenticatorStore extends BaseConfigManager {
  	 */
  	public static AuthenticatorStore getInstance() {
 	    if (s_instance == null) {
-	    	s_instance = new AuthenticatorStore();
-	    	s_instance.initialize();
+	    	AuthenticatorStore s = new AuthenticatorStore();
+	    	s.initialize();
+	    	s_instance = s;
 	    }
 	    	return s_instance;
 	 } 

@@ -67,7 +67,6 @@ public class ClientTokenRetrievalHandler extends BaseHandler {
 	public void init(InitContext ctx) throws ServiceException {
 		super.init(ctx);
 
-		ServiceId svcId = ctx.getServiceId();
 		// only allow for client side
 		HandlerPreconditions.checkClientSide(ctx,
 				ClientTokenRetrievalHandler.class);
