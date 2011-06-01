@@ -89,8 +89,12 @@ public class RateLimiterProviderImpl implements RateLimiterProvider {
 
 	private void checkPolices(IsRateLimitedResponse response,
 			IsRateLimitedRequest request) {
-		if (RateLimiterStatus.SERVE_OK.equals(response.getStatus())
-				|| RateLimiterStatus.SERVE_GIF.equals(response.getStatus())) {
+		IsRateLimitedResponse isRateLimitedResponse = response;
+		if (isRateLimitedResponse == null) {
+			isRateLimitedResponse = new IsRateLimitedResponse();
+		}
+		if (RateLimiterStatus.SERVE_OK.equals(isRateLimitedResponse.getStatus())
+				|| RateLimiterStatus.SERVE_GIF.equals(isRateLimitedResponse.getStatus())) {
 
 			RateLimiterPolicy rlPolicy = new RateLimiterPolicy(request);
 			// use for mock the consumer
@@ -98,12 +102,10 @@ public class RateLimiterProviderImpl implements RateLimiterProvider {
 			BlackListPolicy blPolicy = new BlackListPolicy(request);
 			WhiteListPolicy wlPolicy = new WhiteListPolicy(request);
 
-			response = response == null ? new IsRateLimitedResponse()
-					: response;
 			try {
-				blPolicy.evaluate(response, request);
-				wlPolicy.evaluate(response, request);
-				rlPolicy.evaluate(response, request);
+				blPolicy.evaluate(isRateLimitedResponse, request);
+				wlPolicy.evaluate(isRateLimitedResponse, request);
+				rlPolicy.evaluate(isRateLimitedResponse, request);
 			} catch (RateLimiterException e) {
 				// response.setAck(AckValue.FAILURE);
 				// CommonErrorData data = new CommonErrorData();
