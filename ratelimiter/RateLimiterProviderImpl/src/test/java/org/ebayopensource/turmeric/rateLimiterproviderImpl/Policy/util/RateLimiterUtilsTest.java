@@ -99,20 +99,19 @@ public class RateLimiterUtilsTest {
 	 */
 	@Test
 	public void testIvalidExpression() {
-		Boolean flag;
 		try {
-			flag = limiterUtils.getFinalresult("1>>2");
+			limiterUtils.getFinalresult("1>>2");
 			fail("invalid expression should fail");
 		} catch (Exception e) {
 		}
 		try {
-			flag = limiterUtils.getFinalresult("1>>2 2");
+			limiterUtils.getFinalresult("1>>2 2");
 			fail("invalid expression should fail");
 		} catch (Exception e) {
 		}
 
 		try {
-			flag = limiterUtils.getFinalresult("1>>2 && 2 >1");
+			limiterUtils.getFinalresult("1>>2 && 2 >1");
 			fail("invalid expression should fail");
 		} catch (Exception e) {
 		}
