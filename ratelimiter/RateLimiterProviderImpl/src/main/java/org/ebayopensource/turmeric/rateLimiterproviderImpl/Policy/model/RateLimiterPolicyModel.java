@@ -23,7 +23,7 @@ public class RateLimiterPolicyModel {
 	 */
 	public Date getTimestamp() {
 		if (timestamp == null) {
-			return timestamp;
+			return null;
 		}
 		return new Date(timestamp.getTime());
 	}

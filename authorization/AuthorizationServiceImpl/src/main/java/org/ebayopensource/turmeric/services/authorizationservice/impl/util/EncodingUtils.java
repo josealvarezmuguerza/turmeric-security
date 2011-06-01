@@ -31,7 +31,7 @@ public class EncodingUtils {
 	/**
 	 * The separator to be used to separate the components in the encoded version. 
 	 */
-	public static String SEPARATOR = "~";
+	public static final String SEPARATOR = "~";
 	/**
 	 * The {@link #SEPARATOR} encoded in the Unicode format (e.g. "\\uNNNN"). 
 	 */
@@ -39,11 +39,11 @@ public class EncodingUtils {
 	/**
 	 * The string to represent a null component in the encoded version. 
 	 */
-	public static String NULL = "__";
+	public static final String NULL = "__";
 	/**
 	 * The {@link #NULL} string encoded in the Unicode format (e.g. "\\uNNNN"). 
 	 */
-	public static String NULL_MASK = maskString(NULL);
+	public static final String NULL_MASK = maskString(NULL);
 	
 	/**
 	 * Encode a string in its Unicode format (e.g. "\\uNNNN").
@@ -148,8 +148,7 @@ public class EncodingUtils {
 	public static CloneableSubjectGroupType decodeSubjectGroupKey(String key) {
 		String[] decodedKey = decodeKey(key);
 		assert decodedKey != null && decodedKey.length == 3 
-			: "Decoded key should have exactly 2 elements but is " 
-				+ (decodedKey == null ? "[NULL]" : Arrays.asList(decodedKey));
+			: "Decoded key should have exactly 2 elements but is " + Arrays.asList(decodedKey);
 		
 		SubjectGroupType sg = new SubjectGroupType();
 		sg.setDomain(decodedKey[0]);
@@ -167,8 +166,7 @@ public class EncodingUtils {
 	public static CloneableSubjectType decodeSubjectKey(String key) {
 		String[] decodedKey = decodeKey(key);
 		assert decodedKey != null && decodedKey.length == 2 
-			: "Decoded key should have exactly 2 elements but is " 
-				+ (decodedKey == null ? "[NULL]" : Arrays.asList(decodedKey));
+			: "Decoded key should have exactly 2 elements but is " + Arrays.asList(decodedKey);
 		
 		SubjectType subj = new SubjectType();
 		subj.setDomain(decodedKey[0]);
@@ -251,7 +249,7 @@ public class EncodingUtils {
 		if (decodedKey == null || decodedKey.length > 3) 
 			throw new IllegalArgumentException(
 					"Decoded key should be non-null and have no more than 3 elements, and now it is " 
-					+ (decodedKey == null ? "[NULL]" : Arrays.asList(decodedKey)));
+					+ Arrays.asList(decodedKey));
 		String opNm = decodedKey.length > 2 ? decodedKey[2] : "";
 		String resNm = decodedKey.length > 1 ? decodedKey[1] : "";
 		String resTyp = decodedKey.length > 0 ? decodedKey[0] : "";
