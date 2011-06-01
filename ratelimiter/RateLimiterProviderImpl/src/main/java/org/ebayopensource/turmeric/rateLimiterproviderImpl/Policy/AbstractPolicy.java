@@ -59,13 +59,6 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 		consumer = consumer1;
 	}
 	
-	@edu.umd.cs.findbugs.annotations.SuppressWarnings(
-		    value="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD", 
-		    justification="If you change this it breaks the unit tests.")
-	public AbstractPolicy(BasePolicyServiceConsumer consumer1) {
-		consumer = consumer1;
-	}
-
 	/**
 	 * Gets the consumer.
 	 *

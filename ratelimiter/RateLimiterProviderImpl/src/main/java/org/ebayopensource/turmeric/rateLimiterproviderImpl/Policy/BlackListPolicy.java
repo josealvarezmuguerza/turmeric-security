@@ -26,7 +26,7 @@ import org.ebayopensource.turmeric.services.ratelimiterservice.impl.RateLimiterE
  */
 public class BlackListPolicy extends AbstractPolicy {
 
-	private static List<Policy> blacklistPolicy;
+	private List<Policy> blacklistPolicy;
 
 	/**
 	 * Instantiates a new black list policy.
