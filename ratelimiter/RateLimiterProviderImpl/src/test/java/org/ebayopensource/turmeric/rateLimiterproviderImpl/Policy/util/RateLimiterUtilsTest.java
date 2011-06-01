@@ -39,44 +39,34 @@ public class RateLimiterUtilsTest {
 	 * Testsimple exp.
 	 */
 	@Test
-	public void testsimpleExp() {
+	public void testsimpleExp() throws Exception {
 		Boolean flag;
-		try {
-			flag = limiterUtils.getFinalresult("1>2");
-			assertEquals("\"1>2\" should  be false", false, flag);
-			flag = limiterUtils.getFinalresult(" 1   >  3  ");
-			assertEquals("\" 1   >  3  \" should  be false", false, flag);
-			flag = limiterUtils.getFinalresult("4 > 2");
-			assertEquals("\"4 > 2\" should  be true", true, flag);
-			flag = limiterUtils.getFinalresult("1>1");
-			assertEquals("\"1>1 \" should  be false", false, flag);
-
-		} catch (Exception e) {
-		}
-
+		flag = limiterUtils.getFinalresult("1>2");
+		assertEquals("\"1>2\" should  be false", false, flag);
+		flag = limiterUtils.getFinalresult(" 1   >  3  ");
+		assertEquals("\" 1   >  3  \" should  be false", false, flag);
+		flag = limiterUtils.getFinalresult("4 > 2");
+		assertEquals("\"4 > 2\" should  be true", true, flag);
+		flag = limiterUtils.getFinalresult("1>1");
+		assertEquals("\"1>1 \" should  be false", false, flag);
 	}
 
 	/**
 	 * Test or exp.
 	 */
 	@Test
-	public void testOrExp() {
+	public void testOrExp() throws Exception {
 		Boolean flag;
-		try {
-			flag = limiterUtils.getFinalresult("1>2||3>6");
-			assertEquals("\"1>2||3>6\" should  be false", false, flag);
-			flag = limiterUtils.getFinalresult(" 1   >  3  || 4 > 6 || 5 >7 ");
-			assertEquals("\" 1   >  3  || 4 > 6 || 5 >7  \" should  be false",
-					false, flag);
-			flag = limiterUtils.getFinalresult("1   >  3  || 4 > 6  || 4 > 2");
-			assertEquals("\"1   >  3  || 4 > 6  || 4 > 2\" should  be true",
-					true, flag);
-			flag = limiterUtils.getFinalresult("1>1 || 2>10 || 3>5");
-			assertEquals("\"1>1 || 2>10 || 3>5 \" should  be false", false,
-					flag);
-
-		} catch (Exception e) {
-		}
+		flag = limiterUtils.getFinalresult("1>2||3>6");
+		assertEquals("\"1>2||3>6\" should  be false", false, flag);
+		flag = limiterUtils.getFinalresult(" 1   >  3  || 4 > 6 || 5 >7 ");
+		assertEquals("\" 1   >  3  || 4 > 6 || 5 >7  \" should  be false",
+				false, flag);
+		flag = limiterUtils.getFinalresult("1   >  3  || 4 > 6  || 4 > 2");
+		assertEquals("\"1   >  3  || 4 > 6  || 4 > 2\" should  be true", true,
+				flag);
+		flag = limiterUtils.getFinalresult("1>1 || 2>10 || 3>5");
+		assertEquals("\"1>1 || 2>10 || 3>5 \" should  be false", false, flag);
 
 	}
 
