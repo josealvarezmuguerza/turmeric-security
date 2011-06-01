@@ -52,8 +52,9 @@ public abstract class CounterAbstractPolicy {
 	 * @return the active rl
 	 */
 	protected Map<String, RateLimiterPolicyModel> getActiveRL() {
-		activeRL = (activeRL == null) ? new HashMap<String, RateLimiterPolicyModel>()
-				: activeRL;
+		if (activeRL == null) {
+			activeRL = new HashMap<String, RateLimiterPolicyModel>();
+		}
 		return activeRL;
 	}
 
@@ -63,8 +64,9 @@ public abstract class CounterAbstractPolicy {
 	 * @return the active effects
 	 */
 	protected Map<String, RateLimiterPolicyModel> getActiveEffects() {
-		activeEffect = (activeEffect == null) ? new HashMap<String, RateLimiterPolicyModel>()
-				: activeEffect;
+		if (activeEffect == null) {
+			activeEffect = new HashMap<String, RateLimiterPolicyModel>();
+		}
 		return activeEffect;
 	}
 
