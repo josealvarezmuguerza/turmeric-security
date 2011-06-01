@@ -38,16 +38,16 @@ import org.ebayopensource.turmeric.security.v1.services.Target;
 public abstract class RateLimiterProviderAbstractTest {
 	
 	/** The VERSION. */
-	final String VERSION = "1.0";
+	protected static final String VERSION = "1.0";
 	
 	/** The WHITELIST. */
-	final String WHITELIST = "WHITELIST";
+	protected static final String WHITELIST = "WHITELIST";
 	
 	/** The RL. */
-	final String RL = "RL";
+	protected static final String RL = "RL";
 	
 	/** The BLACKLIST. */
-	final String BLACKLIST = "BLACKLIST";
+	protected static final String BLACKLIST = "BLACKLIST";
 
 	/**
 	 * Gets the bL find policies request.

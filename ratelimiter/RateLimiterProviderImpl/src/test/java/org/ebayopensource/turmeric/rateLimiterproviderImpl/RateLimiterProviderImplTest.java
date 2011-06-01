@@ -53,7 +53,7 @@ public class RateLimiterProviderImplTest extends
 	/**
 	 * The Class IsPolicyType.
 	 */
-	class IsPolicyType extends ArgumentMatcher<FindPoliciesRequest> {
+	static class IsPolicyType extends ArgumentMatcher<FindPoliciesRequest> {
 		
 		/** The type. */
 		String type;

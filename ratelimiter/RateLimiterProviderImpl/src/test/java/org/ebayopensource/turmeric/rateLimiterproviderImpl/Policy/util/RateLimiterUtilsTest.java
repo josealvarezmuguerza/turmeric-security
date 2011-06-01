@@ -13,7 +13,7 @@ import org.junit.Test;
 
 /**
  * The Class RateLimiterUtilsTest.
- *
+ * 
  * @author gbaal
  */
 public class RateLimiterUtilsTest {
@@ -43,19 +43,19 @@ public class RateLimiterUtilsTest {
 		Boolean flag;
 		try {
 			flag = limiterUtils.getFinalresult("1>2");
-			assertEquals("\"1>2\" should  be false",false, flag);
+			assertEquals("\"1>2\" should  be false", false, flag);
 			flag = limiterUtils.getFinalresult(" 1   >  3  ");
-			assertEquals("\" 1   >  3  \" should  be false",false, flag);
+			assertEquals("\" 1   >  3  \" should  be false", false, flag);
 			flag = limiterUtils.getFinalresult("4 > 2");
-			assertEquals("\"4 > 2\" should  be true",true, flag);
+			assertEquals("\"4 > 2\" should  be true", true, flag);
 			flag = limiterUtils.getFinalresult("1>1");
-			assertEquals("\"1>1 \" should  be false",false, flag);
-			
+			assertEquals("\"1>1 \" should  be false", false, flag);
+
 		} catch (Exception e) {
 		}
 
 	}
-	
+
 	/**
 	 * Test or exp.
 	 */
@@ -64,39 +64,38 @@ public class RateLimiterUtilsTest {
 		Boolean flag;
 		try {
 			flag = limiterUtils.getFinalresult("1>2||3>6");
-			assertEquals("\"1>2||3>6\" should  be false",false, flag);
+			assertEquals("\"1>2||3>6\" should  be false", false, flag);
 			flag = limiterUtils.getFinalresult(" 1   >  3  || 4 > 6 || 5 >7 ");
-			assertEquals("\" 1   >  3  || 4 > 6 || 5 >7  \" should  be false",false, flag);
+			assertEquals("\" 1   >  3  || 4 > 6 || 5 >7  \" should  be false",
+					false, flag);
 			flag = limiterUtils.getFinalresult("1   >  3  || 4 > 6  || 4 > 2");
-			assertEquals("\"1   >  3  || 4 > 6  || 4 > 2\" should  be true",true, flag);
+			assertEquals("\"1   >  3  || 4 > 6  || 4 > 2\" should  be true",
+					true, flag);
 			flag = limiterUtils.getFinalresult("1>1 || 2>10 || 3>5");
-			assertEquals("\"1>1 || 2>10 || 3>5 \" should  be false",false, flag);
-			
+			assertEquals("\"1>1 || 2>10 || 3>5 \" should  be false", false,
+					flag);
+
 		} catch (Exception e) {
 		}
 
 	}
-	
+
 	/**
 	 * Test and exp.
 	 */
 	@Test
-	public void testAndExp() {
+	public void testAndExp() throws Exception {
 		Boolean flag;
-		try {
-			flag = limiterUtils.getFinalresult("1>2&&3>6");
-			assertEquals("\"1>2||3>6\" should  be false",false, flag);
-			flag = limiterUtils.getFinalresult(" 1   >  3  && 4 > 6 && 5 >7 ");
-			assertEquals("\" 1   >  3  || 4 > 6 || 5 >7  \" should  be false",false, flag);
-			flag = limiterUtils.getFinalresult("1   <  3  && 4 < 6  && 4 > 2");
-			assertEquals("\"1   <  3  && 4 < 6  && 4 > 2\" should  be true",true, flag);
-
-			
-		} catch (Exception e) {
-		}
-
+		flag = limiterUtils.getFinalresult("1>2&&3>6");
+		assertEquals("\"1>2||3>6\" should  be false", false, flag);
+		flag = limiterUtils.getFinalresult(" 1   >  3  && 4 > 6 && 5 >7 ");
+		assertEquals("\" 1   >  3  || 4 > 6 || 5 >7  \" should  be false",
+				false, flag);
+		flag = limiterUtils.getFinalresult("1   <  3  && 4 < 6  && 4 > 2");
+		assertEquals("\"1   <  3  && 4 < 6  && 4 > 2\" should  be true", true,
+				flag);
 	}
-	
+
 	/**
 	 * Test init provider.
 	 */
@@ -104,12 +103,12 @@ public class RateLimiterUtilsTest {
 	public void testInitProvider() {
 		assertNotNull("limiterUtils is null", limiterUtils);
 	}
-	
+
 	/**
 	 * Test ivalid expression.
 	 */
 	@Test
-	public void testIvalidExpression(){
+	public void testIvalidExpression() {
 		Boolean flag;
 		try {
 			flag = limiterUtils.getFinalresult("1>>2");
@@ -121,7 +120,7 @@ public class RateLimiterUtilsTest {
 			fail("invalid expression should fail");
 		} catch (Exception e) {
 		}
-		
+
 		try {
 			flag = limiterUtils.getFinalresult("1>>2 && 2 >1");
 			fail("invalid expression should fail");

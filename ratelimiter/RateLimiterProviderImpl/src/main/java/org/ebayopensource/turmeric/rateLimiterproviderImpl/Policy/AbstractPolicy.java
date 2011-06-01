@@ -55,6 +55,10 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 	public void setConsumer(BasePolicyServiceConsumer consumer1) {
 		consumer = consumer1;
 	}
+	
+	public AbstractPolicy(BasePolicyServiceConsumer consumer1) {
+		consumer = consumer1;
+	}
 
 	/**
 	 * Gets the consumer.

@@ -41,7 +41,6 @@ public class RateLimiterPolicy extends AbstractPolicy {
 	 */
 	public RateLimiterPolicy(IsRateLimitedRequest rlRequest) {
 		super(rlRequest);
-
 	}
 
 	/* (non-Javadoc)
