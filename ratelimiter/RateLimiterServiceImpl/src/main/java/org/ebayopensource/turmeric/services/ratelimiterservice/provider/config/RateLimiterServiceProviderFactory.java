@@ -82,7 +82,7 @@ public class RateLimiterServiceProviderFactory {
 		if (providerImpl == null) {
 			// check the failed set
 			if (s_failedProviders.contains(providerKey)) {
-				new ServiceException(getConfigError(configMngr));
+				throw new ServiceException(getConfigError(configMngr));
 			}
 			synchronized (RateLimiterServiceProviderFactory.class) {
 				providerImpl = s_serviceProviderMap.get(providerKey);
@@ -133,7 +133,7 @@ public class RateLimiterServiceProviderFactory {
 		return ErrorDataFactory.createErrorData(
 				ErrorConstants.SVC_RATELIMITER_INVALID_PROVIDER_CONFIGURATION, 
 				ErrorConstants.ERRORDOMAIN.toString(),
-				new Object[] {new String("RateLimiterService"), 
+				new Object[] {"RateLimiterService", 
 					configMngr.getConfigPath() + 
 					configMngr.getConfigFileName()});
 	}
