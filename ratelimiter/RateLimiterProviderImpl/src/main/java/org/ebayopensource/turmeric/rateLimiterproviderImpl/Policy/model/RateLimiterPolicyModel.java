@@ -22,7 +22,10 @@ public class RateLimiterPolicyModel {
 	 * @return the timestamp
 	 */
 	public Date getTimestamp() {
-		return timestamp;
+		if (timestamp == null) {
+			return timestamp;
+		}
+		return new Date(timestamp.getTime());
 	}
 
 	/**
@@ -31,7 +34,10 @@ public class RateLimiterPolicyModel {
 	 * @param timestamp the new timestamp
 	 */
 	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+		this.timestamp = null;
+		if (timestamp != null) {
+			this.timestamp = new Date(timestamp.getTime());
+		}
 	}
 
 	/**
