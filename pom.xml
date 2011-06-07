@@ -119,6 +119,14 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>cobertura-maven-plugin</artifactId>
+						<configuration>
+							<instrumentation>
+								<ignores>
+									<ignore>org.ebayopensource.turmeric.common.v1.types.*</ignore>
+									<ignore>org.ebayopensource.turmeric.test.*</ignore>
+								</ignores>
+							</instrumentation>
+						</configuration>
 						<executions>
 							<execution>
 								<id>cobertura-instrument</id>
