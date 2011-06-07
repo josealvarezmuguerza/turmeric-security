@@ -121,10 +121,10 @@
 						<artifactId>cobertura-maven-plugin</artifactId>
 						<configuration>
 							<instrumentation>
-								<ignores>
-									<ignore>org.ebayopensource.turmeric.common.v1.types.*</ignore>
-									<ignore>org.ebayopensource.turmeric.test.*</ignore>
-								</ignores>
+								<excludes>
+									<exclude>org/ebayopensource/turmeric/test/**/*.class</exclude>
+									<exclude>org/ebayopensource/turmeric/common/v1/**/*.class</exclude>
+								</excludes>
 							</instrumentation>
 						</configuration>
 						<executions>
