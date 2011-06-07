@@ -170,19 +170,44 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<execution>
-								<phase>post-integration-test</phase>
+								<phase>verify</phase>
+								<configuration>
+									<tasks>
+										<taskdef classpathref="maven.runtime.classpath"
+											resource="tasks.properties" />
+										<taskdef classpathref="maven.runtime.classpath"
+											resource="net/sf/antcontrib/antcontrib.properties" />
+										<available
+											file="${project.build.directory}/cobertura/cobertura.ser"
+											property="ser.file.exists" />
+										<if>
+											<equals arg1="${ser.file.exists}" arg2="true" />
+											<then>
+												<echo message="Executing cobertura report" />
+												<mkdir dir="${project.build.directory}/site/cobertura" />
+												<cobertura-report format="xml"
+													destdir="${project.build.directory}/site/cobertura"
+													datafile="${project.build.directory}/cobertura/cobertura.ser" />
+											</then>
+											<else>
+												<echo message="No SER file found." />
+											</else>
+										</if>
+									</tasks>
+								</configuration>
 								<goals>
 									<goal>run</goal>
 								</goals>
-								<configuration>
-									<target>
-									    <echo message="${project.build.directory}"/>
-									    <mkdir dir="${project.build.directory}/site/cobertura"/>
-										<cobertura-report format="xml" destdir="${project.build.directory}/site/cobertura" datafile="${project.build.directory}/cobertura" />
-									</target>
-								</configuration>
 							</execution>
 						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>ant-contrib</groupId>
+								<artifactId>ant-contrib</artifactId>
+								<version>20020829</version>
+							</dependency>
+						</dependencies>
+
 					</plugin>
 				</plugins>
 			</build>
