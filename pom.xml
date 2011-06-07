@@ -122,19 +122,10 @@
 						<executions>
 							<execution>
 								<id>cobertura-instrument</id>
+								<phase>process-classes</phase>
 								<goals>
 									<goal>instrument</goal>
 								</goals>
-							</execution>
-							<execution>
-								<id>cobertura-check</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>check</goal>
-								</goals>
-								<configuration>
-									<forceMojoExecution>true</forceMojoExecution>
-								</configuration>
 							</execution>
 						</executions>
 					</plugin>
