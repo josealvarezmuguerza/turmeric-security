@@ -105,55 +105,77 @@
 			</modules>
 		</profile>
 		<profile>
-			<id>cobertura-instrument</id>
-			<activation>
-				<property>
-					<name>cobertura-build</name>
-				</property>
-			</activation>
+			<id>cobertura</id>
+			<dependencies>
+				<dependency>
+					<groupId>net.sourceforge.cobertura</groupId>
+					<artifactId>cobertura</artifactId>
+					<optional>true</optional>
+					<version>1.9.4.1</version>
+				</dependency>
+			</dependencies>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>cobertura-maven-plugin</artifactId>
-						<configuration>
-						</configuration>
 						<executions>
 							<execution>
-								<id>instrument-code</id>
-								<phase>process-classes</phase>
+								<id>cobertura-instrument</id>
 								<goals>
 									<goal>instrument</goal>
 								</goals>
+							</execution>
+							<execution>
+								<id>cobertura-check</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
 								<configuration>
-									<attach>true</attach>
+									<forceMojoExecution>true</forceMojoExecution>
 								</configuration>
 							</execution>
 						</executions>
 					</plugin>
+
 					<plugin>
-						<artifactId>maven-source-plugin</artifactId>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jar-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>attach-sources</id>
+								<id>cobertura-jar</id>
+								<phase>post-integration-test</phase>
 								<goals>
 									<goal>jar</goal>
 								</goals>
+								<configuration>
+									<classifier>cobertura</classifier>
+									<classesDirectory>${basedir}/target/generated-classes/cobertura</classesDirectory>
+								</configuration>
 							</execution>
 						</executions>
-						<inherited>true</inherited>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-install-plugin</artifactId>
+						<version>2.3.1</version>
+						<executions>
+							<execution>
+								<id>cobertura-install</id>
+								<phase>install</phase>
+								<goals>
+									<goal>install</goal>
+								</goals>
+								<configuration>
+									<classifier>cobertura</classifier>
+								</configuration>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
-			<dependencies>
-				<dependency>
-					<groupId>net.sourceforge.cobertura</groupId>
-					<artifactId>cobertura-runtime</artifactId>
-					<version>${cobertura.version}</version>
-					<scope>provided</scope>
-					<type>pom</type>
-				</dependency>
-			</dependencies>
 		</profile>
 	</profiles>
 </project>
