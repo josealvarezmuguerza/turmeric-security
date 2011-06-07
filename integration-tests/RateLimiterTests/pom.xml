@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!--
-		Copyright (c) 2006-2010 eBay Inc. All Rights Reserved. Licensed under
-		the Apache License, Version 2.0 (the "License"); you may not use this
-		file except in compliance with the License. You may obtain a copy of
-		the License at http://www.apache.org/licenses/LICENSE-2.0
-	-->
+<!-- Copyright (c) 2006-2010 eBay Inc. All Rights Reserved. Licensed under 
+	the Apache License, Version 2.0 (the "License"); you may not use this file 
+	except in compliance with the License. You may obtain a copy of the License 
+	at http://www.apache.org/licenses/LICENSE-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.ebayopensource.turmeric.security</groupId>
 		<artifactId>turmeric-security-integration-test-parent</artifactId>
-		<version>1.0.0.2-SNAPSHOT</version>
+		<version>1.0.1.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.policy.tests</groupId>
 	<artifactId>RateLimiterTests</artifactId>
 	<packaging>jar</packaging>
 	<name>RateLimiter :: Tests</name>
-        <properties>
-            <turmeric-policy-version>0.9.1.0-SNAPSHOT</turmeric-policy-version>
-            <turmeric-security-version>0.9.1.0-SNAPSHOT</turmeric-security-version>
-        </properties>
 	<build>
 		<plugins>
 			<plugin>
@@ -81,12 +75,12 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
 			<artifactId>turmeric-security-provider</artifactId>
-			<version>${turmeric-security-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
 			<artifactId>SecurityCommon</artifactId>
-			<version>${turmeric-security-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
@@ -132,4 +126,47 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>cobertura</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.ebayopensource.turmeric.security</groupId>
+					<artifactId>SecurityCommon</artifactId>
+					<version>${project.version}</version>
+					<classifier>cobertura</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.ebayopensource.turmeric.security</groupId>
+					<artifactId>turmeric-security-provider</artifactId>
+					<version>${project.version}</version>
+					<classifier>cobertura</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.ebayopensource.turmeric.impl</groupId>
+					<artifactId>RateLimiterServiceImpl</artifactId>
+					<version>${project.version}</version>
+					<classifier>cobertura</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.ebayopensource.turmeric.errorlib</groupId>
+					<artifactId>RateLimiterErrorLibrary</artifactId>
+					<version>${project.version}</version>
+					<classifier>cobertura</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.ebayopensource.turmeric.client</groupId>
+					<artifactId>RateLimiterServiceConsumer</artifactId>
+					<version>${project.version}</version>
+					<classifier>cobertura</classifier>
+				</dependency>
+				<dependency>
+					<groupId>org.ebayopensource.turmeric.impl</groupId>
+					<artifactId>RateLimiterProviderImpl</artifactId>
+					<version>${project.version}</version>
+					<classifier>cobertura</classifier>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>
