@@ -1,0 +1,1 @@
+This folder is to host SOA platform's integration tests.

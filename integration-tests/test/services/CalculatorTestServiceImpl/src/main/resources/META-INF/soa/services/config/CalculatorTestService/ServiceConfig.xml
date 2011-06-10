@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><!--
+    Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+       http://www.apache.org/licenses/LICENSE-2.0
+ -->
+
+<service-config group="SecurityServiceGroup" service-name="{http://www.ebayopensource.org/marketplace/services}CalculatorTestService" xmlns="http://www.ebay.com/soaframework/common/config">
+    <service-impl-class-name>org.ebayopensource.turmeric.calculatortestservice.impl.CalculatorTestServiceImpl</service-impl-class-name>
+    <service-interface-class-name>org.ebayopensource.turmeric.calculatortestservice.intf.CalculatorTestService</service-interface-class-name>
+    <current-version>1.0.0</current-version>
+    <service-instance-config>
+    	<pipeline-config>
+    		<request-handlers>
+				<handler name="AuthnHandler">
+	   			    <class-name>org.ebayopensource.turmeric.test.services.handlers.TestAuthenticationHandler</class-name>
+	   			</handler>  
+	   			<handler name="RateLimiterHandler">
+               		<class-name>org.ebayopensource.turmeric.services.ratelimiterservice.impl.handler.RateLimiterHandler</class-name>
+               	</handler>
+           		
+			</request-handlers>
+		</pipeline-config>
+      </service-instance-config>
+ </service-config>

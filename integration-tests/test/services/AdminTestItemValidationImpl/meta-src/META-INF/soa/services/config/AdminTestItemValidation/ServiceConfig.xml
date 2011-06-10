@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service-config  xmlns="http://www.ebayopensource.org/turmeric/common/config">
+    <service-impl-class-name>org.ebayopensource.turmeric.test.v1.services.admintestitemvalidation.impl.AdminTestItemValidationImpl</service-impl-class-name>
+    <service-interface-class-name>org.ebayopensource.turmeric.test.v1.services.admintestitemvalidation.intf.AdminTestItemValidation</service-interface-class-name>
+    <service-instance-config>
+        <pipeline-config>
+           <request-handlers>
+               <handler name="AuthnHandler">
+                      <class-name>org.ebayopensource.turmeric.test.v1.services.handlers.MockAuthenticationHandler</class-name>
+               </handler>
+              <handler name="AuthorizationHandler">
+                    <class-name>org.ebayopensource.turmeric.services.authorizationservice.impl.handler.AuthorizationHandler</class-name>
+              </handler>
+              <!--  <handler name="RLHandler">
+                     <class-name>com.ebay.soaframework.extended.spf.impl.handlers.RateLimiterHandler</class-name>
+              </handler> -->
+              <!--  <handler name="ServerUseCaseHeaderHandler">
+                    <class-name>com.ebay.soaframework.extended.spf.impl.handlers.ServerUseCaseHeaderHandler</class-name>
+              </handler> -->
+           </request-handlers>
+    
+    
+          <!--   <logging-handler>
+                <class-name>com.ebay.soaframework.spf.impl.pipeline.ServerLoggingHandler</class-name>
+           </logging-handler> -->
+        </pipeline-config>
+    </service-instance-config>
+</service-config>
