@@ -379,11 +379,11 @@ public class RateLimiterProviderImplTest extends
 
 	// @super.initRule() for the rules
 	// 10.2.124.3:hits >2 allowed connection for the Ip is 10.2.124.3 effect
-	// duration is 3000l rolloverPeriod 20000l effect flag
-	// 10.2.124.5:hits > 1 effect duration is 5000l rolloverPeriod 20000l effect
+	// duration is 3 sec rolloverPeriod 20sec effect flag
+	// 10.2.124.5:hits > 1 effect duration is 5 sec rolloverPeriod 20 sec effect
 	// block
-	// HITS >8 allowed connection to all is 8 effect duration is 8000l
-	// rolloverPeriod 20000l effect block
+	// HITS >8 allowed connection to all is 8 effect duration is 8 sec
+	// rolloverPeriod 20 sec effect block
 	/**
 	 * Test in rl.
 	 */
@@ -478,8 +478,8 @@ public class RateLimiterProviderImplTest extends
 		assertEquals(RateLimiterStatus.SERVE_OK, rateLimitResponse.getStatus());
 	}
 
-	// "ServiceName.checkout:count > 15 effect is BLOCK effect duration 8000l
-	// roll over period 20000l
+	// "ServiceName.checkout:count > 15 effect is BLOCK effect duration 80 sec
+	// roll over period 20 sec
 
 	/**
 	 * Test servicecount.
