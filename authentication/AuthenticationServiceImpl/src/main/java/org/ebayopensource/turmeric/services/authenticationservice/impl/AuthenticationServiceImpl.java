@@ -50,11 +50,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	public AuthenticateResponseType authenticate(AuthenticateRequestType request) {
 
     	AuthenticateResponseType response = new AuthenticateResponseType();
-    	
+    	    	
     	// validate  request
-    	if(request == null || request.getOperationName() == null || 
-    			request.getResourceName() == null || request.getResourceType() == null || 
-    			request.getCredential().isEmpty()) {
+    	if(!isRequestValid(request)) {
     		setErrorInResponse(response, ErrorDataFactory.createErrorData(ErrorConstants.SVC_SECURITY_AUTHN_INVALID_REQUEST, 
 					ErrorConstants.ERRORDOMAIN.toString(), 
 					new Object[] {"resource/resourcetype/operationname and credentials should be present" }));
@@ -129,6 +127,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         					ErrorConstants.ERRORDOMAIN.toString()));
     	return response;
     }
+
+	private boolean isRequestValid(AuthenticateRequestType request) {
+		if (request == null || request.getOperationName() == null || 
+    			request.getResourceName() == null || request.getResourceType() == null) {
+			return false;
+		}
+		if (request.getCredential().isEmpty()) {
+			return false;
+		}
+		for (CredentialType ctype : request.getCredential()) {
+			if (ctype.getValue().isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
     
     private GetAuthenticationPolicyResponse getAuthnPolicy(AuthenticateRequestType authnRequest) throws ServiceException  {
     	BasePolicyServiceConsumer consumer = new BasePolicyServiceConsumer();
