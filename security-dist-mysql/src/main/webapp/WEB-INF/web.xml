@@ -98,5 +98,9 @@
        <servlet-name>SOAMetricsQueryServiceV1</servlet-name>
        <url-pattern>/SOAMetricsQueryServiceV1</url-pattern>
    </servlet-mapping>
+   <servlet-mapping>
+       <servlet-name>RateLimiterServiceV1</servlet-name>
+       <url-pattern>/RateLimiterServiceV1</url-pattern>
+   </servlet-mapping>
 
 </web-app>

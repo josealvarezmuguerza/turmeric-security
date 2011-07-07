@@ -142,7 +142,7 @@ public abstract class CounterAbstractPolicy {
 
 		// add the the time it was added to the rolloverPeriod
 		Long timeToReset = (limiterPolicyModel.getTimestamp().getTime() + rule
-				.getRolloverPeriod());
+				.getRolloverPeriod() * 1000);
 		// get current date
 		java.util.Date date = new java.util.Date();
 		// compare if current id after the reset date
@@ -180,7 +180,7 @@ public abstract class CounterAbstractPolicy {
 		RateLimiterPolicyModel limiterPolicyModel = new RateLimiterPolicyModel();
 		limiterPolicyModel.setTimestamp(new Date());
 		limiterPolicyModel.setEffectDuration(new Date().getTime()
-				+ rule.getEffectDuration());
+				+ rule.getEffectDuration() * 1000);
 		limiterPolicyModel.setActive(true);
 		limiterPolicyModel.setEffect(currentlimiterStatus);
 
@@ -228,7 +228,7 @@ public abstract class CounterAbstractPolicy {
 				if (rule != null) {
 					if (model.getRolloverPeriod() == null) {
 						getActiveRL().get(data).setRolloverPeriod(
-								rule.getRolloverPeriod());
+								rule.getRolloverPeriod() * 1000);
 					}
 					if (model.getTimestamp() == null) {
 						getActiveRL().get(data).setTimestamp(new Date());
@@ -299,8 +299,8 @@ public abstract class CounterAbstractPolicy {
 		Rule rule = findRule(rules, name);
 		if (rule != null) {
 			model.setEffectDuration(new Date().getTime()
-					+ rule.getEffectDuration());
-			model.setRolloverPeriod(rule.getRolloverPeriod());
+					+ rule.getEffectDuration() * 1000);
+			model.setRolloverPeriod(rule.getRolloverPeriod() * 1000);
 			model.setTimestamp(new Date());
 		}
 		return model;

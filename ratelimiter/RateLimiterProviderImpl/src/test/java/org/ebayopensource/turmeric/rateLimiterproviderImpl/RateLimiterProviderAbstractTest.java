@@ -204,8 +204,8 @@ public abstract class RateLimiterProviderAbstractTest {
 		condition.setExpression(expression);
 		rule.setCondition(condition);
 		rule.setEffect(EffectType.FLAG);
-		rule.setEffectDuration(3000l);
-		rule.setRolloverPeriod(20000l);
+		rule.setEffectDuration(3l);
+		rule.setRolloverPeriod(20l);
 		rules.add(rule);
 
 		Rule rule2 = new Rule();
@@ -218,8 +218,8 @@ public abstract class RateLimiterProviderAbstractTest {
 		condition2.setExpression(expression2);
 		rule2.setCondition(condition2);
 		rule2.setEffect(EffectType.CHALLENGE);
-		rule2.setEffectDuration(5000l);
-		rule2.setRolloverPeriod(20000l);
+		rule2.setEffectDuration(5l);
+		rule2.setRolloverPeriod(20l);
 		rules.add(rule2);
 		// HITS to all
 		Rule rule3 = new Rule();
@@ -232,8 +232,8 @@ public abstract class RateLimiterProviderAbstractTest {
 		condition3.setExpression(expression3);
 		rule3.setCondition(condition3);
 		rule3.setEffect(EffectType.BLOCK);
-		rule3.setEffectDuration(8000l);
-		rule3.setRolloverPeriod(20000l);
+		rule3.setEffectDuration(8l);
+		rule3.setRolloverPeriod(20l);
 		rules.add(rule3);
 
 		// serviceCount
@@ -247,8 +247,8 @@ public abstract class RateLimiterProviderAbstractTest {
 		condition4.setExpression(expression4);
 		rule4.setCondition(condition4);
 		rule4.setEffect(EffectType.BLOCK);
-		rule4.setEffectDuration(8000l);
-		rule4.setRolloverPeriod(20000l);
+		rule4.setEffectDuration(8l);
+		rule4.setRolloverPeriod(20l);
 		rules.add(rule4);
 		return rules;
 	}
