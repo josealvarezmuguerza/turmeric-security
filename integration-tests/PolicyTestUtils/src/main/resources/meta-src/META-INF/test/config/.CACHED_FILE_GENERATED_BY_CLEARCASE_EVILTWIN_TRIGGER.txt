@@ -1,0 +1,17 @@
+# ---------------------------------------------------
+# this is a temp file and used for eviltwin trigger.
+# this file speeds up the process for adding file to source control
+# you can remove this file. but if you remove it than you will not take 
+# a advantage of this cached file.
+# ---------------------------------------------------
+--12-27T16:54  sukoneru   checkout directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\policy\PolicyTestUtils\meta-src\META-INF\test\config" from \main\m_soa_opensource_security\1 (unreserved)
+--12-27T16:54  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\policy\PolicyTestUtils\meta-src\META-INF\test\config@@\main\m_soa_opensource_security\1"
+  "token retrieval class
+   ChangeSet No: 312
+   ChangeSet Name: token retrieval
+   ChangeSet Branch: m_soa_opensource_security"
+--12-27T16:54  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\policy\PolicyTestUtils\meta-src\META-INF\test\config@@\main\m_soa_opensource_security\0"
+--12-27T16:54  sukoneru   create branch "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\policy\PolicyTestUtils\meta-src\META-INF\test\config@@\main\m_soa_opensource_security"
+--12-27T16:54  sukoneru   create directory version "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\policy\PolicyTestUtils\meta-src\META-INF\test\config@@\main\0"
+--12-27T16:54  sukoneru   create branch "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\policy\PolicyTestUtils\meta-src\META-INF\test\config@@\main"
+--12-27T16:54  sukoneru   create directory element "D:\SOA\SOAOS_17Nov_Validation\v4soa\eBay\policy\PolicyTestUtils\meta-src\META-INF\test\config@@"

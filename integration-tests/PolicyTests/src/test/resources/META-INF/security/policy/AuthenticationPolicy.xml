@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ================================================================== -->
+<!--  Copyright (c) 2006-2010 eBay Inc. All Rights Reserved.            -->
+<!--  Licensed under the Apache License, Version 2.0 (the "License");   -->
+<!--  you may not use this file except in compliance with the License.  -->
+<!--  You may obtain a copy of the License at                           -->
+<!--                                                                    -->
+<!--     http://www.apache.org/licenses/LICENSE-2.0                     -->
+<!-- ================================================================== -->
+	<authentication-policy xmlns="http://www.ebay.com/securityframework/policy">
+	 	<resource name="CalculatorTestService" default-authentication-method="TestOSExtendedInfo" type="Service">	
+	 					<operation name="*">	
+	 						<authentication-method>TestOSExtendedInfo</authentication-method>				 	
+	 					</operation>		
+	 										
+	 		</resource>
+	 		<resource name="PolicyEnforcementService" default-authentication-method="Token" type="Service">
+	 					<operation name="verifyAccess">
+	 					        <authentication-method>TestAuthenticatePES</authentication-method>	
+	 					</operation>						
+		</resource>
+		
+		<resource name="AdminTestItemValidation" default-authentication-method="" type="Service">
+			<operation name="*">
+				<authentication-method></authentication-method> 	
+			</operation>							
+		</resource>				
+	</authentication-policy>

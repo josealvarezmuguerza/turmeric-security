@@ -20,8 +20,10 @@
   <artifactId>turmeric-security-integration-test-parent</artifactId>
   <packaging>pom</packaging>
   <modules>
-      <module>SOASecurityTests</module>
+     <module>SOASecurityTests</module>
       <module>RateLimiterTests</module>
+      <module>GroupMembershipTests</module>
+      <module>PolicyTestUtils</module>
   </modules>
   <profiles>
   	<profile>
@@ -34,5 +36,16 @@
 	      <module>RateLimiterServiceTest</module>		
   		</modules>
   	</profile>
+
+        <profile>
+               <id>policytests</id>
+               <activation>
+                  <activeByDefault>true</activeByDefault>
+               </activation>
+               <modules>
+                        <module>PolicyTests</module>
+               </modules>
+         </profile>
+  	
   </profiles>
 </project>
