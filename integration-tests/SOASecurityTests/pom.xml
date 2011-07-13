@@ -141,7 +141,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.runtime.tests</groupId>
-			<artifactId>SOATestsCommon</artifactId>
+			<artifactId>jetty-common-tests</artifactId>
 			<version>${turmeric-runtime-version}</version>
 			<exclusions>
 				<exclusion>
