@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.errorlibrary.turmericratelimiter.ErrorConstants;
-import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.model.RateLimiterPolicyModel;
+import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
 import org.ebayopensource.turmeric.security.v1.services.FindPoliciesRequest;
 import org.ebayopensource.turmeric.security.v1.services.FindPoliciesResponse;
 import org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest;
@@ -79,7 +79,7 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 	}
 
 	private void populate() {
-		getActiveRL();
+//		getActiveRL();
 
 		// retrive all subjects from request
 		List<SubjectType> subjectTypes = rlRequest.getSubject();

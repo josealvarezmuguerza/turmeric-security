@@ -3,12 +3,18 @@
  */
 package org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Properties;
 
-import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.model.RateLimiterPolicyModel;
+import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
+import org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider;
+import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
+import org.ebayopensource.turmeric.rateLimiterproviderImpl.counterprovider.config.RateLimiterCounterProviderFactory;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceRuntimeException;
 import org.ebayopensource.turmeric.security.v1.services.EffectType;
 import org.ebayopensource.turmeric.security.v1.services.Operation;
 import org.ebayopensource.turmeric.security.v1.services.Policy;
@@ -16,6 +22,7 @@ import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 import org.ebayopensource.turmeric.security.v1.services.Resource;
 import org.ebayopensource.turmeric.security.v1.services.Resources;
 import org.ebayopensource.turmeric.security.v1.services.Rule;
+import org.ebayopensource.turmeric.utils.ContextUtils;
 
 /**
  * The Class CounterAbstractPolicy.
@@ -33,42 +40,65 @@ public abstract class CounterAbstractPolicy {
 	// 101.12.69.105:hits
 	/** The Constant IPHITS. */
 	public static final String IPHITS = ":hits";
-	private static Map<String, RateLimiterPolicyModel> activeRL;
-	private static Map<String, RateLimiterPolicyModel> activeEffect;
+
+	private static RateLimiterCounterProvider counterProvider;
+
+	private static final String counterProviderPropFilePath = "META-INF/soa/providers/config/RateLimiterProvider/counter_provider.properties";
+
+	private static final String counterProviderPropKey = "preferred-provider";
+
+	private static List<CommonErrorData> s_errorData = null;
 
 	/**
 	 * Instantiates a new counter abstract policy.
 	 */
 	public CounterAbstractPolicy() {
 		super();
-		// Initialised maps
-		getActiveRL();
-		getActiveEffects();
+		getCounterProvider();
+		// // Initialised maps
+		// getActiveRL();
+		// getActiveEffects();
 	}
 
-	/**
-	 * Gets the active rl.
-	 * 
-	 * @return the active rl
-	 */
-	protected Map<String, RateLimiterPolicyModel> getActiveRL() {
-		if (activeRL == null) {
-			activeRL = new HashMap<String, RateLimiterPolicyModel>();
+	protected void getCounterProvider() {
+		if (s_errorData != null) {
+			throw new ServiceRuntimeException(s_errorData);
 		}
-		return activeRL;
+		if (counterProvider == null) {
+			try {
+				counterProvider = RateLimiterCounterProviderFactory
+						.create(getPreferredProvider());
+			} catch (ServiceException se) {
+				s_errorData = se.getErrorMessage().getError();
+				throw new ServiceRuntimeException(s_errorData);
+			}
+		}
 	}
 
-	/**
-	 * Gets the active effects.
-	 * 
-	 * @return the active effects
-	 */
-	protected Map<String, RateLimiterPolicyModel> getActiveEffects() {
-		if (activeEffect == null) {
-			activeEffect = new HashMap<String, RateLimiterPolicyModel>();
+	private static String getPreferredProvider() {
+		ClassLoader classLoader = ContextUtils.getClassLoader();
+		InputStream inStream = classLoader
+				.getResourceAsStream(counterProviderPropFilePath);
+		String provider = null;
+		if (inStream != null) {
+			Properties properties = new Properties();
+			try {
+				properties.load(inStream);
+				provider = (String) properties.get(counterProviderPropKey);
+			} catch (IOException e) {
+				// ignore
+			} finally {
+				try {
+					inStream.close();
+				} catch (IOException e) {
+					// ignore
+				}
+			}
 		}
-		return activeEffect;
+		return provider;
 	}
+
+
 
 	/**
 	 * Increment counter.
@@ -90,15 +120,13 @@ public abstract class CounterAbstractPolicy {
 
 			if (rateLimiterPolicyModel.getTimestamp() == null)
 				rateLimiterPolicyModel.setTimestamp(new Date());
-			if (getActiveRL().containsKey(ipOrSubjectGroup)) {
-				RateLimiterPolicyModel limiterPolicyModel = getActiveRL().get(
-						ipOrSubjectGroup);
-				getActiveRL().get(ipOrSubjectGroup).setCount(
-						limiterPolicyModel.getCount() + 1);
 
+			if (counterProvider.cointainKeyInActiveRL(ipOrSubjectGroup)) {
+				counterProvider.incrementRLCounter(ipOrSubjectGroup);
 			} else {
-				rateLimiterPolicyModel.setCount(1);
-				getActiveRL().put(ipOrSubjectGroup, rateLimiterPolicyModel);
+				counterProvider.setRLCounter(ipOrSubjectGroup, 1);
+				counterProvider.addActiveRL(ipOrSubjectGroup,
+						rateLimiterPolicyModel);
 			}
 		}
 
@@ -113,7 +141,7 @@ public abstract class CounterAbstractPolicy {
 	 * @param rule
 	 *            the rule
 	 */
-	protected void resetCounter(String ipOrSubjectGroup, Rule rule) {
+	protected void resetCounter(String ipOrSubjectGroup, final Rule rule) {
 		if (!rule.getCondition().getExpression().getPrimitiveValue().getValue()
 				.contains(ipOrSubjectGroup)) {
 			return;
@@ -124,8 +152,8 @@ public abstract class CounterAbstractPolicy {
 		if (ipOrSubjectGroup != null) {
 			ipOrSubjectGroup = ipOrSubjectGroup.trim();
 		}
-		RateLimiterPolicyModel limiterPolicyModel = getActiveRL().get(
-				ipOrSubjectGroup);
+		RateLimiterPolicyModel limiterPolicyModel = counterProvider
+				.getActiveRL(ipOrSubjectGroup);
 		if (limiterPolicyModel == null) {
 			return;
 		}
@@ -147,15 +175,16 @@ public abstract class CounterAbstractPolicy {
 		java.util.Date date = new java.util.Date();
 		// compare if current id after the reset date
 		if (date.after(new Date(timeToReset))) {
-			if (getActiveRL().containsKey(ipOrSubjectGroup)) {
+			if (counterProvider.cointainKeyInActiveRL(ipOrSubjectGroup)) {
 				// reset it
-				getActiveRL().get(ipOrSubjectGroup).setCount(1);
-				getActiveRL().get(ipOrSubjectGroup).setTimestamp(new Date());
-				getActiveRL().get(ipOrSubjectGroup).setActive(false);
-				getActiveRL().get(ipOrSubjectGroup).setEffectDuration(null);
-				getActiveRL().get(ipOrSubjectGroup).setEffect(null);
+				counterProvider.setRLCounter(ipOrSubjectGroup, 1);
+				counterProvider.setRLTimestamp(ipOrSubjectGroup, new Date());
+				counterProvider.setRLActive(ipOrSubjectGroup, false);
+				counterProvider.setRLEffectDuration(ipOrSubjectGroup, null);
+				counterProvider.setRLEffect(ipOrSubjectGroup, null);
 				// since reset remove it to activeEffects
-				getActiveEffects().remove(ipOrSubjectGroup);
+				counterProvider.removeActiveEffect(ipOrSubjectGroup);
+
 			}
 		}
 
@@ -184,8 +213,10 @@ public abstract class CounterAbstractPolicy {
 		limiterPolicyModel.setActive(true);
 		limiterPolicyModel.setEffect(currentlimiterStatus);
 
-		getActiveEffects().remove(currentSubjectOrGroup);
-		getActiveEffects().put(currentSubjectOrGroup, limiterPolicyModel);
+		counterProvider.removeActiveEffect(currentSubjectOrGroup);
+		counterProvider.addActiveEffect(currentSubjectOrGroup,
+				limiterPolicyModel);
+
 	}
 
 	// checks and reset effect
@@ -193,11 +224,7 @@ public abstract class CounterAbstractPolicy {
 	 * Check all effects.
 	 */
 	protected void checkAllEffects() {
-		for (Map.Entry<String, RateLimiterPolicyModel> entry : getActiveEffects()
-				.entrySet()) {
-			resetEffect(entry.getKey());
-		}
-
+		counterProvider.resetEffects();
 	}
 
 	/**
@@ -219,19 +246,19 @@ public abstract class CounterAbstractPolicy {
 		checkAllEffects();
 	}
 
-	private void updateData(List<Rule> rules) {
-		for (String data : getActiveRL().keySet()) {
-			RateLimiterPolicyModel model = getActiveRL().get(data);
+	private void updateData(final List<Rule> rules) {
+		for (String data : counterProvider.getActiveRLKeys()) {
+			RateLimiterPolicyModel model = counterProvider.getActiveRL(data);
 			Rule rule = null;
 			if (model != null) {
 				rule = findRule(rules, data);
 				if (rule != null) {
 					if (model.getRolloverPeriod() == null) {
-						getActiveRL().get(data).setRolloverPeriod(
+						counterProvider.setRLRolloverPeriod(data,
 								rule.getRolloverPeriod() * 1000);
 					}
 					if (model.getTimestamp() == null) {
-						getActiveRL().get(data).setTimestamp(new Date());
+						counterProvider.setRLTimestamp(data, new Date());
 					}
 					resetCounter(data, rule);
 				}
@@ -332,36 +359,6 @@ public abstract class CounterAbstractPolicy {
 		return null;
 	}
 
-	// remove form database if effect duration is < now
-	/**
-	 * Reset effect.
-	 * 
-	 * @param currentSubjectOrGroup
-	 *            the current subject or group
-	 */
-	protected void resetEffect(String currentSubjectOrGroup) {
-		if (currentSubjectOrGroup != null) {
-			currentSubjectOrGroup = currentSubjectOrGroup.trim();
-		}
-		if (getActiveEffects().containsKey(currentSubjectOrGroup)) {
-			RateLimiterPolicyModel limiterPolicyModel = getActiveEffects().get(
-					currentSubjectOrGroup);
-
-			// get current date
-			java.util.Date date = new java.util.Date();
-			if (date.after(new Date(limiterPolicyModel.getEffectDuration()))) {
-				// remove it
-				getActiveEffects().remove(currentSubjectOrGroup);
-
-				if (getActiveRL().containsKey(currentSubjectOrGroup)) {
-					getActiveRL().remove(currentSubjectOrGroup);
-					getActiveRL().put(currentSubjectOrGroup,
-							new RateLimiterPolicyModel());
-				}
-			}
-		}
-	}
-
 	// special variable
 	/**
 	 * Checks if is special var.
@@ -449,7 +446,8 @@ public abstract class CounterAbstractPolicy {
 		} else {
 			ipOrSubjectGroup = str;
 		}
-		RateLimiterPolicyModel model = getActiveRL().get(ipOrSubjectGroup);
+		RateLimiterPolicyModel model = counterProvider
+				.getActiveRL(ipOrSubjectGroup);
 
 		if (model == null) {
 			throw new Exception(ipOrSubjectGroup + " not in database");

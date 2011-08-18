@@ -22,9 +22,11 @@
   <modules>
     <module>RateLimiterService</module>
     <module>RateLimiterProvider</module>
+    <module>RateLimiterCounterProvider</module>
     <module>RateLimiterServiceConsumer</module>
     <module>RateLimiterServiceImpl</module>
     <module>RateLimiterErrorLibrary</module>
+    <module>RateLimiterCounterProviderImpl</module>
     <module>RateLimiterProviderImpl</module>
   </modules>
 </project>

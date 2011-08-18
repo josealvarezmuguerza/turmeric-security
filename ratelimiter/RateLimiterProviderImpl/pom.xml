@@ -104,6 +104,13 @@
 			<artifactId>GroupMembershipServiceConsumer</artifactId>
 			<version>${turmeric-policy-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.turmeric.ratelimiter</groupId>
+			<artifactId>RateLimiterCounterProvider</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
