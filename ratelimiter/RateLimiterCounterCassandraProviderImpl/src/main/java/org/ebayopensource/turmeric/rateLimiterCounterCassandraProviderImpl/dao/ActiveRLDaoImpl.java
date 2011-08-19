@@ -19,6 +19,13 @@ import org.ebayopensource.turmeric.utils.cassandra.dao.AbstractColumnFamilyDao;
 public class ActiveRLDaoImpl extends AbstractColumnFamilyDao<String, ActiveRL>
 		implements ActiveRLDao {
 
+	/**
+	 * Instantiates a new active rl dao impl.
+	 *
+	 * @param host the host
+	 * @param keySpace the key space
+	 * @param cf the cf
+	 */
 	public ActiveRLDaoImpl(final String host, final String keySpace, final String cf) {
 		super(host, keySpace, String.class, ActiveRL.class, cf);
 	}

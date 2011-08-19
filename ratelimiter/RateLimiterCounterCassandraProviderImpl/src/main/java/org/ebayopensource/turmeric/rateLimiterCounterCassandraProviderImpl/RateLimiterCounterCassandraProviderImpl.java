@@ -26,7 +26,6 @@ import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateL
 import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 import org.ebayopensource.turmeric.utils.ContextUtils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RateLimiterCounterCassandraProviderImpl.
  * 

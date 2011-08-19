@@ -27,6 +27,7 @@ import org.ebayopensource.turmeric.utils.config.exceptions.ConfigurationExceptio
 
 /**
  * A factory for creating RateLimiterCounterProvider objects.
+ * @author jamuguerza
  */
 public class RateLimiterCounterProviderFactory {
 	

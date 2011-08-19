@@ -17,6 +17,7 @@ import org.w3c.dom.Element;
 
 /**
  * The Class RateLimiterCounterProviderConfigManager.
+ * @author jamuguerza
  */
 public class RateLimiterCounterProviderConfigManager extends BaseConfigManager { 
 	

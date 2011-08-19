@@ -22,6 +22,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * The Class RateLimiterCounterProviderConfigMapper.
+ * @author jamuguerza
  */
 public class RateLimiterCounterProviderConfigMapper {
 

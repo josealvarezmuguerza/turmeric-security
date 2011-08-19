@@ -18,6 +18,8 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.RateLimiterCounterCassandraProviderImpl;
+import org.ebayopensource.turmeric.rateLimiterCounterMapProviderImpl.RateLimiterCounterMapProviderImpl;
 import org.ebayopensource.turmeric.security.v1.services.FindPoliciesRequest;
 import org.ebayopensource.turmeric.security.v1.services.FindPoliciesResponse;
 import org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest;
@@ -43,6 +45,12 @@ public class RateLimiterProviderImplTest extends
 
 	/** The provider. */
 	RateLimiterProviderImpl provider = null;
+	
+	/** The counter provider with java hashmap. */
+	RateLimiterCounterMapProviderImpl rlCounterMapProvider = null; 
+
+	/** The counter provider with java cassandra. */
+	RateLimiterCounterCassandraProviderImpl rlCounterCassandraProvider = null;
 	
 	/** The rate limit request. */
 	IsRateLimitedRequest rateLimitRequest = null;
@@ -99,6 +107,9 @@ public class RateLimiterProviderImplTest extends
 		basePolicyServiceConsumerMock = mock(BasePolicyServiceConsumer.class);
 		rateLimitRequest = new IsRateLimitedRequest();
 		provider = new RateLimiterProviderImpl();
+		rlCounterMapProvider= new RateLimiterCounterMapProviderImpl();
+		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
+		
 		// set mock
 		provider.setConsumer(basePolicyServiceConsumerMock);
 		// mock for BL

@@ -19,6 +19,13 @@ import org.ebayopensource.turmeric.utils.cassandra.dao.AbstractColumnFamilyDao;
 public class ActiveEffectDaoImpl extends AbstractColumnFamilyDao<String, ActiveEffect>
 		implements ActiveEffectDao {
 
+	/**
+	 * Instantiates a new active effect dao impl.
+	 *
+	 * @param host the host
+	 * @param keySpace the key space
+	 * @param cf the cf
+	 */
 	public ActiveEffectDaoImpl(final String host, final String keySpace, final String cf) {
 		super(host, keySpace, String.class, ActiveEffect.class, cf);
 	}

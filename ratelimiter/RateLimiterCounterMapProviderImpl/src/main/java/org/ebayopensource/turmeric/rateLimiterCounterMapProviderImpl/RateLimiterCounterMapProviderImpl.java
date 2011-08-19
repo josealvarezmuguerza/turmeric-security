@@ -49,7 +49,7 @@ public class RateLimiterCounterMapProviderImpl implements
 	 * 
 	 * @return the active effects
 	 */
-	private Map<String, RateLimiterPolicyModel> getActiveEffectsMap() {
+	private Map<String, RateLimiterPolicyModel> getActiveEffectMap() {
 		if (activeEffectMap == null) {
 			activeEffectMap = new HashMap<String, RateLimiterPolicyModel>();
 		}
@@ -89,7 +89,7 @@ public class RateLimiterCounterMapProviderImpl implements
 	 */
 	public void addActiveEffect(final String key,
 			final RateLimiterPolicyModel rateLimiterPolicyModel) {
-		getActiveEffectsMap().put(key, rateLimiterPolicyModel);
+		getActiveEffectMap().put(key, rateLimiterPolicyModel);
 	}
 
 	/*
@@ -99,7 +99,7 @@ public class RateLimiterCounterMapProviderImpl implements
 	 * RateLimiterCounterProvider#removeActiveEffect(java.lang.String)
 	 */
 	public void removeActiveEffect(final String key) {
-		getActiveEffectsMap().remove(key);
+		getActiveEffectMap().remove(key);
 	}
 
 	/*
@@ -203,7 +203,7 @@ public class RateLimiterCounterMapProviderImpl implements
 	 * RateLimiterCounterProvider#resetEffects()
 	 */
 	public void resetEffects() {
-		for (Map.Entry<String, RateLimiterPolicyModel> entry : getActiveEffectsMap()
+		for (Map.Entry<String, RateLimiterPolicyModel> entry : getActiveEffectMap()
 				.entrySet()) {
 			resetEffect(entry.getKey());
 		}
@@ -220,15 +220,15 @@ public class RateLimiterCounterMapProviderImpl implements
 		if (currentSubjectOrGroup != null) {
 			currentSubjectOrGroup = currentSubjectOrGroup.trim();
 		}
-		if (getActiveEffectsMap().containsKey(currentSubjectOrGroup)) {
-			RateLimiterPolicyModel limiterPolicyModel = getActiveEffectsMap()
+		if (getActiveEffectMap().containsKey(currentSubjectOrGroup)) {
+			RateLimiterPolicyModel limiterPolicyModel = getActiveEffectMap()
 					.get(currentSubjectOrGroup);
 
 			// get current date
 			java.util.Date date = new java.util.Date();
 			if (date.after(new Date(limiterPolicyModel.getEffectDuration()))) {
 				// remove it
-				getActiveEffectsMap().remove(currentSubjectOrGroup);
+				getActiveEffectMap().remove(currentSubjectOrGroup);
 
 				if (getActiveRLMap().containsKey(currentSubjectOrGroup)) {
 					getActiveRLMap().remove(currentSubjectOrGroup);

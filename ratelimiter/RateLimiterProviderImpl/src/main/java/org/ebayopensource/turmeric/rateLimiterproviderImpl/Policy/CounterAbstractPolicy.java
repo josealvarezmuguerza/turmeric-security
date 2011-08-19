@@ -55,9 +55,6 @@ public abstract class CounterAbstractPolicy {
 	public CounterAbstractPolicy() {
 		super();
 		getCounterProvider();
-		// // Initialised maps
-		// getActiveRL();
-		// getActiveEffects();
 	}
 
 	protected void getCounterProvider() {
@@ -125,13 +122,12 @@ public abstract class CounterAbstractPolicy {
 				counterProvider.incrementRLCounter(ipOrSubjectGroup);
 			} else {
 				counterProvider.setRLCounter(ipOrSubjectGroup, 1);
-				counterProvider.addActiveRL(ipOrSubjectGroup,
-						rateLimiterPolicyModel);
 			}
 		}
 
 	}
 
+	
 	// check if we need to reset counter base on RolloverPeriod
 	/**
 	 * Reset counter.

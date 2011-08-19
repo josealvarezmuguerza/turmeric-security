@@ -15,6 +15,7 @@ import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 
 /**
  * The Class RateLimiterPolicyModel.
+ * @author jamuguerza
  */
 public class RateLimiterPolicyModel {
 	private Date timestamp;
