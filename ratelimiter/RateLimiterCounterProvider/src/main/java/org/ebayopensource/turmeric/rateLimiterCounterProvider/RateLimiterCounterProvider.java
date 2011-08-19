@@ -15,7 +15,6 @@ import java.util.Set;
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
 import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 
-// TODO: Auto-generated Javadoc
 /**
  * A generic provider for adopters to implement their own rules for the Rate
  * Limiter service. This currently extends the interface for RateLimiterService
@@ -50,14 +49,6 @@ public interface RateLimiterCounterProvider {
 	 * @return the active rl
 	 */
 	public RateLimiterPolicyModel getActiveRL(String key);
-
-	/**
-	 * Cointain key in active effect.
-	 *
-	 * @param key the key
-	 * @return true, if cointain key in active effect
-	 */
-	public boolean cointainKeyInActiveEffect(String key);
 
 	/**
 	 * Adds the active effect.

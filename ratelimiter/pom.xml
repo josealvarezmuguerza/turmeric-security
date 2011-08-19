@@ -26,7 +26,8 @@
     <module>RateLimiterServiceConsumer</module>
     <module>RateLimiterServiceImpl</module>
     <module>RateLimiterErrorLibrary</module>
-    <module>RateLimiterCounterProviderImpl</module>
+    <module>RateLimiterCounterMapProviderImpl</module>
+    <module>RateLimiterCounterCassandraProviderImpl</module>
     <module>RateLimiterProviderImpl</module>
   </modules>
 </project>

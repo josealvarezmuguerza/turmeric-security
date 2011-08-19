@@ -12,5 +12,9 @@
 			<provider-name>rateLimiterCounterMapProviderImpl</provider-name>
 			<provider-impl-classname>org.ebayopensource.turmeric.rateLimiterCounterMapProviderImpl.RateLimiterCounterMapProviderImpl</provider-impl-classname>
 		</provider-config>
+		<provider-config>
+			<provider-name>rateLimiterCounterCassandraProviderImpl</provider-name>
+			<provider-impl-classname>org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.RateLimiterCounterCassandraProviderImpl</provider-impl-classname>
+		</provider-config>
 	</provider-config-list>
 </rate-limiter-counter-provider-config>
