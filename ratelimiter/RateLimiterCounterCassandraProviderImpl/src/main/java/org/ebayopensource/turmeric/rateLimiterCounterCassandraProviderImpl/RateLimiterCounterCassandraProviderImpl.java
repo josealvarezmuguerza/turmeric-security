@@ -42,6 +42,9 @@ public class RateLimiterCounterCassandraProviderImpl implements
 
 	/** The Constant cassandraPropFilePath. */
 	private static final String cassandraPropFilePath = "META-INF/config/cassandra/cassandra.properties";
+	
+	/** The Constant c_hostIp. */
+    private static final String c_clusterName = "cassandra-rl-cluster-name";
 
 	/** The Constant c_hostIp. */
 	private static final String c_hostIp = "cassandra-host-ip";
@@ -70,6 +73,8 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	/** The active effect cf. */
 	private static String activeEffectCF;
 
+    private static String clusterName;
+
 	{
 		getCassandraConfig();
 	}
@@ -78,8 +83,8 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * Instantiates a new rate limiter counter cassandra provider impl.
 	 */
 	public RateLimiterCounterCassandraProviderImpl() {
-		activeRLDao = new ActiveRLDaoImpl(host, keyspace, activeRLCF);
-		activeEffectDao = new ActiveEffectDaoImpl(host, keyspace,
+		activeRLDao = new ActiveRLDaoImpl(clusterName, host, keyspace, activeRLCF);
+		activeEffectDao = new ActiveEffectDaoImpl(clusterName, host, keyspace,
 				activeEffectCF);
 	}
 
@@ -97,6 +102,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 			Properties properties = new Properties();
 			try {
 				properties.load(inStream);
+				clusterName = properties.getProperty(c_clusterName);
 				host = (String) properties.get(c_hostIp) + ":"
 						+ (String) properties.get(c_rpcPort);
 

@@ -26,8 +26,8 @@ public class ActiveRLDaoImpl extends AbstractColumnFamilyDao<String, ActiveRL>
 	 * @param keySpace the key space
 	 * @param cf the cf
 	 */
-	public ActiveRLDaoImpl(final String host, final String keySpace, final String cf) {
-		super(host, keySpace, String.class, ActiveRL.class, cf);
+	public ActiveRLDaoImpl(final String clusterName, final String host, final String keySpace, final String cf) {
+		super(clusterName, host, keySpace, String.class, ActiveRL.class, cf);
 	}
 
 	

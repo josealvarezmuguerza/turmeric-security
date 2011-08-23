@@ -26,8 +26,8 @@ public class ActiveEffectDaoImpl extends AbstractColumnFamilyDao<String, ActiveE
 	 * @param keySpace the key space
 	 * @param cf the cf
 	 */
-	public ActiveEffectDaoImpl(final String host, final String keySpace, final String cf) {
-		super(host, keySpace, String.class, ActiveEffect.class, cf);
+	public ActiveEffectDaoImpl(final String clusterName, final String host, final String keySpace, final String cf) {
+		super(clusterName, host, keySpace, String.class, ActiveEffect.class, cf);
 	}
 
 }
