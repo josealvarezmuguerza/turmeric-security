@@ -45,11 +45,6 @@
 			<version>1.0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.turmeric.utils</groupId>
-			<artifactId>TurmericUtils</artifactId>
-			<version>1.0.0.1-SNAPSHOT</version>
-			<type>jar</type>
-		</dependency>
+	
 	</dependencies>
 </project>

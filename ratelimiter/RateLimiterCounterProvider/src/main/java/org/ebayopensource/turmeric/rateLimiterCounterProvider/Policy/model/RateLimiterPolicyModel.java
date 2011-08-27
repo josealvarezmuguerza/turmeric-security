@@ -14,6 +14,17 @@ import java.util.Date;
 import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 
 /**
+ *    column_metadata =
+ *  [
+ *  {column_name: 'timestamp', validation_class: UTF8Type},
+ *  {column_name: 'active', validation_class:UTF8Type},
+ *  {column_name: 'ip', validation_class: UTF8Type},
+ *  {column_name: 'effect', validation_class: UTF8Type},
+ *  {column_name: 'count', validation_class: LongType},
+ *  {column_name: 'effectDuration', validation_class: LongType},
+ *  {column_name: 'rolloverPeriod', validation_class: LongType}
+ *  ];
+ *  
  * The Class RateLimiterPolicyModel.
  * @author jamuguerza
  */

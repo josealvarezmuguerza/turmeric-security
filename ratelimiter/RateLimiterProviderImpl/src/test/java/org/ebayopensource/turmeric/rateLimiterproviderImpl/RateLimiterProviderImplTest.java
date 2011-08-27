@@ -15,6 +15,7 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
@@ -37,6 +38,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class RateLimiterProviderImplTest.
  */
@@ -101,15 +103,17 @@ public class RateLimiterProviderImplTest extends
 
 	/**
 	 * Sets the up.
+	 * @throws IOException 
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 		basePolicyServiceConsumerMock = mock(BasePolicyServiceConsumer.class);
 		rateLimitRequest = new IsRateLimitedRequest();
 		provider = new RateLimiterProviderImpl();
 		rlCounterMapProvider= new RateLimiterCounterMapProviderImpl();
 		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
-		
+
+	
 		// set mock
 		provider.setConsumer(basePolicyServiceConsumerMock);
 		// mock for BL
@@ -129,9 +133,11 @@ public class RateLimiterProviderImplTest extends
 
 	/**
 	 * Tear down.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@After
-	public void tearDown() {
+	public void tearDown() throws IOException {
 
 		try {
 			System.out.println("sleep");

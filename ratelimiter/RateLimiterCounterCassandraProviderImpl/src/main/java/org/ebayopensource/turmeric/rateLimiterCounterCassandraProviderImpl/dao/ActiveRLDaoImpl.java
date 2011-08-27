@@ -9,25 +9,26 @@
  *******************************************************************************/
 package org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao;
 
-import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.model.ActiveRL;
+import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
 import org.ebayopensource.turmeric.utils.cassandra.dao.AbstractColumnFamilyDao;
 
 
 /*
  *  @author jamuguerza
  */
-public class ActiveRLDaoImpl extends AbstractColumnFamilyDao<String, ActiveRL>
+public class ActiveRLDaoImpl extends AbstractColumnFamilyDao<String, RateLimiterPolicyModel>
 		implements ActiveRLDao {
 
 	/**
 	 * Instantiates a new active rl dao impl.
 	 *
+	 * @param clusterName the cluster name
 	 * @param host the host
 	 * @param keySpace the key space
 	 * @param cf the cf
 	 */
 	public ActiveRLDaoImpl(final String clusterName, final String host, final String keySpace, final String cf) {
-		super(clusterName, host, keySpace, String.class, ActiveRL.class, cf);
+		super(clusterName, host, keySpace, String.class, RateLimiterPolicyModel.class, cf);
 	}
 
 	
