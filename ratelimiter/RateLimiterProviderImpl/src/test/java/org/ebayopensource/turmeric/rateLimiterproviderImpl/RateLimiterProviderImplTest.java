@@ -33,6 +33,7 @@ import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 import org.ebayopensource.turmeric.security.v1.services.SubjectGroupType;
 import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 import org.ebayopensource.turmeric.services.policyservice.intf.gen.BasePolicyServiceConsumer;
+import org.ebayopensource.turmeric.utils.cassandra.CassandraServiceDataCleaner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -136,9 +137,10 @@ public class RateLimiterProviderImplTest extends
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
+	@SuppressWarnings("static-access")
 	@After
 	public void tearDown() throws IOException {
-
+		new CassandraServiceDataCleaner().cleanupDataDirectories();
 		try {
 			System.out.println("sleep");
 			Thread.sleep(20000);

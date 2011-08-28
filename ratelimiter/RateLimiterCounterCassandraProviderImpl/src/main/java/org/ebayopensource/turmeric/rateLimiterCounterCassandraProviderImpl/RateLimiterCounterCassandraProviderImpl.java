@@ -263,18 +263,25 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @param currentSubjectOrGroup the current subject or group
 	 */
 	private void resetEffect(String currentSubjectOrGroup) {
+		if (currentSubjectOrGroup != null) {
+			currentSubjectOrGroup = currentSubjectOrGroup.trim();
+		}
 
-		RateLimiterPolicyModel activeEffect =  activeEffectDao.find(currentSubjectOrGroup);
+		if (activeEffectDao.containsKey(currentSubjectOrGroup)) {
+			RateLimiterPolicyModel limiterPolicyModel = activeEffectDao
+					.find(currentSubjectOrGroup);
 
-		// get current date
-		java.util.Date date = new java.util.Date();
-		if (date.after(new Date(activeEffect.getEffectDuration()))) {
-			// remove it
-			activeEffectDao.delete(currentSubjectOrGroup);
+			// get current date
+			java.util.Date date = new java.util.Date();
+			if (date.after(new Date(limiterPolicyModel.getEffectDuration()))) {
+				// remove it
+				activeEffectDao.delete(currentSubjectOrGroup);
 
-			if (activeRLDao.containsKey(currentSubjectOrGroup)) {
-				activeRLDao.delete(currentSubjectOrGroup);
-				activeRLDao.save(currentSubjectOrGroup, new RateLimiterPolicyModel());
+				if (activeRLDao.containsKey(currentSubjectOrGroup)) {
+					activeRLDao.delete(currentSubjectOrGroup);
+					activeRLDao.save(currentSubjectOrGroup,
+							new RateLimiterPolicyModel());
+				}
 			}
 		}
 	}
