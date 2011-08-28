@@ -48,6 +48,16 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.ebayopensource.turmeric.impl</groupId>
+			<artifactId>RateLimiterCounterMapProviderImpl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.turmeric.impl</groupId>
+			<artifactId>RateLimiterCounterCassandraProviderImpl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.ebayopensource.turmeric.errorlib</groupId>
 			<artifactId>RateLimiterErrorLibrary</artifactId>
 			<version>${project.version}</version>
@@ -82,7 +92,6 @@
 			<artifactId>SecurityCommon</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
 			<artifactId>PolicyServiceConsumer</artifactId>
@@ -166,6 +175,16 @@
 					<version>${project.version}</version>
 					<classifier>cobertura</classifier>
 				</dependency>
+				<dependency>
+			                <groupId>org.ebayopensource.turmeric.impl</groupId>
+			                <artifactId>RateLimiterCounterMapProviderImpl</artifactId>
+			                <version>${project.version}</version>
+		                </dependency>
+		                <dependency>
+			                <groupId>org.ebayopensource.turmeric.impl</groupId>
+			                <artifactId>RateLimiterCounterCassandraProviderImpl</artifactId>
+			                <version>${project.version}</version>
+		                </dependency>
 			</dependencies>
 		</profile>
 	</profiles>
