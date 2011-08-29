@@ -108,13 +108,17 @@ public class RateLimiterProviderImplTest extends
 	 */
 	@SuppressWarnings("static-access")
 	@Before
-	public void setUp() throws IOException {
+	public void setUp() {
 		basePolicyServiceConsumerMock = mock(BasePolicyServiceConsumer.class);
 		rateLimitRequest = new IsRateLimitedRequest();
 		provider = new RateLimiterProviderImpl();
 		rlCounterMapProvider= new RateLimiterCounterMapProviderImpl();
 		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
-		new CassandraServiceDataCleaner().cleanupDataDirectories();
+		try{
+			new CassandraServiceDataCleaner().cleanupDataDirectories();
+		} catch (IOException  e) {
+			//	ignore it
+		}
 
 	
 		// set mock
