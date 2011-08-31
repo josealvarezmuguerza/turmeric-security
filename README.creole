@@ -1,12 +1,10 @@
 This folder is to host the security component.  This component contains
-* SecurityFramework library
 * AuthenticationService
 * AuthorizationService
-* BlacklistService
 * GroupMembershipService
-* RateLimiterService
-* WhitelistService
 * PolicyEnforcementService
+* RateLimiterService
+* SecurityError Library
 
 =Building from Source at the Command Line=
 
@@ -26,10 +24,10 @@ the command line.
 ## Optionally you may store the settings.xml in another directory and specify -s <pathtosettings.xml> as part of your build.
 ## For Linux users this is under your home directory, in a hidden directory called .m2.
 ## For more information about settings.xml please visit the [[http://maven.apache.org/settings.html|Maven Reference page]].
-# Clone a copy of the Runtime source code. {{{git clone git://github.com/ebayopensource/turmeric-security.git}}}
+# Clone a copy of the Security source code. {{{git clone git://github.com/ebayopensource/turmeric-security.git}}}
 # Make sure you have an active Internet connection, which the build requires to download all required dependencies.
 # Once you have checked out the files, change to the directory where  you checked the files out, and you can start a build by running:{{{mvn clean install}}}
 # Unit tests run during the build. To skip these tests, use the following command instead:{{{mvn clean install -DskipTests=true}}}
 
-The build takes 10 to 15 minutes.
+The build takes 30 to 40 minutes.
 
