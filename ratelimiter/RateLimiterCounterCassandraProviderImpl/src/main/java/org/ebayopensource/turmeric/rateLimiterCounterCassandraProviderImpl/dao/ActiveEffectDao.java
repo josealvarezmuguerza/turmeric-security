@@ -9,11 +9,9 @@
  *******************************************************************************/
 package org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao;
 
-import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
 /*
  *  * @author jamuguerza
  */
 public interface ActiveEffectDao extends BaseDao {
-	  public void save(String key, RateLimiterPolicyModel  activeEffect);
-	  public RateLimiterPolicyModel find(String key);
+	  
 }
