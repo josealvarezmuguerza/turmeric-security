@@ -15,9 +15,12 @@ import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.cassandra.config.DatabaseDescriptor;
+import org.apache.cassandra.io.util.FileUtils;
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.RateLimiterCounterCassandraProviderImpl;
 import org.ebayopensource.turmeric.rateLimiterCounterMapProviderImpl.RateLimiterCounterMapProviderImpl;
@@ -33,13 +36,12 @@ import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 import org.ebayopensource.turmeric.security.v1.services.SubjectGroupType;
 import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 import org.ebayopensource.turmeric.services.policyservice.intf.gen.BasePolicyServiceConsumer;
-import org.ebayopensource.turmeric.utils.cassandra.CassandraServiceDataCleaner;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RateLimiterProviderImplTest.
  */
@@ -48,31 +50,32 @@ public class RateLimiterProviderImplTest extends
 
 	/** The provider. */
 	RateLimiterProviderImpl provider = null;
-	
+
 	/** The counter provider with java hashmap. */
-	RateLimiterCounterMapProviderImpl rlCounterMapProvider = null; 
+	RateLimiterCounterMapProviderImpl rlCounterMapProvider = null;
 
 	/** The counter provider with java cassandra. */
 	RateLimiterCounterCassandraProviderImpl rlCounterCassandraProvider = null;
-	
+
 	/** The rate limit request. */
 	IsRateLimitedRequest rateLimitRequest = null;
 	// mock
 	/** The base policy service consumer mock. */
 	BasePolicyServiceConsumer basePolicyServiceConsumerMock;
-
+	
 	/**
 	 * The Class IsPolicyType.
 	 */
 	static class IsPolicyType extends ArgumentMatcher<FindPoliciesRequest> {
-		
+
 		/** The type. */
 		String type;
 
 		/**
 		 * Instantiates a new checks if is policy type.
-		 *
-		 * @param type the type
+		 * 
+		 * @param type
+		 *            the type
 		 */
 		public IsPolicyType(String type) {
 			this.type = type;
@@ -102,25 +105,31 @@ public class RateLimiterProviderImplTest extends
 		}
 	}
 
+	
+	@BeforeClass
+	public static void setupCassandraConfigFile(){
+		System.setProperty("cassandra.config", "META-INF/config/cassandra/cassandra.yaml");
+
+	}
 	/**
 	 * Sets the up.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
-	@SuppressWarnings("static-access")
 	@Before
 	public void setUp() {
+		try {
+			cleanupData();
+		} catch (IOException e) {
+			// ignore it
+		}
 		basePolicyServiceConsumerMock = mock(BasePolicyServiceConsumer.class);
 		rateLimitRequest = new IsRateLimitedRequest();
 		provider = new RateLimiterProviderImpl();
-		rlCounterMapProvider= new RateLimiterCounterMapProviderImpl();
+		rlCounterMapProvider = new RateLimiterCounterMapProviderImpl();
 		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
-		try{
-			new CassandraServiceDataCleaner().cleanupDataDirectories();
-		} catch (IOException  e) {
-			//	ignore it
-		}
 
-	
+		
 		// set mock
 		provider.setConsumer(basePolicyServiceConsumerMock);
 		// mock for BL
@@ -138,15 +147,36 @@ public class RateLimiterProviderImplTest extends
 				.thenReturn(super.generateRLFindPoliciesResponse());
 	}
 
+	/*
+	 * DatabaseDescriptor.getAllDataFileLocations() calls the static method
+	 * getStorageConfigURL which attempts to load a cassandra.yaml file. So we
+	 * need a sample of cassandra.yaml under test resource folder
+	 * Similar issue as https://issues.apache.org/jira/browse/CASSANDRA-2694
+	 */
+	private void cleanupData() throws IOException {
+		String[] allDataFileLocations = DatabaseDescriptor
+				.getAllDataFileLocations();
+		for (String s : allDataFileLocations) {
+			File dirFile = new File(s);
+			if (dirFile.exists() && dirFile.isDirectory()) {
+				FileUtils.delete(dirFile.listFiles());
+			}
+		}
+	}
+
 	/**
 	 * Tear down.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	@SuppressWarnings("static-access")
 	@After
 	public void tearDown() throws IOException {
-		new CassandraServiceDataCleaner().cleanupDataDirectories();
+		try {
+			cleanupData();
+		} catch (IOException e) {
+			// ignore it
+		}
 		try {
 			System.out.println("sleep");
 			Thread.sleep(20000);
@@ -253,8 +283,8 @@ public class RateLimiterProviderImplTest extends
 				basePolicyServiceConsumerMock
 						.findPolicies(argThat(new IsPolicyType(RL))))
 				.thenReturn(policyResponse2);
-		assertEquals(policyResponse2, basePolicyServiceConsumerMock
-				.findPolicies(policyRequest2));
+		assertEquals(policyResponse2,
+				basePolicyServiceConsumerMock.findPolicies(policyRequest2));
 	}
 
 	/**
@@ -279,8 +309,8 @@ public class RateLimiterProviderImplTest extends
 				basePolicyServiceConsumerMock
 						.findPolicies(argThat(new IsPolicyType(WHITELIST))))
 				.thenReturn(policyResponse2);
-		assertEquals(policyResponse2, basePolicyServiceConsumerMock
-				.findPolicies(policyRequest2));
+		assertEquals(policyResponse2,
+				basePolicyServiceConsumerMock.findPolicies(policyRequest2));
 	}
 
 	/**
@@ -310,8 +340,8 @@ public class RateLimiterProviderImplTest extends
 				.thenReturn(policyResponse);
 
 		// test it
-		assertEquals(policyResponse, basePolicyServiceConsumerMock
-				.findPolicies(policyRequest));
+		assertEquals(policyResponse,
+				basePolicyServiceConsumerMock.findPolicies(policyRequest));
 
 	}
 
