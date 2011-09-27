@@ -9,25 +9,25 @@
 	<parent>
 		<groupId>org.ebayopensource.turmeric</groupId>
 		<artifactId>turmeric-project</artifactId>
-		<version>1.1.0.2-SNAPSHOT</version>
-		<relativePath>../turmeric-project/pom.xml</relativePath>
+		<version>1.1.0.3</version>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.security</groupId>
 	<artifactId>turmeric-security-parent</artifactId>
 	<version>1.0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<turmeric-runtime-version>1.0.1.0-SNAPSHOT</turmeric-runtime-version>
+		<turmeric-runtime-version>1.0.0</turmeric-runtime-version>
 		<turmeric-policy-version>1.0.0-Beta-RC2</turmeric-policy-version>
 		<turmeric-monitoring-version>1.0.0.4-SNAPSHOT</turmeric-monitoring-version>
 		<turmeric-jpa-utils-version>1.0.0-Beta</turmeric-jpa-utils-version>
 		<cobertura.version>1.9.2</cobertura.version>
 	</properties>
-	<scm>
-		<connection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/security</connection>
-		<developerConnection>scm:svn:http://www.ebayopensource.org/svn/turmeric/soa-platform/trunk/security</developerConnection>
-	</scm>
-	<build>
+	  <scm>
+	    <connection>scm:git:git@github.com:ebayopensource/turmeric-security.git</connection>
+	    <developerConnection>scm:git:git@github.com:ebayopensource/turmeric-security.git</developerConnection>
+	    <url>scm:git:git@github.com:ebayopensource/turmeric-security.git</url>
+	  </scm>
+ 	<build>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -38,15 +38,6 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<tagBase>http://www.ebayopensource.org/svn/turmeric/soa-platform/tags</tagBase>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
