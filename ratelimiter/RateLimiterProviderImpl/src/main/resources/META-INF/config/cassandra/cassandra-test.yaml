@@ -7,7 +7,7 @@
 
 # The name of the cluster. This is mainly used to prevent machines in
 # one logical cluster from joining another.
-cluster_name: 'TurmericCluster'
+cluster_name: 'TestCluster'
 
 # You should always specify InitialToken when setting up a production
 # cluster for the first time, and often when adding capacity later.
@@ -382,4 +382,4 @@ encryption_options:
     keystore_password: cassandra
     truststore: conf/.truststore
     truststore_password: cassandra
-
+ 

@@ -52,10 +52,10 @@ public class RateLimiterProviderImplTest extends
 	RateLimiterProviderImpl provider = null;
 
 	/** The counter provider with java hashmap. */
-	RateLimiterCounterMapProviderImpl rlCounterMapProvider = null;
+	static RateLimiterCounterMapProviderImpl rlCounterMapProvider = null;
 
 	/** The counter provider with java cassandra. */
-	RateLimiterCounterCassandraProviderImpl rlCounterCassandraProvider = null;
+	static  RateLimiterCounterCassandraProviderImpl rlCounterCassandraProvider = null;
 
 	/** The rate limit request. */
 	IsRateLimitedRequest rateLimitRequest = null;
@@ -107,9 +107,11 @@ public class RateLimiterProviderImplTest extends
 
 	
 	@BeforeClass
-	public static void setupCassandraConfigFile(){
-		System.setProperty("cassandra.config", "META-INF/config/cassandra/cassandra.yaml");
-
+	public static void setupCassandraConfigFile() throws Exception {
+		System.setProperty("log4j.configuration", "META-INF/config/cassandra/log4j.properties");
+		System.setProperty("cassandra.config", "META-INF/config/cassandra/cassandra-test.yaml");
+		rlCounterMapProvider = new RateLimiterCounterMapProviderImpl();
+		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
 	}
 	/**
 	 * Sets the up.
@@ -126,8 +128,7 @@ public class RateLimiterProviderImplTest extends
 		basePolicyServiceConsumerMock = mock(BasePolicyServiceConsumer.class);
 		rateLimitRequest = new IsRateLimitedRequest();
 		provider = new RateLimiterProviderImpl();
-		rlCounterMapProvider = new RateLimiterCounterMapProviderImpl();
-		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
+
 
 		
 		// set mock
