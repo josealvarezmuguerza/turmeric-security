@@ -11,15 +11,16 @@ package org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao;
 
 import java.util.Set;
 
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.model.RateLimiterGenericsPolicyModel;
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
 
 /*
  *  @author jamuguerza
  */
-public interface BaseDao {
-		  public void delete(String key);
-		  public Set<String> getKeys();
-		  public boolean  containsKey(String key);
-		  public void save(String key, RateLimiterPolicyModel  activeEffect);
-		  public RateLimiterPolicyModel find(String key);		  
+public interface BaseDao<K> {
+		  public void delete(K key);
+		  public Set<K> getKeys();
+		  public boolean  containsKey(K key);
+		  public void save(K key, RateLimiterGenericsPolicyModel<?>  activeEffect);
+		  public RateLimiterGenericsPolicyModel<?> find(K key);		  
 }

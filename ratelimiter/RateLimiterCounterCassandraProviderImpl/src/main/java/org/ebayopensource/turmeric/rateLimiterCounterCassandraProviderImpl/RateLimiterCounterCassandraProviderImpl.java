@@ -19,6 +19,7 @@ import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.A
 import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.ActiveEffectDaoImpl;
 import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.ActiveRLDao;
 import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.ActiveRLDaoImpl;
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.model.RateLimiterGenericsPolicyModel;
 
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider;
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
@@ -26,6 +27,7 @@ import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 import org.ebayopensource.turmeric.utils.ContextUtils;
 import org.ebayopensource.turmeric.utils.cassandra.service.CassandraManager;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class RateLimiterCounterCassandraProviderImpl.
  * 
@@ -35,10 +37,10 @@ public class RateLimiterCounterCassandraProviderImpl implements
 		RateLimiterCounterProvider {
 
 	/** The active rl dao. */
-	private final ActiveRLDao activeRLDao;
+	private final ActiveRLDao<String> activeRLDao;
 	
 	/** The active effect dao. */
-	private final ActiveEffectDao activeEffectDao;
+	private final ActiveEffectDao<String> activeEffectDao;
 
 	/** The Constant cassandraPropFilePath. */
 	private static final String cassandraPropFilePath = "META-INF/config/cassandra/cassandra.properties";
@@ -48,6 +50,9 @@ public class RateLimiterCounterCassandraProviderImpl implements
 
 	/** The Constant c_hostIp. */
 	private static final String c_hostIp = "cassandra-host-ip";
+	
+	/** The Constant c_embedded. */
+	private static final String c_embedded = "embedded";
 	
 	/** The Constant c_rpcPort. */
 	private static final String c_rpcPort = "cassandra-rpc-port";
@@ -73,20 +78,25 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	/** The active effect cf. */
 	private static String activeEffectCF;
 
+    /** The cluster name. */
     private static String clusterName;
 
-	{
-		CassandraManager.initialize();
-		getCassandraConfig();
-	}
-
+    /** The embedded. */
+    private static String embedded;
+    
 	/**
 	 * Instantiates a new rate limiter counter cassandra provider impl.
 	 */
 	public RateLimiterCounterCassandraProviderImpl() {
-		activeRLDao = new ActiveRLDaoImpl(clusterName, host, keyspace, activeRLCF);
-		activeEffectDao = new ActiveEffectDaoImpl(clusterName, host, keyspace,
-				activeEffectCF);
+		getCassandraConfig();
+		
+		if (Boolean.valueOf(embedded)) {
+			CassandraManager.initialize();
+		}
+		
+		activeRLDao = new ActiveRLDaoImpl<String>(clusterName, host, keyspace, activeRLCF, String.class);
+		activeEffectDao = new ActiveEffectDaoImpl<String>(clusterName, host, keyspace,
+				activeEffectCF, String.class);
 	}
 
 	/**
@@ -112,6 +122,8 @@ public class RateLimiterCounterCassandraProviderImpl implements
 				activeRLCF = (String) properties.get(c_activeRL_cf);
 				activeEffectCF = (String) properties.get(c_activeEffect_cf);
 
+				embedded = (String) properties.get(c_embedded);
+				
 			} catch (IOException e) {
 				// ignore
 			} finally {
@@ -136,7 +148,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 */
 	public void addActiveRL(final String key,
 			final RateLimiterPolicyModel rateLimiterPolicyModel) {
-		activeRLDao.save(key,  rateLimiterPolicyModel);
+		activeRLDao.save(key,  (RateLimiterGenericsPolicyModel<?>) rateLimiterPolicyModel);
 	}
 
 	/* (non-Javadoc)
@@ -151,7 +163,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 */
 	public void addActiveEffect(final String key,
 			final RateLimiterPolicyModel rateLimiterPolicyModel) {
-		activeEffectDao.save(key,  rateLimiterPolicyModel);
+		activeEffectDao.save(key,  (RateLimiterGenericsPolicyModel<?>) rateLimiterPolicyModel);
 	}
 
 	/* (non-Javadoc)
@@ -165,7 +177,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#incrementRLCounter(java.lang.String)
 	 */
 	public void incrementRLCounter(final String key) {
-		RateLimiterPolicyModel activeRL = activeRLDao.find(key);
+		RateLimiterGenericsPolicyModel<?> activeRL = activeRLDao.find(key);
 		if (activeRL != null) {
 			activeRL.setCount(activeRL.getCount() + 1);
 			activeRLDao.save(key, activeRL);
@@ -176,7 +188,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#setRLCounter(java.lang.String, int)
 	 */
 	public void setRLCounter(final String key, int i) {
-		RateLimiterPolicyModel activeRL = getOrCreateActiveRL(key);
+		RateLimiterGenericsPolicyModel<?> activeRL = getOrCreateActiveRL(key);
 		activeRL.setCount(i);
 		activeRLDao.save(key, activeRL);
 	}
@@ -185,7 +197,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#setRLTimestamp(java.lang.String, java.util.Date)
 	 */
 	public void setRLTimestamp(final String key, final Date date) {
-		RateLimiterPolicyModel activeRL = getOrCreateActiveRL(key);
+		RateLimiterGenericsPolicyModel<?> activeRL = getOrCreateActiveRL(key);
 		activeRL.setTimestamp(date);
 		activeRLDao.save(key, activeRL);
 	}
@@ -194,7 +206,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#setRLActive(java.lang.String, boolean)
 	 */
 	public void setRLActive(final String key, boolean b) {
-		RateLimiterPolicyModel activeRL = getOrCreateActiveRL(key);
+		RateLimiterGenericsPolicyModel<?> activeRL = getOrCreateActiveRL(key);
 		activeRL.setActive(b);
 		activeRLDao.save(key, activeRL);
 	}
@@ -203,7 +215,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#setRLEffectDuration(java.lang.String, java.lang.Long)
 	 */
 	public void setRLEffectDuration(final String key, final Long duration) {
-		RateLimiterPolicyModel activeRL = getOrCreateActiveRL(key);
+		RateLimiterGenericsPolicyModel<?> activeRL = getOrCreateActiveRL(key);
 		activeRL.setEffectDuration(duration);
 		activeRLDao.save(key, activeRL);
 	}
@@ -212,7 +224,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#setRLRolloverPeriod(java.lang.String, java.lang.Long)
 	 */
 	public void setRLRolloverPeriod(final String key, final Long rollover) {
-		RateLimiterPolicyModel activeRL = getOrCreateActiveRL(key);
+		RateLimiterGenericsPolicyModel<?> activeRL = getOrCreateActiveRL(key);
 		activeRL.setRolloverPeriod(rollover);
 		activeRLDao.save(key, activeRL);
 	}
@@ -221,7 +233,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#setRLEffect(java.lang.String, org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus)
 	 */
 	public void setRLEffect(final String key, final RateLimiterStatus effect) {
-		RateLimiterPolicyModel activeRL = getOrCreateActiveRL(key);
+		RateLimiterGenericsPolicyModel<?> activeRL = getOrCreateActiveRL(key);
 		activeRL.setEffect(effect);
 		activeRLDao.save(key, activeRL);
 	}
@@ -232,10 +244,10 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	 * @param key the key
 	 * @return the or create active rl
 	 */
-	private RateLimiterPolicyModel getOrCreateActiveRL(String key) {
-		RateLimiterPolicyModel activeRL =  activeRLDao.find(key);
+	private RateLimiterGenericsPolicyModel<?> getOrCreateActiveRL(String key) {
+		RateLimiterGenericsPolicyModel<?> activeRL =  activeRLDao.find(key);
 		if (activeRL == null) {
-			activeRL = new RateLimiterPolicyModel();
+			activeRL = new RateLimiterGenericsPolicyModel("");
 		}
 		return activeRL;
 	}
@@ -243,7 +255,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 	/* (non-Javadoc)
 	 * @see org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider#getActiveRL(java.lang.String)
 	 */
-	public RateLimiterPolicyModel getActiveRL(final String key) {
+	public RateLimiterGenericsPolicyModel<?> getActiveRL(final String key) {
 		return activeRLDao.find(key);
 	}
 
@@ -268,7 +280,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 		}
 
 		if (activeEffectDao.containsKey(currentSubjectOrGroup)) {
-			RateLimiterPolicyModel limiterPolicyModel = activeEffectDao
+			RateLimiterGenericsPolicyModel<?> limiterPolicyModel = activeEffectDao
 					.find(currentSubjectOrGroup);
 
 			// get current date
@@ -280,7 +292,7 @@ public class RateLimiterCounterCassandraProviderImpl implements
 				if (activeRLDao.containsKey(currentSubjectOrGroup)) {
 					activeRLDao.delete(currentSubjectOrGroup);
 					activeRLDao.save(currentSubjectOrGroup,
-							new RateLimiterPolicyModel());
+							new RateLimiterGenericsPolicyModel(""));
 				}
 			}
 		}
