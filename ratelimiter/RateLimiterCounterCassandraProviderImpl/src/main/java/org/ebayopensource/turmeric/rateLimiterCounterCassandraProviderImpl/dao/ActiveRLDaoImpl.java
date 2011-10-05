@@ -9,7 +9,6 @@
  *******************************************************************************/
 package org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao;
 
-import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.model.RateLimiterGenericsPolicyModel;
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
 import org.ebayopensource.turmeric.utils.cassandra.dao.AbstractColumnFamilyDao;
 
@@ -17,8 +16,8 @@ import org.ebayopensource.turmeric.utils.cassandra.dao.AbstractColumnFamilyDao;
 /*
  *  @author jamuguerza
  */
-public class ActiveRLDaoImpl<K> extends AbstractColumnFamilyDao<K, RateLimiterGenericsPolicyModel>
-		implements ActiveRLDao<K> {
+public class ActiveRLDaoImpl extends AbstractColumnFamilyDao<String, RateLimiterPolicyModel>
+		implements ActiveRLDao {
 
 	/**
 	 * Instantiates a new active rl dao impl.
@@ -28,13 +27,13 @@ public class ActiveRLDaoImpl<K> extends AbstractColumnFamilyDao<K, RateLimiterGe
 	 * @param keySpace the key space
 	 * @param cf the cf
 	 */
-	public ActiveRLDaoImpl(final String clusterName, final String host, final String keySpace, final String cf,  final Class<K> kTypeClass) {
-		super(clusterName, host, keySpace, kTypeClass, RateLimiterGenericsPolicyModel.class, cf);
+	public ActiveRLDaoImpl(final String clusterName, final String host, final String keySpace, final String cf,  final Class<String> kTypeClass) {
+		super(clusterName, host, keySpace, kTypeClass, RateLimiterPolicyModel.class, cf);
 	}
 
-	public void save(final K key, final RateLimiterGenericsPolicyModel<?> model) {
-		super.save(key, model);
-	}	
-	
+//	public void save(final String key, final RateLimiterPolicyModel model) {
+//		super.save(key, model);
+//	}
+//	
 
 }

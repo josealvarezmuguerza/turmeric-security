@@ -36,7 +36,7 @@ public class RateLimiterPolicyModel {
 	private int count;
 	private Long effectDuration;
 	private Long rolloverPeriod;
-
+	
 	/**
 	 * Gets the timestamp.
 	 *

@@ -22,7 +22,12 @@ import java.util.List;
 import org.apache.cassandra.config.DatabaseDescriptor;
 import org.apache.cassandra.io.util.FileUtils;
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
+import org.ebayopensource.turmeric.manager.cassandra.server.CassandraTestManager;
 import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.RateLimiterCounterCassandraProviderImpl;
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.ActiveEffectDao;
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.ActiveEffectDaoImpl;
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.ActiveRLDao;
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao.ActiveRLDaoImpl;
 import org.ebayopensource.turmeric.rateLimiterCounterMapProviderImpl.RateLimiterCounterMapProviderImpl;
 import org.ebayopensource.turmeric.security.v1.services.FindPoliciesRequest;
 import org.ebayopensource.turmeric.security.v1.services.FindPoliciesResponse;
@@ -110,8 +115,13 @@ public class RateLimiterProviderImplTest extends
 	public static void setupCassandraConfigFile() throws Exception {
 		System.setProperty("log4j.configuration", "META-INF/config/cassandra/log4j.properties");
 		System.setProperty("cassandra.config", "META-INF/config/cassandra/cassandra-test.yaml");
-		rlCounterMapProvider = new RateLimiterCounterMapProviderImpl();
-		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
+		CassandraTestManager.initialize();
+		
+		ActiveRLDao activeRLDao = new ActiveRLDaoImpl("TestCluster", "127.0.1.22", "rl", "activeRL", String.class);
+		ActiveEffectDao activeEffectDao = new ActiveEffectDaoImpl("TestCluster", "127.0.1.22", "rl", "activeEffect", String.class);
+		
+//		rlCounterMapProvider = new RateLimiterCounterMapProviderImpl();
+//		rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
 	}
 	/**
 	 * Sets the up.

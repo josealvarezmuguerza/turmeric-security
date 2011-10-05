@@ -12,6 +12,6 @@ package org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.dao;
 /*
  *  @author jamuguerza
  */
-public interface ActiveRLDao<K> extends BaseDao<K> {
+public interface ActiveRLDao extends BaseDao {
 
 }
