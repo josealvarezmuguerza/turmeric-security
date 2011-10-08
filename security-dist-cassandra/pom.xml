@@ -14,7 +14,7 @@
 		<version>1.0.1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.security</groupId>
-	<artifactId>security-dist-mysql</artifactId>
+	<artifactId>security-dist-cassandra</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
@@ -79,7 +79,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
-			<artifactId>RateLimiterCounterMapProviderImpl</artifactId>
+			<artifactId>RateLimiterCounterCassandraProviderImpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
