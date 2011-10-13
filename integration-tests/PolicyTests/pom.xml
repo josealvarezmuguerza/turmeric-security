@@ -6,9 +6,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.ebayopensource.turmeric.policy</groupId>
-		<artifactId>turmeric-policy-integration-tests-parent</artifactId>
-		<version>1.0.0.4-SNAPSHOT</version>
+		<groupId>org.ebayopensource.turmeric.security</groupId>
+   	        <artifactId>turmeric-security-integration-test-parent</artifactId>
+		<version>1.0.1.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.policy.tests</groupId>
@@ -40,27 +40,27 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy</groupId>
 			<artifactId>turmeric-policy-provider</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>PolicyServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
 			<artifactId>turmeric-security-provider</artifactId>
-			<version>${turmeric-security-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
 			<artifactId>SecurityCommon</artifactId>
-			<version>${turmeric-security-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
 			<artifactId>PolicyServiceConsumer</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy.tests</groupId>
