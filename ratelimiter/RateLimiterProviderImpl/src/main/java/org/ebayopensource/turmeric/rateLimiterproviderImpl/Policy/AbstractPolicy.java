@@ -88,10 +88,8 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 				// add to subject list
 				if (!requestSubjects.contains(st.getValue().trim())){
 					requestSubjects.add(st.getValue().trim());
-				// add to group list
-					if("userid".equals(st.getDomain())){
-						processIncrementSubjectOrGroup(st.getValue().trim());
-					}
+					// add to group list
+					processIncrementSubjectOrGroup(st.getValue().trim());
 				}
 			}
 
