@@ -140,6 +140,11 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.ebayopensource.turmeric.groupmembership</groupId>
+			<artifactId>turmeric-groupmembership-provider</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.ebayopensource.turmeric.runtime.tests</groupId>
 			<artifactId>jetty-common-tests</artifactId>
 			<version>1.0.1.0-SNAPSHOT</version>
