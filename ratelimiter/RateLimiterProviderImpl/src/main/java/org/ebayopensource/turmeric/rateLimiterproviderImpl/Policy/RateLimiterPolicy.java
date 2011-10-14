@@ -93,7 +93,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 
 	private IsRateLimitedResponse checkRateLimiter(
 			IsRateLimitedResponse response, IsRateLimitedRequest request,
-			List<String> subjects, List<String> subjectGroups) throws Exception {
+			List<String> reqSubjects, List<String> reqSubjectGroups) throws Exception {
 		// we only allow ok
 		if (RateLimiterStatus.SERVE_OK.equals(response.getStatus())) {
 
@@ -106,21 +106,38 @@ public class RateLimiterPolicy extends AbstractPolicy {
 					if (isPolicySubjectGroupValid(p)) {
 						// adds resource for service counts
 						super.createServiceCounters(p);
-
 						for (SubjectGroup subjectGroup : p.getTarget()
 								.getSubjects().getSubjectGroup()) {
 							// we only check attributes for Inclusion
 							if (!org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.util.Utils
 									.isExclusion(subjectGroup)) {
-								if (subjectGroups.contains(subjectGroup
-										.getSubjectGroupName().trim())) {
-									// checkRateLimiter(response, request,
-									// subjects,
-									// domain);
-									response = evaluateAttribute(response,
-											subjectGroup.getSubjectGroupName(),
-											p);
+							
+								
+								for (Subject subjectPolicy : subjectGroup.getSubject()){
+									if(reqSubjects.contains(subjectPolicy.getSubjectName())){
+										response = evaluateAttribute(response,
+												subjectGroup.getSubjectGroupName(),
+												p);
+										
+										if (RateLimiterStatus.BLOCK
+												.equals(response.getStatus())) {
+											super.addToActiveEffects(currentSubjectOrGroup,
+													currentRule, currentlimiterStatus);
+											return response;
+										}
+										
+									}
 								}
+								
+//								if (reqSubjectGroups.contains(subjectGroup
+//										.getSubjectGroupName().trim())) {
+//									// checkRateLimiter(response, request,
+//									// subjects,
+//									// domain);
+//									response = evaluateAttribute(response,
+//											subjectGroup.getSubjectGroupName(),
+//											p);
+//								}
 							}
 
 						}
@@ -129,7 +146,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 							// we only check attributes for Inclusion
 							if (!org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.util.Utils
 									.isExclusion(subject)) {
-								if (subjects.contains(subject.getSubjectName()
+								if (reqSubjects.contains(subject.getSubjectName()
 										.trim())) {
 									// checkRateLimiter(response, request,
 									// subjects,
