@@ -82,6 +82,7 @@
 		<module>policy-enforcement</module>
 		<module>ratelimiter</module>
 		<module>security-war</module>
+		<module>group-membership</module>
 	</modules>
 	<profiles>
 		<profile>
