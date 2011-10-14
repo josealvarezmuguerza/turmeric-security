@@ -21,10 +21,6 @@
   <name>Rate Limiter :: Rate Limiter Service :: Consumer</name>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.ebayopensource.turmeric.runtime</groupId>
       <artifactId>soa-server</artifactId>
       <version>${turmeric-runtime-version}</version>

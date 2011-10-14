@@ -99,6 +99,42 @@
 		    <version>3.4.0.GA</version>
 		    <scope>provided</scope>
 		</dependency>
+		<dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>slf4j-simple</artifactId>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+  		  <artifactId>slf4j-api</artifactId>
+  		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>com.ebay.kernel</groupId> 
+		  <artifactId>uKernelCore</artifactId>
+		  <scope>provided</scope> 
+		</dependency>
+		<dependency>
+		  <groupId>junit</groupId> 
+		  <artifactId>junit</artifactId>
+		  <scope>provided</scope> 
+		</dependency>
+		<dependency>
+		  <groupId>org.ebayopensource.turmeric.monitoring</groupId> 
+		  <artifactId>monitoring-metrics-jpa</artifactId>
+		  <version>${turmeric-monitoring-version}</version>
+		  <scope>provided</scope> 
+		</dependency>
+		<dependency>
+		  <groupId>junit</groupId> 
+		  <artifactId>junit</artifactId>
+		  <scope>provided</scope> 
+		</dependency>
+		<dependency>
+		  <groupId>org.ebayopensource.turmeric.utils</groupId> 
+		  <artifactId>turmeric-utils-jpa</artifactId>
+		  <version>1.0.0-Beta</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
