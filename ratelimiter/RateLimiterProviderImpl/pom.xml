@@ -30,12 +30,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb-j5</artifactId>
-			<version>2.0.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.ebayopensource.turmeric.ratelimiter</groupId>
 			<artifactId>RateLimiterProvider</artifactId>
 			<version>${project.version}</version>		
@@ -67,19 +61,9 @@
 			<version>${turmeric-runtime-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.ebayopensource.turmeric.monitoring</groupId>
-			<artifactId>monitoring-metrics-jpa</artifactId>
-			<version>${turmeric-monitoring-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.ebayopensource.turmeric.intf</groupId>
 			<artifactId>GroupMembershipService</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.turmeric.utils</groupId>
-			<artifactId>TurmericUtils</artifactId>
-			<version>0.9.0-Beta</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.errorlib</groupId>

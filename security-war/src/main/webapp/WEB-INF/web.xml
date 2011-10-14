@@ -60,16 +60,6 @@
          <param-value>RateLimiterService</param-value>
       </init-param>
    </servlet>
-   <servlet>
-       <description>SOAMetricsQueryService</description>
-       <display-name>SOAMetricsQueryServiceV1</display-name>
-       <servlet-name>SOAMetricsQueryServiceV1</servlet-name>
-       <servlet-class>org.ebayopensource.turmeric.runtime.spf.pipeline.SPFServlet</servlet-class>
-      <init-param>
-         <param-name>SOA_SERVICE_NAME</param-name>
-         <param-value>SOAMetricsQueryService</param-value>
-      </init-param>
-   </servlet>
    <servlet-mapping>
        <servlet-name>PolicyEnforcementServiceV1</servlet-name>
        <url-pattern>/PolicyEnforcementServiceV1</url-pattern>
@@ -95,12 +85,7 @@
        <url-pattern>/GroupMembershipServiceV1</url-pattern>
    </servlet-mapping>
    <servlet-mapping>
-       <servlet-name>SOAMetricsQueryServiceV1</servlet-name>
-       <url-pattern>/SOAMetricsQueryServiceV1</url-pattern>
-   </servlet-mapping>
-   <servlet-mapping>
        <servlet-name>RateLimiterServiceV1</servlet-name>
        <url-pattern>/RateLimiterServiceV1</url-pattern>
    </servlet-mapping>
-
 </web-app>
