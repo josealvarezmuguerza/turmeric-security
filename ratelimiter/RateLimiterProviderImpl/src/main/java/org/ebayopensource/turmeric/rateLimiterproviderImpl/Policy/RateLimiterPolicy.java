@@ -105,7 +105,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 				for (Policy p : rateLimeterPolicy) {
 					if (isPolicySubjectGroupValid(p)) {
 						// adds resource for service counts
-						super.createServiceCounters(p);
+						super.createServiceCounters(p.getRule(), request.getResourceName(), request.getOperationName());
 						for (SubjectGroup subjectGroup : p.getTarget()
 								.getSubjects().getSubjectGroup()) {
 							// we only check attributes for Inclusion

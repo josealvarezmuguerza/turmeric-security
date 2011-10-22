@@ -32,6 +32,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
+import org.ebayopensource.turmeric.rateLimiterCounterCassandraProviderImpl.RateLimiterCounterCassandraProviderImpl;
+import org.ebayopensource.turmeric.rateLimiterCounterMapProviderImpl.RateLimiterCounterMapProviderImpl;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyRequest;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyResponse;
 import org.ebayopensource.turmeric.security.v1.services.CreateResourcesRequest;
@@ -82,6 +84,9 @@ public class RatelimiterTests{
 	BaseRateLimiterServiceConsumer consumer = new BaseRateLimiterServiceConsumer();
 	private static final String s_PropFilePath = "RateLimiterTests.properties";
 	private static final String m_PreRequisitePoliciesFilePath = "PreRequisitePolicies.properties";
+	private static  RateLimiterCounterMapProviderImpl rlCounterMapProvider = new RateLimiterCounterMapProviderImpl();
+	private static  RateLimiterCounterCassandraProviderImpl rlCounterCassandraProvider = new RateLimiterCounterCassandraProviderImpl();
+	
 	
 	@Before
 	public void setUp() throws Exception {
