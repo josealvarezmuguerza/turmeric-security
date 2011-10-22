@@ -205,7 +205,7 @@ public abstract class RateLimiterProviderAbstractTest {
 		rule.setCondition(condition);
 		rule.setEffect(EffectType.FLAG);
 		rule.setEffectDuration(3l);
-		rule.setRolloverPeriod(20l);
+		rule.setRolloverPeriod(3l);
 		rules.add(rule);
 
 		Rule rule2 = new Rule();
@@ -219,7 +219,7 @@ public abstract class RateLimiterProviderAbstractTest {
 		rule2.setCondition(condition2);
 		rule2.setEffect(EffectType.CHALLENGE);
 		rule2.setEffectDuration(5l);
-		rule2.setRolloverPeriod(20l);
+		rule2.setRolloverPeriod(5l);
 		rules.add(rule2);
 		// HITS to all
 		Rule rule3 = new Rule();

@@ -530,6 +530,7 @@ public class RateLimiterProviderImplTest extends
 		assertEquals("this should Reset", RateLimiterStatus.BLOCK,
 				rateLimitResponse.getStatus());
 
+		//effect has been reset but counter not
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
@@ -537,8 +538,20 @@ public class RateLimiterProviderImplTest extends
 		}
 		rateLimitResponse = provider.isRateLimited(super
 				.generateIsRateLimitedRequest(rateLimitRequest));
-		assertEquals("this should Reset", RateLimiterStatus.SERVE_OK,
+		assertEquals("this should Block due to counter is  >8 ", RateLimiterStatus.BLOCK,
 				rateLimitResponse.getStatus());
+		
+		//effect & counter have been reset
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		rateLimitResponse = provider.isRateLimited(super
+				.generateIsRateLimitedRequest(rateLimitRequest));
+		assertEquals("this should OK since both counters have been reset", RateLimiterStatus.SERVE_OK,
+				rateLimitResponse.getStatus());
+		
 		rateLimitResponse = provider.isRateLimited(super
 				.generateIsRateLimitedRequest(rateLimitRequest));
 		assertEquals(RateLimiterStatus.SERVE_OK, rateLimitResponse.getStatus());
@@ -575,11 +588,20 @@ public class RateLimiterProviderImplTest extends
 					e.printStackTrace();
 				}
 			}
-			IsRateLimitedResponse rateLimitResponse = provider
-					.isRateLimited(super
-							.generateIsRateLimitedRequest(rateLimitRequest));
-			assertEquals("this should be OK i" + i, RateLimiterStatus.SERVE_OK,
-					rateLimitResponse.getStatus());
+			if (i > 8) {
+				IsRateLimitedResponse rateLimitResponse = provider
+						.isRateLimited(super
+								.generateIsRateLimitedRequest(rateLimitRequest));
+				assertEquals(
+						"this should be BLOCK since HITS counter is still up to 8  ",
+						RateLimiterStatus.BLOCK, rateLimitResponse.getStatus());
+			}else{
+				IsRateLimitedResponse rateLimitResponse = provider
+						.isRateLimited(super
+								.generateIsRateLimitedRequest(rateLimitRequest));
+				assertEquals("this should be OK since request #" + i,
+						RateLimiterStatus.SERVE_OK, rateLimitResponse.getStatus());
+			}
 		}
 		IsRateLimitedResponse rateLimitResponse = provider.isRateLimited(super
 				.generateIsRateLimitedRequest(rateLimitRequest));

@@ -142,9 +142,6 @@ public abstract class CounterAbstractPolicy {
 				.contains(ipOrSubjectGroup)) {
 			return;
 		}
-		if (!isSpecialVAR(ipOrSubjectGroup)) {
-			ipOrSubjectGroup = ipOrSubjectGroup.concat(IPHITS);
-		}
 		if (ipOrSubjectGroup != null) {
 			ipOrSubjectGroup = ipOrSubjectGroup.trim();
 		}
@@ -229,15 +226,15 @@ public abstract class CounterAbstractPolicy {
 	 * @param policy
 	 *            the policy
 	 */
-	protected void createServiceCounters(Policy policy) {
-		if (policy == null)
+	protected void createServiceCounters(final List<Rule> rules, final String resourceName, final String operationName){
+		if (rules == null || rules.isEmpty()){
 			return;
-		Resources resources = policy.getTarget().getResources();
-		if (resources != null) {
-			generateServiceCountName(resources, policy.getRule());
+		}
+		if (resourceName != null && operationName != null) {
+			generateServiceCountName(resourceName, operationName,  rules);
 
 		}
-		updateData(policy.getRule());
+		updateData(rules);
 		// deletes all effect where effect duration < now
 		checkAllEffects();
 	}
@@ -296,25 +293,15 @@ public abstract class CounterAbstractPolicy {
 		return rateLimiterStatus;
 	}
 
-	private void generateServiceCountName(Resources resources, List<Rule> rules) {
-		for (Resource resource : resources.getResource()) {
-			if (resource != null && resource.getResourceName() != null
-					&& resource.getResourceName().trim().length() > 0
-					&& resource.getOperation() != null) {
-				for (Operation operation : resource.getOperation()) {
-					if (operation != null
-							&& operation.getOperationName().trim().length() > 0) {
-						incrementCounter(
-								resource.getResourceName().concat(":")
-										.concat(operation.getOperationName())
-										.concat(SERVICECOUNT),
-								createModel(rules, SERVICECOUNT));
-					}
-				}
+	private void generateServiceCountName(final String resource,
+			final String operation, final List<Rule> rules) {
+		if (resource != null && resource.trim().length() > 0
+				&& operation != null && operation.trim().length() > 0) {
+			incrementCounter(
+					resource.concat(":").concat(operation).concat(SERVICECOUNT),
+					createModel(rules, SERVICECOUNT));
 
-			}
 		}
-
 	}
 
 	private RateLimiterPolicyModel createModel(List<Rule> rules, String name) {
