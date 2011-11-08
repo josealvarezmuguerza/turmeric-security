@@ -5,6 +5,7 @@ package org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -12,6 +13,7 @@ import java.util.Properties;
 import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider;
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
+import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.util.RateLimiterUtils;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.counterprovider.config.RateLimiterCounterProviderFactory;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceException;
 import org.ebayopensource.turmeric.runtime.common.exceptions.ServiceRuntimeException;
@@ -22,7 +24,10 @@ import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
 import org.ebayopensource.turmeric.security.v1.services.Resource;
 import org.ebayopensource.turmeric.security.v1.services.Resources;
 import org.ebayopensource.turmeric.security.v1.services.Rule;
+import org.ebayopensource.turmeric.security.v1.services.SubjectType;
 import org.ebayopensource.turmeric.utils.ContextUtils;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
 
 /**
  * The Class CounterAbstractPolicy.
@@ -40,6 +45,10 @@ public abstract class CounterAbstractPolicy {
 	// 101.12.69.105:hits
 	/** The Constant IPHITS. */
 	public static final String IPHITS = ":hits";
+
+	public static final String SUBJECT_GROUP = ".SubjectGroup";
+
+	public static final String SUBJECT = ".SubjectGroup.Subject";
 
 	private static RateLimiterCounterProvider counterProvider;
 
@@ -95,8 +104,6 @@ public abstract class CounterAbstractPolicy {
 		return provider;
 	}
 
-
-
 	/**
 	 * Increment counter.
 	 * 
@@ -127,7 +134,6 @@ public abstract class CounterAbstractPolicy {
 
 	}
 
-	
 	// check if we need to reset counter base on RolloverPeriod
 	/**
 	 * Reset counter.
@@ -196,9 +202,11 @@ public abstract class CounterAbstractPolicy {
 	 */
 	protected void addToActiveEffects(String currentSubjectOrGroup, Rule rule,
 			RateLimiterStatus currentlimiterStatus) {
-		if (currentSubjectOrGroup != null) {
-			currentSubjectOrGroup = currentSubjectOrGroup.trim();
+		if (currentSubjectOrGroup == null || rule == null) {
+			return;
 		}
+		currentSubjectOrGroup = currentSubjectOrGroup.trim();
+
 		RateLimiterPolicyModel limiterPolicyModel = new RateLimiterPolicyModel();
 		limiterPolicyModel.setTimestamp(new Date());
 		limiterPolicyModel.setEffectDuration(new Date().getTime()
@@ -226,13 +234,15 @@ public abstract class CounterAbstractPolicy {
 	 * @param policy
 	 *            the policy
 	 */
-	protected void createServiceCounters(final List<Rule> rules, final String resourceName, final String operationName){
-		if (rules == null || rules.isEmpty()){
+	protected void createServiceCounters(final List<Rule> rules,
+			final String resourceName, final String operationName,
+			final List<String> reqSubjects, final List<String> reqSubjectGroups) {
+		if (rules == null || rules.isEmpty()) {
 			return;
 		}
 		if (resourceName != null && operationName != null) {
-			generateServiceCountName(resourceName, operationName,  rules);
-
+			generateServiceCountName(resourceName, operationName, rules,
+					reqSubjects, reqSubjectGroups);
 		}
 		updateData(rules);
 		// deletes all effect where effect duration < now
@@ -294,25 +304,60 @@ public abstract class CounterAbstractPolicy {
 	}
 
 	private void generateServiceCountName(final String resource,
-			final String operation, final List<Rule> rules) {
+			final String operation, final List<Rule> rules,
+			final List<String> reqSubjects, final List<String> reqSubjectGroups) {
 		if (resource != null && resource.trim().length() > 0
 				&& operation != null && operation.trim().length() > 0) {
 			incrementCounter(
 					resource.concat(":").concat(operation).concat(SERVICECOUNT),
-					createModel(rules, SERVICECOUNT));
+					createModel(rules, SERVICECOUNT, resource, operation,
+							reqSubjects, reqSubjectGroups));
 
 		}
 	}
 
-	private RateLimiterPolicyModel createModel(List<Rule> rules, String name) {
+	private RateLimiterPolicyModel createModel(List<Rule> rules,
+			final String name, final String resource, final String operation,
+			final List<String> reqSubjects, final List<String> reqSubjectGroups) {
 		RateLimiterPolicyModel model = new RateLimiterPolicyModel();
 		Rule rule = findRule(rules, name);
 		if (rule != null) {
+
+			if (rule.getCondition().getExpression().getPrimitiveValue()
+					.getValue().contains(SUBJECT_GROUP.concat(SERVICECOUNT))) {
+				for (String subjectGroup : reqSubjectGroups) {
+					incrementCounter(
+							resource.concat(":")
+									.concat(operation)
+									.concat(".".concat(subjectGroup).concat(
+											SERVICECOUNT)),
+							createModel(rule, SERVICECOUNT));
+				}
+			}
+			if (rule.getCondition().getExpression().getPrimitiveValue()
+					.getValue().contains(SUBJECT.concat(SERVICECOUNT))) {
+				for (String subject : reqSubjects) {
+					incrementCounter(resource.concat(":").concat(operation)
+							.concat(".".concat(subject).concat(SERVICECOUNT)),
+							createModel(rule, SERVICECOUNT));
+				}
+
+			}
 			model.setEffectDuration(new Date().getTime()
 					+ rule.getEffectDuration() * 1000);
 			model.setRolloverPeriod(rule.getRolloverPeriod() * 1000);
 			model.setTimestamp(new Date());
 		}
+		return model;
+	}
+
+	private RateLimiterPolicyModel createModel(Rule rule, final String name) {
+		RateLimiterPolicyModel model = new RateLimiterPolicyModel();
+		model.setEffectDuration(new Date().getTime() + rule.getEffectDuration()
+				* 1000);
+		model.setRolloverPeriod(rule.getRolloverPeriod() * 1000);
+		model.setTimestamp(new Date());
+
 		return model;
 	}
 
@@ -420,11 +465,25 @@ public abstract class CounterAbstractPolicy {
 	 * @throws Exception
 	 *             the exception
 	 */
-	protected int getVariable(String str, String ipOrSubjectGroup)
+	protected int getVariable(final String str, String ipOrSubjectGroup, final boolean sg)
 			throws Exception {
 		if (isIpCount(str)) {
 			// assumption is per Ip hits so check if contains same Ip
 			ipOrSubjectGroup = ipOrSubjectGroup.concat(IPHITS);
+
+		} else if (str.contains(SUBJECT_GROUP.concat(SERVICECOUNT))) {
+			if(!sg){
+				return 0;
+			}
+			ipOrSubjectGroup = str.replace(SUBJECT_GROUP.concat(SERVICECOUNT),
+					".".concat(ipOrSubjectGroup).concat(SERVICECOUNT));
+
+		} else if (str.contains(SUBJECT.concat(SERVICECOUNT))) {
+			if(sg){
+				return 0;
+			}
+			ipOrSubjectGroup = str.replace(SUBJECT.concat(SERVICECOUNT), "."
+					.concat(ipOrSubjectGroup).concat(SERVICECOUNT));
 
 		} else {
 			ipOrSubjectGroup = str;
@@ -434,7 +493,6 @@ public abstract class CounterAbstractPolicy {
 
 		if (model == null) {
 			throw new Exception(ipOrSubjectGroup + " not in database");
-
 		}
 		return model.getCount();
 	}

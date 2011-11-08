@@ -11,7 +11,12 @@ package org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.turmeric.common.v1.types.AckValue;
+import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
+import org.ebayopensource.turmeric.common.v1.types.ErrorMessage;
+import org.ebayopensource.turmeric.errorlibrary.turmericratelimiter.ErrorConstants;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.util.RateLimiterUtils;
+import org.ebayopensource.turmeric.runtime.common.exceptions.ErrorDataFactory;
 import org.ebayopensource.turmeric.security.v1.services.Condition;
 import org.ebayopensource.turmeric.security.v1.services.EffectType;
 import org.ebayopensource.turmeric.security.v1.services.IsRateLimitedRequest;
@@ -91,6 +96,13 @@ public class RateLimiterPolicy extends AbstractPolicy {
 		return response;
 	}
 
+	private void setErrorInResponse(IsRateLimitedResponse respType, CommonErrorData errorData){
+    	respType.setAck(AckValue.FAILURE);
+    	ErrorMessage errMsg = new ErrorMessage();    	
+    	respType.setErrorMessage(errMsg);
+    	errMsg.getError().add(errorData);
+    }
+	
 	private IsRateLimitedResponse checkRateLimiter(
 			IsRateLimitedResponse response, IsRateLimitedRequest request,
 			List<String> reqSubjects, List<String> reqSubjectGroups) throws Exception {
@@ -105,7 +117,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 				for (Policy p : rateLimeterPolicy) {
 					if (isPolicySubjectGroupValid(p)) {
 						// adds resource for service counts
-						super.createServiceCounters(p.getRule(), request.getResourceName(), request.getOperationName());
+						super.createServiceCounters(p.getRule(), request.getResourceName(), request.getOperationName(), reqSubjects, reqSubjectGroups);
 						for (SubjectGroup subjectGroup : p.getTarget()
 								.getSubjects().getSubjectGroup()) {
 							// we only check attributes for Inclusion
@@ -116,7 +128,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 								for (Subject subjectPolicy : subjectGroup.getSubject()){
 									if(reqSubjects.contains(subjectPolicy.getSubjectName())){
 										response = evaluateAttribute(response,
-												subjectGroup.getSubjectGroupName(),
+												subjectGroup.getSubjectGroupName(), true,
 												p);
 										
 										if (RateLimiterStatus.BLOCK
@@ -128,16 +140,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 										
 									}
 								}
-								
-//								if (reqSubjectGroups.contains(subjectGroup
-//										.getSubjectGroupName().trim())) {
-//									// checkRateLimiter(response, request,
-//									// subjects,
-//									// domain);
-//									response = evaluateAttribute(response,
-//											subjectGroup.getSubjectGroupName(),
-//											p);
-//								}
+					
 							}
 
 						}
@@ -152,7 +155,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 									// subjects,
 									// domain);
 									response = evaluateAttribute(response,
-											subject.getSubjectName(), p);
+											subject.getSubjectName(), false,  p);
 								}
 							}
 						}
@@ -181,8 +184,8 @@ public class RateLimiterPolicy extends AbstractPolicy {
 
 	// Evaluate condition
 	private IsRateLimitedResponse evaluateAttribute(
-			IsRateLimitedResponse response, String ipOrSubjectGroup,
-			Policy policy) throws Exception {
+			IsRateLimitedResponse response, final String ipOrSubjectGroup,
+			final boolean sg, final Policy policy) throws Exception {
 		Condition condition = null;
 		for (Rule rule : policy.getRule()) {
 			// // now we have the rollover period
@@ -195,7 +198,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 			if (condition != null && condition.getExpression() != null) {
 				// if true set the effect or the highest severity
 				if (processPrimitiveValue(condition.getExpression()
-						.getPrimitiveValue(), ipOrSubjectGroup)) {
+						.getPrimitiveValue(), ipOrSubjectGroup, sg)) {
 					response.setStatus(convertGetTheHigestSeverity(
 							rule.getEffect(), response, true));
 					// will be use to populate effect duration
@@ -220,7 +223,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 
 	// check primitive value
 	private boolean processPrimitiveValue(PrimitiveValue primitiveValue,
-			String ipOrSubjectGroup) throws Exception {
+			final String ipOrSubjectGroup, final boolean sg) throws Exception {
 		// check if valid
 		if (primitiveValue != null
 				&& SupportedPrimitive.STRING.equals(primitiveValue.getType())
@@ -228,7 +231,7 @@ public class RateLimiterPolicy extends AbstractPolicy {
 			if ((primitiveValue.getValue().contains(":hits") && primitiveValue
 					.getValue().contains(ipOrSubjectGroup))
 					|| !primitiveValue.getValue().contains(":hits")) {
-				return new RateLimiterUtils(ipOrSubjectGroup)
+				return new RateLimiterUtils(ipOrSubjectGroup, sg)
 						.getFinalresult(primitiveValue.getValue());
 			}
 		}
