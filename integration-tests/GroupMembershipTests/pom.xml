@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ebayopensource.turmeric.security</groupId>
 		<artifactId>turmeric-security-integration-test-parent</artifactId>
-		<version>1.0.0.2-SNAPSHOT</version>
+		<version>1.0.1.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.security.tests</groupId>
@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>PolicyServiceImpl</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.security</groupId>
@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
 			<artifactId>PolicyServiceConsumer</artifactId>
-			<version>${project.version}</version>
+			<version>${turmeric-policy-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
