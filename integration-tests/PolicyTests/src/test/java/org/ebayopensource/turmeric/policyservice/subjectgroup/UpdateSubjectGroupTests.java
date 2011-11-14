@@ -184,7 +184,9 @@ public class UpdateSubjectGroupTests{
 			expectedTotalOps = Integer.parseInt(totalSubjs);
 		}
 		if (expectedTotalOps == 0) {
-			assertTrue(subjectGroup.getSubject()==null || subjectGroup.getSubject().size()==0);
+			
+			assertTrue("Exptect no subjects, Subject Group: " + subjectGroup.getSubject() + " size: " + subjectGroup.getSubject().size(),  subjectGroup.getSubject()==null || subjectGroup.getSubject().size()==0);
+			
 			
 		} else {
 			assertNotNull(subjectGroup.getSubject());
