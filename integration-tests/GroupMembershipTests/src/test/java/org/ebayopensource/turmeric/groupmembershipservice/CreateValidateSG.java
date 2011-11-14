@@ -93,7 +93,7 @@ public class CreateValidateSG  extends CommonUtils{
 		String size = reader.getPreEntryValue(request_id, "response_sgsize");
 
 		if(isMember!=null){
-			assertEquals("isMember is not set with correct value",Boolean.parseBoolean(isMember),m_resp.isIsMember());
+			assertEquals("isMember is not set with correct value: " + m_resp.isIsMember(),Boolean.parseBoolean(isMember),m_resp.isIsMember());
 		}
 		if(sgName!=null){
 			assertEquals("sgName is not correct",sgName,m_resp.getSubjectgroup().get(0).getName());
