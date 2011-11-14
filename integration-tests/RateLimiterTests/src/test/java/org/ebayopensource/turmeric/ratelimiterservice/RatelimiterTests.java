@@ -32,6 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
+import org.ebayopensource.turmeric.manager.cassandra.server.CassandraTestManager;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyRequest;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyResponse;
 import org.ebayopensource.turmeric.security.v1.services.CreateResourcesRequest;
@@ -56,6 +57,7 @@ import org.ebayopensource.turmeric.test.services.utils.FindPolicyHelper;
 import org.ebayopensource.turmeric.test.services.utils.PolicyServiceTestHelper;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -82,7 +84,15 @@ public class RatelimiterTests{
 	BaseRateLimiterServiceConsumer consumer = new BaseRateLimiterServiceConsumer();
 	private static final String s_PropFilePath = "RateLimiterTests.properties";
 	private static final String m_PreRequisitePoliciesFilePath = "PreRequisitePolicies.properties";
+
+	@BeforeClass
+	public static void setupCassandraConfigFile() throws Exception {
+		System.setProperty("log4j.configuration", "META-INF/config/cassandra/log4j.properties");
+		System.setProperty("cassandra.config", "META-INF/config/cassandra/cassandra-test.yaml");
+		CassandraTestManager.initialize();
+	}
 	
+		
 	@Before
 	public void setUp() throws Exception {
 		System.out.println(" *** Create Pre-Requisite data ***");

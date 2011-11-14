@@ -26,7 +26,7 @@ public class RateLimiterUtilsTest {
 	public void init() {
 		System.setProperty("log4j.configuration", "META-INF/config/cassandra/log4j.properties");
 		System.setProperty("cassandra.config", "META-INF/config/cassandra/cassandra-test.yaml");
-		limiterUtils = new RateLimiterUtils("test");
+		limiterUtils = new RateLimiterUtils("test", false);
 	}
 
 	/**

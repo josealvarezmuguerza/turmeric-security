@@ -17,6 +17,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
+import org.ebayopensource.turmeric.common.v1.types.CommonErrorData;
+import org.ebayopensource.turmeric.common.v1.types.ErrorMessage;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.BlackListPolicy;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.RateLimiterPolicy;
 import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.WhiteListPolicy;
@@ -107,17 +109,16 @@ public class RateLimiterProviderImpl implements RateLimiterProvider {
 				wlPolicy.evaluate(isRateLimitedResponse, request);
 				rlPolicy.evaluate(isRateLimitedResponse, request);
 			} catch (RateLimiterException e) {
-				// response.setAck(AckValue.FAILURE);
-				// CommonErrorData data = new CommonErrorData();
-				// data.setCause(e.getCause() + "");
-				// data.setMessage(e.getMessage());
-				// if (response.getErrorMessage() == null) {
-				// response.setErrorMessage(new ErrorMessage());
-				// }
-				//
-				// response.getErrorMessage().getError().add(data);
-				// response.setStatus(RateLimiterStatus.INVALID);
-				// e.printStackTrace();
+				response.setAck(AckValue.FAILURE);
+				CommonErrorData data = new CommonErrorData();
+				data.setCause(e.getCause() + "");
+				data.setMessage(e.getMessage());
+				if (response.getErrorMessage() == null) {
+					response.setErrorMessage(new ErrorMessage());
+				}
+
+				response.getErrorMessage().getError().add(data);
+				response.setStatus(RateLimiterStatus.INVALID);
 
 			}
 

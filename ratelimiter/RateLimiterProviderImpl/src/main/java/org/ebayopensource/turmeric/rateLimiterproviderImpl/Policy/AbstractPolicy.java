@@ -106,6 +106,9 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 			}
 
 		}
+		//no matter who call it
+		processIncrementSubjectOrGroup(HITS);
+
 
 	}
 
@@ -280,8 +283,6 @@ public abstract class AbstractPolicy extends CounterAbstractPolicy {
 		if ("BLACKLIST".equalsIgnoreCase(getPolicyType().trim())) {
 			// counter per user
 			incrementCounter(ipOrSubjectGroup, new RateLimiterPolicyModel());
-			// to all
-			incrementCounter(HITS, new RateLimiterPolicyModel());
 		}
 	}
 }

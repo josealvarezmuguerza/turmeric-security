@@ -11,15 +11,17 @@ import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.CounterAbstrac
  */
 public class RateLimiterUtils extends CounterAbstractPolicy {
 	private String ipOrSubjectGroup = null;
-
+	private boolean sg = false;
+	
 	/**
 	 * Instantiates a new rate limiter utils.
 	 *
 	 * @param ipOrSubjectGroup the ip or subject group
 	 */
-	public RateLimiterUtils(String ipOrSubjectGroup) {
+	public RateLimiterUtils(final String ipOrSubjectGroup, final boolean sg) {
 		super();
 		this.ipOrSubjectGroup = ipOrSubjectGroup;
+		this.sg = sg;
 	}
 
 
@@ -193,7 +195,7 @@ public class RateLimiterUtils extends CounterAbstractPolicy {
 			val = Integer.valueOf(str);
 		} catch (NumberFormatException e) {
 			// not number it must be a variable
-			val = super.getVariable(str, ipOrSubjectGroup);
+			val = super.getVariable(str, ipOrSubjectGroup, sg);
 		}
 		return val;
 	}
