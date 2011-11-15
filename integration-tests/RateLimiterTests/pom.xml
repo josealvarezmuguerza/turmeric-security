@@ -68,11 +68,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.ebayopensource.turmeric.monitoring</groupId>
-			<artifactId>monitoring-metrics-jpa</artifactId>
-			<version>${turmeric-monitoring-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy</groupId>
 			<artifactId>turmeric-policy-provider</artifactId>
 			<version>${turmeric-policy-version}</version>

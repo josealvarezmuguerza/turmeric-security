@@ -36,11 +36,6 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.ebayopensource.turmeric.monitoring</groupId>
-			<artifactId>monitoring-metrics-jpa</artifactId>
-			<version>${turmeric-monitoring-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.ebayopensource.turmeric.groupmembership</groupId>
 			<artifactId>turmeric-groupmembership-provider</artifactId>
 			<version>${project.version}</version>
