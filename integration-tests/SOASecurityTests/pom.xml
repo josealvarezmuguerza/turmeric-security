@@ -82,7 +82,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.policy.tests</groupId>
 			<artifactId>PolicyTestUtils</artifactId>
-			<version>${turmeric-policy-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
