@@ -28,6 +28,7 @@ import org.ebayopensource.turmeric.security.v1.services.Target;
 
 public class FindPolicyHelper {
 	private static final String CONFIG_DELIMITER = ":";
+	private static final String CONFIG_RULE_DELIMITER = "$";
 	
 	
 	public  CreatePolicyRequest constructCreatePolicyRequest(String policyInfo,
@@ -190,7 +191,7 @@ public class FindPolicyHelper {
 			String effectDuration = getToken(policyeffectTokens);
 			String rolloverperiod = getToken(policyeffectTokens);
 			if (ruleCondition!=null) {
-				StringTokenizer ruleTokens = new StringTokenizer(ruleCondition,CONFIG_DELIMITER);
+				StringTokenizer ruleTokens = new StringTokenizer(ruleCondition,CONFIG_RULE_DELIMITER);
 				String ruleName = getToken(ruleTokens);
 				rCondition = getToken(ruleTokens);
 				rule.setRuleName(ruleName);
