@@ -120,12 +120,6 @@
 		  <scope>provided</scope> 
 		</dependency>
 		<dependency>
-		  <groupId>org.ebayopensource.turmeric.monitoring</groupId> 
-		  <artifactId>monitoring-metrics-jpa</artifactId>
-		  <version>${turmeric-monitoring-version}</version>
-		  <scope>provided</scope> 
-		</dependency>
-		<dependency>
 		  <groupId>junit</groupId> 
 		  <artifactId>junit</artifactId>
 		  <scope>provided</scope> 
