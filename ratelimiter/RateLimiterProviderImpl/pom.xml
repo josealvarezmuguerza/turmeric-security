@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ebayopensource.turmeric.ratelimiter</groupId>
 		<artifactId>turmeric-ratelimiter-parent</artifactId>
-		<version>1.0.1.0-SNAPSHOT</version>
+		<version>1.1.0-Beta</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -97,14 +97,14 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>RateLimiterCounterMapProviderImpl</artifactId>
-			<version>1.0.1.0-SNAPSHOT</version>
+			<version>1.1.0-Beta</version>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.impl</groupId>
 			<artifactId>RateLimiterCounterCassandraProviderImpl</artifactId>
-			<version>1.0.1.0-SNAPSHOT</version>
+			<version>1.1.0-Beta</version>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>

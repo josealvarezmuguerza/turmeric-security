@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.ebayopensource.turmeric.groupmembership</groupId>
     <artifactId>turmeric-security-groupmembership-parent</artifactId>         
-    <version>1.0.1.0-SNAPSHOT</version>
+    <version>1.1.0-Beta</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>org.ebayopensource.turmeric.intf</groupId>
