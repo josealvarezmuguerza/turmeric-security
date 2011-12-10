@@ -24,28 +24,7 @@
       <module>RateLimiterTests</module>
       <module>GroupMembershipTests</module>
       <module>PolicyTestUtils</module>
+      <module>PolicyTests</module>
+      <module>test</module>
   </modules>
-  <profiles>
-  	<profile>
-  		<id>ratelimiter-mysql-tests</id>
-  		<activation>
-  			<activeByDefault>false</activeByDefault>
-  		</activation>
-  		<!-- These tests require a mysql database -->
-  		<modules>
-	      <module>RateLimiterServiceTest</module>		
-  		</modules>
-  	</profile>
-
-        <profile>
-               <id>policytests</id>
-               <activation>
-                  <activeByDefault>true</activeByDefault>
-               </activation>
-               <modules>
-                        <module>PolicyTests</module>
-               </modules>
-         </profile>
-  	
-  </profiles>
 </project>
