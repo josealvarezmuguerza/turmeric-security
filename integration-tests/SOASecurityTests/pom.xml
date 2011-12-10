@@ -15,9 +15,6 @@
 	<groupId>org.ebayopensource.turmeric.security.tests</groupId>
 	<artifactId>SOASecurityTests</artifactId>
 	<name>Security :: Tests</name>
-	<properties>
-		<test-project-version>0.9.0.4-Beta-SNAPSHOT</test-project-version>
-	</properties>
 	<build>
 		<plugins>
 			<plugin>
@@ -95,32 +92,32 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>AdminTestItemValidation</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>AdminTestItemValidationConsumer</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>AdminTestItemValidationImpl</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>CalculatorTestService</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>CalculatorTestServiceImpl</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>CalculatorTestServiceConsumer</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
