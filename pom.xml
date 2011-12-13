@@ -81,6 +81,7 @@
 		<module>ratelimiter</module>
 		<module>security-war</module>
 		<module>group-membership</module>
+		<module>security-dist</module>
 		<module>integration-tests</module>
 	</modules>
 </project>
