@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.ebayopensource.turmeric.security</groupId>
     <artifactId>turmeric-security-parent</artifactId>
-    <version>1.0.1.0-SNAPSHOT</version>
+    <version>1.1.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>org.ebayopensource.turmeric.security</groupId>
@@ -24,28 +24,7 @@
       <module>RateLimiterTests</module>
       <module>GroupMembershipTests</module>
       <module>PolicyTestUtils</module>
+      <module>PolicyTests</module>
+      <module>test</module>
   </modules>
-  <profiles>
-  	<profile>
-  		<id>ratelimiter-mysql-tests</id>
-  		<activation>
-  			<activeByDefault>false</activeByDefault>
-  		</activation>
-  		<!-- These tests require a mysql database -->
-  		<modules>
-	      <module>RateLimiterServiceTest</module>		
-  		</modules>
-  	</profile>
-
-        <profile>
-               <id>policytests</id>
-               <activation>
-                  <activeByDefault>true</activeByDefault>
-               </activation>
-               <modules>
-                        <module>PolicyTests</module>
-               </modules>
-         </profile>
-  	
-  </profiles>
 </project>

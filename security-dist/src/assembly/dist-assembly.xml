@@ -42,6 +42,7 @@
 				<include>org.ebayopensource.turmeric.client:*</include>
 				<include>org.ebayopensource.turmeric.errorlib:*</include>
 				<include>org.ebayopensource.turmeric.typelib:*</include>
+				<include>org.ebayopensource.turmeric.security:*</include>
 			</includes>
 		</dependencySet>
 	</dependencySets>

@@ -9,15 +9,12 @@
 	<parent>
 		<groupId>org.ebayopensource.turmeric.security</groupId>
 		<artifactId>turmeric-security-integration-test-parent</artifactId>
-		<version>1.0.1.0-SNAPSHOT</version>
+		<version>1.1.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>org.ebayopensource.turmeric.security.tests</groupId>
 	<artifactId>SOASecurityTests</artifactId>
 	<name>Security :: Tests</name>
-	<properties>
-		<test-project-version>0.9.0.4-Beta-SNAPSHOT</test-project-version>
-	</properties>
 	<build>
 		<plugins>
 			<plugin>
@@ -48,12 +45,10 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -97,32 +92,32 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>AdminTestItemValidation</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>AdminTestItemValidationConsumer</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>AdminTestItemValidationImpl</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>CalculatorTestService</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>CalculatorTestServiceImpl</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.test</groupId>
 			<artifactId>CalculatorTestServiceConsumer</artifactId>
-			<version>${test-project-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.client</groupId>
@@ -147,7 +142,7 @@
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.runtime.tests</groupId>
 			<artifactId>jetty-common-tests</artifactId>
-			<version>1.0.1.0-SNAPSHOT</version>
+			<version>${turmeric-runtime-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>slf4j-to-jul</artifactId>
@@ -175,11 +170,6 @@
 			<groupId>org.ebayopensource.turmeric.security</groupId>
 			<artifactId>turmeric-security-provider</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.turmeric.intf</groupId>
@@ -242,83 +232,4 @@
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
-	<profiles>
-		<profile>
-			<id>cobertura</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.intf</groupId>
-					<artifactId>RateLimiterService</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.impl</groupId>
-					<artifactId>RateLimiterServiceImpl</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.client</groupId>
-					<artifactId>RateLimiterServiceConsumer</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.intf</groupId>
-					<artifactId>AuthorizationService</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.impl</groupId>
-					<artifactId>AuthorizationServiceImpl</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.intf</groupId>
-					<artifactId>PolicyEnforcementService</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.impl</groupId>
-					<artifactId>PolicyEnforcementServiceImpl</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.client</groupId>
-					<artifactId>PolicyEnforcementConsumer</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.client</groupId>
-					<artifactId>AuthenticationServiceConsumer</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.impl</groupId>
-					<artifactId>AuthenticationServiceImpl</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.intf</groupId>
-					<artifactId>AuthenticationService</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-				<dependency>
-					<groupId>org.ebayopensource.turmeric.security</groupId>
-					<artifactId>SecurityProviderInterface</artifactId>
-					<version>${project.version}</version>
-					<classifier>cobertura</classifier>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
 </project>

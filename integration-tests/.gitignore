@@ -1,0 +1,6 @@
+gen-src
+gen-meta-src
+target
+ConfigRoot
+temp_*.xml
+
