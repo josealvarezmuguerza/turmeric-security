@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider;
 import org.ebayopensource.turmeric.rateLimiterCounterProvider.Policy.model.RateLimiterPolicyModel;
@@ -39,7 +40,7 @@ public class RateLimiterCounterMapProviderImpl implements
 	 */
 	private Map<String, RateLimiterPolicyModel> getActiveRLMap() {
 		if (activeRLMap == null) {
-			activeRLMap = new HashMap<String, RateLimiterPolicyModel>();
+			activeRLMap = new ConcurrentHashMap<String, RateLimiterPolicyModel>();
 		}
 		return activeRLMap;
 	}
@@ -51,7 +52,7 @@ public class RateLimiterCounterMapProviderImpl implements
 	 */
 	private Map<String, RateLimiterPolicyModel> getActiveEffectMap() {
 		if (activeEffectMap == null) {
-			activeEffectMap = new HashMap<String, RateLimiterPolicyModel>();
+			activeEffectMap = new ConcurrentHashMap<String, RateLimiterPolicyModel>();
 		}
 		return activeEffectMap;
 	}
