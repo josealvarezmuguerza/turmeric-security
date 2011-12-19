@@ -80,7 +80,7 @@ public class RateLimiterServiceImpl
 				}
 			}
 		}
-		return provider;
+		return provider.trim();
 	}
 
 	/**
