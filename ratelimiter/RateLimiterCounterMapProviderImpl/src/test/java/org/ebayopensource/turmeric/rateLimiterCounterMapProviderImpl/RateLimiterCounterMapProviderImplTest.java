@@ -9,6 +9,8 @@
  *******************************************************************************/
 package org.ebayopensource.turmeric.rateLimiterCounterMapProviderImpl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
@@ -35,7 +37,7 @@ import org.ebayopensource.turmeric.security.v1.services.RateLimiterStatus;
  */
 public class RateLimiterCounterMapProviderImplTest {
 
-	private RateLimiterCounterMapProviderImpl providerImpl;
+	private RateLimiterCounterMapProviderImpl providerImpl = null;
 	private RateLimiterPolicyModel rateLimiterPolicyModel_1;
 	private Method getActiveRLMapMethod;
 	private Method getActiveEffectMapMethod;
@@ -67,9 +69,16 @@ public class RateLimiterCounterMapProviderImplTest {
 	}
 
 	@After
-	public void tearDown() {
+	public void tearDown() throws Exception {
 		getActiveRLMapMethod = null;
 		getActiveEffectMapMethod = null;
+		Field activeRLMapField = RateLimiterCounterMapProviderImpl.class.getDeclaredField("activeRLMap");
+		activeRLMapField.setAccessible(true);
+		activeRLMapField.set(providerImpl, null);
+		
+		Field activeEffectMapField = RateLimiterCounterMapProviderImpl.class.getDeclaredField("activeEffectMap");
+		activeEffectMapField.setAccessible(true);
+		activeEffectMapField.set(providerImpl, null);
 		providerImpl = null;
 	}
 
@@ -150,13 +159,11 @@ public class RateLimiterCounterMapProviderImplTest {
 	@Test
 	public void testSetRLCounter() {
 		
-		providerImpl.setRLCounter(rl_key, 0); //any value
+		providerImpl.setRLCounter(rl_key, 1); 
 		assertEquals("rl_key counter should be 1", 1,  providerImpl.getActiveRL(rl_key).getCount());
 
 		providerImpl.setRLCounter(rl_key, 5);
-		assertEquals("rl_key counter should be 1", 1,  providerImpl.getActiveRL(rl_key).getCount());
-		
-		assertEquals("rl_key counter should be 1", 1,  providerImpl.getActiveRL(rl_key + "01").getCount());
+		assertEquals("rl_key counter should be 5", 5,  providerImpl.getActiveRL(rl_key).getCount());
 	}
 	
 	

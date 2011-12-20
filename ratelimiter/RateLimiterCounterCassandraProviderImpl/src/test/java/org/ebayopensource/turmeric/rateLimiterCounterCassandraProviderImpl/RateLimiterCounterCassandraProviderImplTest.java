@@ -230,8 +230,6 @@ public class RateLimiterCounterCassandraProviderImplTest {
 
 		providerImpl.setRLCounter(rl_key, 5);
 		assertEquals("rl_key counter should be 5", 5,  providerImpl.getActiveRL(rl_key).getCount());
-		
-		assertEquals("rl_key counter should be 1", 1,  providerImpl.getActiveRL(rl_key + "01").getCount());
 	}
 	
 	@Test

@@ -137,7 +137,7 @@ public class RateLimiterCounterMapProviderImpl implements
 			rateLimiterPolicyModel = new RateLimiterPolicyModel();
 			getActiveRLMap().put(key, rateLimiterPolicyModel);
 		}
-		getActiveRLMap().get(key).setCount(1);
+		getActiveRLMap().get(key).setCount(i);
 	}
 
 	/*
