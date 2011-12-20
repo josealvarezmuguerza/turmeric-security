@@ -163,6 +163,7 @@ public class RateLimiterCounterMapProviderImplTest {
 	@Test
 	public void testRessetEffect() {
 		providerImpl.addActiveEffect(effect_key, createModel());
+		providerImpl.addActiveRL(effect_key, createModel());
 		RateLimiterPolicyModel rateLimiterPolicyModel_2 = createModel();
 		rateLimiterPolicyModel_2.setEffectDuration(createdTime - 60 * 1000);
 		providerImpl.addActiveEffect(effect_key + "01", rateLimiterPolicyModel_2);

@@ -213,6 +213,14 @@ public class RateLimiterCounterCassandraProviderImplTest {
 		
 		assertEquals("rl_key counter should be 1", 1,  providerImpl.getActiveRL(rl_key + "01").getCount());
 	}
+	
+	@Test
+	public void testIncrementRLCounterNonExistent() {
+		providerImpl.addActiveRL(rl_key, createModel());
+
+		providerImpl.incrementRLCounter(rl_key + "02");
+		assertEquals("rl_key counter should remain in 1", 1,  providerImpl.getActiveRL(rl_key).getCount());
+	}
 
 	@Test
 	public void testSetRLCounter() {
@@ -229,7 +237,9 @@ public class RateLimiterCounterCassandraProviderImplTest {
 	@Test
 	public void testRessetEffect() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		providerImpl.addActiveEffect(effect_key, createModel());
+		providerImpl.addActiveRL(effect_key, createModel());
 		RateLimiterPolicyModel rateLimiterPolicyModel_2 = createModel();
+		
 		rateLimiterPolicyModel_2.setEffectDuration(createdTime - 60 * 1000);
 		providerImpl.addActiveEffect(effect_key + "01", rateLimiterPolicyModel_2);
 		
@@ -244,6 +254,58 @@ public class RateLimiterCounterCassandraProviderImplTest {
 		assertNull(effect_key + " 01 must be null", activeEffectDaoImpl.find(effect_key + "01"));
 	}
 	
+	@Test
+	public void testSetRolloverPeriod() {
+		providerImpl.addActiveRL(rl_key, createModel());
+		providerImpl.addActiveRL(rl_key + "01", createModel());
+		
+		providerImpl.setRLRolloverPeriod(rl_key, 1000L);
+		assertEquals("rl_key counter should be 1000 as Long",1000L,  providerImpl.getActiveRL(rl_key).getRolloverPeriod().longValue());
+
+		assertEquals("rl_key counter should be 60 as Long", 60L,  providerImpl.getActiveRL(rl_key + "01").getRolloverPeriod().longValue());
+	}
 	
+	@Test
+	public void testSetEffect() {
+		providerImpl.addActiveRL(rl_key, createModel());
+		providerImpl.addActiveRL(rl_key + "01", createModel());
+		
+		providerImpl.setRLEffect(rl_key, RateLimiterStatus.SERVE_GIF);
+		assertEquals("rl_key counter should be SERVE_GIF",RateLimiterStatus.SERVE_GIF,  providerImpl.getActiveRL(rl_key).getEffect());
+		assertEquals("rl_key counter should be BLOCK",RateLimiterStatus.BLOCK,  providerImpl.getActiveRL(rl_key + "01").getEffect());
+
+	}
+	
+	@Test
+	public void testSetActive() {
+		providerImpl.addActiveRL(rl_key, createModel());
+		providerImpl.addActiveRL(rl_key + "01", createModel());
+		
+		providerImpl.setRLActive(rl_key, false);
+		assertEquals("rl_key counter should be false", false,  providerImpl.getActiveRL(rl_key).isActive());
+		assertEquals("rl_key counter should be true", true,  providerImpl.getActiveRL(rl_key + "01").isActive());
+	}
+
+	@Test
+	public void testSetEffectDuration() {
+		providerImpl.addActiveRL(rl_key, createModel());
+		providerImpl.addActiveRL(rl_key + "01", createModel());
+		long effectDuration = createdTime + 3600L * 1000; 
+		providerImpl.setRLEffectDuration(rl_key, 5000L);
+		assertEquals("rl_key counter should be 5000 as long",5000L,  providerImpl.getActiveRL(rl_key).getEffectDuration().longValue());
+		assertEquals("rl_key counter should be " + effectDuration + " as Long",effectDuration ,  providerImpl.getActiveRL(rl_key + "01").getEffectDuration().longValue());
+	}
+	
+	@Test
+	public void testSetTimestamp() {
+		providerImpl.addActiveRL(rl_key, createModel());
+		providerImpl.addActiveRL(rl_key + "01", createModel());
+		long newCreatedTime = System.currentTimeMillis();
+		providerImpl.setRLTimestamp(rl_key, new Date(newCreatedTime));
+		assertEquals("rl_key counter should be " + newCreatedTime, newCreatedTime,  providerImpl.getActiveRL(rl_key).getTimestamp().getTime());
+		assertEquals("rl_key counter should be " + createdTime, createdTime,  providerImpl.getActiveRL(rl_key + "01").getTimestamp().getTime());
+	}
+	
+
 	
 }
