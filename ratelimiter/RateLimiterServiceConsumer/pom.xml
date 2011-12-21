@@ -35,11 +35,6 @@
       <artifactId>RateLimiterErrorLibrary</artifactId>
       <version>${project.version}</version>
     </dependency>
-<!--         <dependency>
-      <groupId>org.ebayopensource.turmeric.impl</groupId>
-      <artifactId>RateLimiterServiceImpl</artifactId>
-      <version>${project.version}</version>
-    </dependency>
--->
+
   </dependencies>
 </project>

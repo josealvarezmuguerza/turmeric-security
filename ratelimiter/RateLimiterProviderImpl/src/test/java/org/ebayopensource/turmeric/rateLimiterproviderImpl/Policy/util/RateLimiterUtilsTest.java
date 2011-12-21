@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import org.ebayopensource.turmeric.rateLimiterproviderImpl.Policy.util.RateLimiterUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
