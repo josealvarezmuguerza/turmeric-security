@@ -7,18 +7,13 @@ package org.ebayopensource.turmeric.services.ratelimiterservice.impl;
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *******************************************************************************/
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.util.Properties;
-
-import org.ebayopensource.turmeric.utils.ContextUtils;
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
+
+import java.lang.reflect.Method;
+
+import org.junit.Test;
 
 
 /**
@@ -46,9 +41,4 @@ public class RateLimiterServiceImplTest {
 		}
 		
 	}
-
-
-	
-	
-	
 }
