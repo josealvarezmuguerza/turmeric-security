@@ -176,5 +176,17 @@
 		 </snapshots>
 	      </pluginRepository>
 	   </pluginRepositories>
-
+ <profiles>
+    
+    <profile>
+      <id>it</id>
+      <activation>
+        <!-- Default behavior is to always build integration tests -->
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>integration-tests</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>
