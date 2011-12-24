@@ -16,7 +16,7 @@
     <version>1.1.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>org.ebayopensource.turmeric.security</groupId>
+  <groupId>org.ebayopensource.turmeric.security.tests</groupId>
   <artifactId>turmeric-security-integration-test-parent</artifactId>
   <packaging>pom</packaging>
   <modules>

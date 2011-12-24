@@ -7,7 +7,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.ebayopensource.turmeric.security</groupId>
+		<groupId>org.ebayopensource.turmeric.security.tests</groupId>
 		<artifactId>turmeric-security-integration-test-parent</artifactId>
 		<version>1.1.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
@@ -15,32 +15,7 @@
 	<groupId>org.ebayopensource.turmeric.security.tests</groupId>
 	<artifactId>SOASecurityTests</artifactId>
 	<name>Security :: Tests</name>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<forkMode>pertest</forkMode>
-					<testFailureIgnore>true</testFailureIgnore>
-					<includes>
-						<include>**/AuthorizationHandlerTests.java</include>
-						<include>**/AuthorizationServiceTests.java</include>
-						<include>**/AuthorizationServiceCacheTestValidation.java</include>
-						<include>**/AuthorizationServiceNegativeTest.java</include>
-						<include>**/PolicyEnforcementHandlerTests.java</include>
-						<include>**/PolicyEnforcementHandlerNegativeTests.java</include>
-						<include>**/PolicyEnforcementServiceAuthzNegativeTest.java</include>
-						<include>**/PolicyEnforcementServiceTests.java</include>
-					</includes>
-					<excludes>
-						<exclude>**/TestOSExtendedInfoAuthenticatorImpl.java</exclude>
-						<exclude>**/TestAuthenticatePES.java</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
