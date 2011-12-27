@@ -164,18 +164,12 @@ public class RatelimiterTests{
 				assertEquals(errorMessage, expectedErrorMessage,errorMessage);
 				assertEquals(validationStatus,response.getStatus().toString());
 			}
-	
-			if("true".equalsIgnoreCase(m_hasAnotherRequester)){
-				createPreRequisiteData();
-				loadValidatePolicyData();
-				ratelimiterPolicy();
 				
-			}
-			
 		System.out.println("*** Test Scenario : " + m_testCaseName + " completed successfully ***");
 	}
 
-		
+ 
+    
 	@SuppressWarnings("unchecked")
 	public static Collection loadValidatePolicyData() {
 		List  list = new ArrayList();
@@ -197,7 +191,7 @@ public class RatelimiterTests{
 				}
 			}
 			for (int i = 0; i < totalTests; i++) {
-				eachRowData = new ArrayList();
+				eachRowData = new ArrayList<String>();
 				String testName = "testcase" + i + ".name";
 				String resource = "testcase" + i + ".request.resource";
 				String subjects = "testcase" + i + ".request.subject";
