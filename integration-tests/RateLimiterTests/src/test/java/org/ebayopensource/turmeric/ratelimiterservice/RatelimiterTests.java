@@ -72,6 +72,8 @@ public class RatelimiterTests{
 	private String m_subjects;
 	private String m_numOfHits;
 	private String m_expectedResult;
+	private String m_hasAnotherRequester;
+	
 	private static Properties props = new Properties();
 	private static Map<String,Long> m_policyIds = new HashMap<String,Long>();
 	private static Map<String,Long> m_subjectIds = new HashMap<String,Long>();
@@ -112,13 +114,16 @@ public class RatelimiterTests{
 		
 	}
 
-	public RatelimiterTests(String testCaseName, 
-			String resource, String subjects,String numOfHits, String expectedResult) {
+	public RatelimiterTests(final String testCaseName, 
+			final String resource, String subjects, final String numOfHits, final String expectedResult,
+			final String hasAnotherRequester) {
 		this.m_testCaseName = testCaseName;
 		this.m_resource = resource;
 		this.m_subjects = subjects;
 		this.m_numOfHits = numOfHits;
 		this.m_expectedResult = expectedResult;
+		this.m_hasAnotherRequester = hasAnotherRequester;
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -160,6 +165,13 @@ public class RatelimiterTests{
 				assertEquals(validationStatus,response.getStatus().toString());
 			}
 	
+			if("true".equalsIgnoreCase(m_hasAnotherRequester)){
+				createPreRequisiteData();
+				loadValidatePolicyData();
+				ratelimiterPolicy();
+				
+			}
+			
 		System.out.println("*** Test Scenario : " + m_testCaseName + " completed successfully ***");
 	}
 
@@ -191,11 +203,14 @@ public class RatelimiterTests{
 				String subjects = "testcase" + i + ".request.subject";
 				String numOfHits  = "testcase" + i + ".request.numofhits";
 				String expectedResult = "testcase" + i + ".response";
+				String hasAnotherRequester  = "testcase" + i + ".hasAnotherRequester";
+				
 				eachRowData.add(props.getProperty(testName));
 				eachRowData.add(props.getProperty(resource));
 				eachRowData.add(props.getProperty(subjects));
 				eachRowData.add(props.getProperty(numOfHits));
 				eachRowData.add(props.getProperty(expectedResult));
+				eachRowData.add(props.getProperty(hasAnotherRequester));
 				list.add(eachRowData.toArray());
 			}
 		} catch (IOException e) {	}
