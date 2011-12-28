@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,6 +34,8 @@ import java.util.regex.Pattern;
 
 import org.ebayopensource.turmeric.common.v1.types.AckValue;
 import org.ebayopensource.turmeric.manager.cassandra.server.CassandraTestManager;
+import org.ebayopensource.turmeric.rateLimiterCounterMapProviderImpl.RateLimiterCounterMapProviderImpl;
+import org.ebayopensource.turmeric.rateLimiterCounterProvider.RateLimiterCounterProvider;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyRequest;
 import org.ebayopensource.turmeric.security.v1.services.CreatePolicyResponse;
 import org.ebayopensource.turmeric.security.v1.services.CreateResourcesRequest;
@@ -72,7 +75,14 @@ public class RatelimiterTests{
 	private String m_subjects;
 	private String m_numOfHits;
 	private String m_expectedResult;
-	private String m_hasAnotherRequester;
+	
+	private String m_secondCall;
+	
+	private String m_resourceRecall;
+	private String m_subjectsRecall;
+	private String m_numOfHitsRecall;
+	private String m_expectedResultRecall;
+
 	
 	private static Properties props = new Properties();
 	private static Map<String,Long> m_policyIds = new HashMap<String,Long>();
@@ -108,6 +118,7 @@ public class RatelimiterTests{
 		cleanUpResources();
 		cleanUpSubjectGroups();
 		cleanUpSubjects();
+		CassandraTestManager.cleanUpCassandraDirs();
 	}
 	
 	private RatelimiterTests(){
@@ -115,14 +126,20 @@ public class RatelimiterTests{
 	}
 
 	public RatelimiterTests(final String testCaseName, 
-			final String resource, String subjects, final String numOfHits, final String expectedResult,
-			final String hasAnotherRequester) {
+			final String resource, String subjects, final String numOfHits, final String expectedResult, final String secondCall, 
+			final String resourceRecall, String subjectsRecall, final String numOfHitsRecall, final String expectedResultRecall) {
 		this.m_testCaseName = testCaseName;
 		this.m_resource = resource;
 		this.m_subjects = subjects;
 		this.m_numOfHits = numOfHits;
 		this.m_expectedResult = expectedResult;
-		this.m_hasAnotherRequester = hasAnotherRequester;
+		
+		this.m_secondCall = secondCall;
+		
+		this.m_resourceRecall = resourceRecall;
+		this.m_subjectsRecall = subjectsRecall;
+		this.m_numOfHitsRecall = numOfHitsRecall;
+		this.m_expectedResultRecall = expectedResultRecall;
 		
 	}
 
@@ -165,8 +182,43 @@ public class RatelimiterTests{
 				assertEquals(validationStatus,response.getStatus().toString());
 			}
 				
-		System.out.println("*** Test Scenario : " + m_testCaseName + " completed successfully ***");
-	}
+			if("true".equalsIgnoreCase(m_secondCall)){
+		    	request = new IsRateLimitedRequest();
+		    	response = new IsRateLimitedResponse();
+		    	
+				constructIsRatelimiterSecondRequest(request);
+				
+				int numOfSvcInvokesRecall = 0;
+				if (m_numOfHitsRecall !=null) {
+					numOfSvcInvokes = Integer.parseInt(m_numOfHitsRecall);
+				}
+				for (int i=0; i<numOfSvcInvokes;i++) {
+					response = consumer.isRateLimited(request);	
+				}
+				
+				 errorMessage = response.getErrorMessage() != null ? response
+						.getErrorMessage().getError().get(0).getMessage() : null;
+				resTokens = new StringTokenizer(m_expectedResultRecall,"|");
+				expectedAckValue = getToken(resTokens);
+				expectedErrorMessage = getToken(resTokens);
+				validationStatus = getToken(resTokens);
+				
+				if (expectedAckValue.equalsIgnoreCase("success")) {
+					assertEquals(errorMessage, AckValue.SUCCESS, response.getAck());
+					assertNull(errorMessage, response.getErrorMessage());
+					assertEquals(validationStatus,response.getStatus().toString());
+				} else {
+					assertEquals(errorMessage, AckValue.FAILURE, response.getAck());
+					assertNotNull(errorMessage, response.getErrorMessage());
+					assertEquals(errorMessage, expectedErrorMessage,errorMessage);
+					assertEquals(validationStatus,response.getStatus().toString());
+				}
+			}					
+			
+			System.out.println("*** Test Scenario : " + m_testCaseName + " completed successfully ***");
+    }
+
+
 
  
     
@@ -197,14 +249,28 @@ public class RatelimiterTests{
 				String subjects = "testcase" + i + ".request.subject";
 				String numOfHits  = "testcase" + i + ".request.numofhits";
 				String expectedResult = "testcase" + i + ".response";
-				String hasAnotherRequester  = "testcase" + i + ".hasAnotherRequester";
+
+				String secondCall = "testcase" + i + ".request.secondCall";
+				
+				String resourceRecall = "testcase" + i + ".request.resource.recall";
+				String subjectsRecall = "testcase" + i + ".request.subject.recall";
+				String numOfHitsRecall  = "testcase" + i + ".request.numofhits.recall";
+				String expectedResultRecall = "testcase" + i + ".response.recall";
+
 				
 				eachRowData.add(props.getProperty(testName));
 				eachRowData.add(props.getProperty(resource));
 				eachRowData.add(props.getProperty(subjects));
 				eachRowData.add(props.getProperty(numOfHits));
 				eachRowData.add(props.getProperty(expectedResult));
-				eachRowData.add(props.getProperty(hasAnotherRequester));
+
+				eachRowData.add(props.getProperty(secondCall));
+
+				eachRowData.add(props.getProperty(resourceRecall));
+				eachRowData.add(props.getProperty(subjectsRecall));
+				eachRowData.add(props.getProperty(numOfHitsRecall));
+				eachRowData.add(props.getProperty(expectedResultRecall));
+				
 				list.add(eachRowData.toArray());
 			}
 		} catch (IOException e) {	}
@@ -241,6 +307,32 @@ public class RatelimiterTests{
 		if (m_subjects!=null) {
 			SubjectType subject = new SubjectType();
 				StringTokenizer subjTokens = new StringTokenizer(m_subjects,CONFIG_DELIMITER);
+				String subjType =getToken(subjTokens);
+				String subjName= getToken(subjTokens);
+				subject.setValue(subjName);
+				subject.setDomain(subjType);
+				request.getSubject().add(subject);
+		}
+			 		
+	}
+
+private void  constructIsRatelimiterSecondRequest(IsRateLimitedRequest request) throws Exception {
+		
+		if (m_resourceRecall!=null) {
+			StringTokenizer resourceTokens = new StringTokenizer(m_resourceRecall, CONFIG_DELIMITER);
+			String resType =getToken(resourceTokens);
+			String resName= getToken(resourceTokens);
+			request.setResourceName(resName);
+			request.setResourceType(resType);
+			System.out.println("resourceType = "+ resType+ ", resourceName = "+ resName);
+			while (resourceTokens.hasMoreElements()) {
+				request.setOperationName(getToken(resourceTokens));
+				System.out.print("\n\t Operation name = "+request.getOperationName());
+			}
+		}
+		if (m_subjectsRecall !=null) {
+			SubjectType subject = new SubjectType();
+				StringTokenizer subjTokens = new StringTokenizer(m_subjectsRecall, CONFIG_DELIMITER);
 				String subjType =getToken(subjTokens);
 				String subjName= getToken(subjTokens);
 				subject.setValue(subjName);

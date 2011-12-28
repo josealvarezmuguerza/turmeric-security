@@ -60,16 +60,13 @@ public class CassandraTestManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		if (CassandraManager.getEmbeddedService() == null) {
-//			System.out.println("Cleaning cassandra dirs ? = " + deleteDir(new File("target/cassandra/data/TestKeyspace")));
-//		}
 	}
 
 	private static void cleanupData() throws IOException {
 		String[] allDataFileLocations = DatabaseDescriptor
 				.getAllDataFileLocations();
 		for (String s : allDataFileLocations) {
-			File dirFile = new File(s + "/rl");
+			File dirFile = new File(s);
 			if (dirFile.exists() && dirFile.isDirectory()) {
 				FileUtils.delete(dirFile.listFiles());
 			}
