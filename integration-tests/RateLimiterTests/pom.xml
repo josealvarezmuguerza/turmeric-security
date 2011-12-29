@@ -22,7 +22,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<!--forkMode>pertest</forkMode>-->
+					<forkMode>always</forkMode>
 					<testFailureIgnore>true</testFailureIgnore>
 					<includes>
 						<include>**/*Test.java</include>
